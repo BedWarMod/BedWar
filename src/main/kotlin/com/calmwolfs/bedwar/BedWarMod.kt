@@ -27,7 +27,7 @@ import org.apache.logging.log4j.Logger
     modid = BedWarMod.MODID,
     clientSideOnly = true,
     useMetadata = true,
-    guiFactory = "come.calmwolfs.bedwar.config.gui.ConfigGuiForgeInterop",
+    guiFactory = "com.calmwolfs.bedwar.data.config.gui.ConfigGuiForgeInterop",
     version = "0.1",
 )
 object BedWarMod {
