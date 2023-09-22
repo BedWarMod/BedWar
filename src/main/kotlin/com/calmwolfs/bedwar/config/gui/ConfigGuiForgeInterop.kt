@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.data.config.gui
+package com.calmwolfs.bedwar.config.gui
 
 import io.github.moulberry.moulconfig.gui.GuiScreenElementWrapper
 import net.minecraft.client.Minecraft

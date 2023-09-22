@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.utils.computer
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.data.commands.CopyErrorCommand
+import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.utils.ModUtils
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.launch

@@ -1,6 +1,6 @@
 package com.calmwolfs.bedwar.events
 
-import com.calmwolfs.bedwar.data.commands.CopyErrorCommand
+import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.Event
 

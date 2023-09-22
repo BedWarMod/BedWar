@@ -1,12 +1,15 @@
 package com.calmwolfs.bedwar
 
-import com.calmwolfs.bedwar.data.MinecraftData
+import com.calmwolfs.bedwar.commands.Commands
+import com.calmwolfs.bedwar.config.Features
+import com.calmwolfs.bedwar.config.gui.ConfigManager
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.data.RenderGuiData
-import com.calmwolfs.bedwar.data.commands.Commands
-import com.calmwolfs.bedwar.data.config.Features
-import com.calmwolfs.bedwar.data.config.gui.ConfigManager
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager
+import com.calmwolfs.bedwar.data.game.MinecraftData
+import com.calmwolfs.bedwar.data.game.ScoreboardData
 import com.calmwolfs.bedwar.events.ModTickEvent
+import com.calmwolfs.bedwar.features.config.PauseButton
+import com.calmwolfs.bedwar.utils.HypixelUtils
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -27,18 +30,27 @@ import org.apache.logging.log4j.Logger
     modid = BedWarMod.MODID,
     clientSideOnly = true,
     useMetadata = true,
-    guiFactory = "com.calmwolfs.bedwar.data.config.gui.ConfigGuiForgeInterop",
+    guiFactory = "com.calmwolfs.bedwar.config.gui.ConfigGuiForgeInterop",
     version = "0.1",
 )
-object BedWarMod {
+class BedWarMod {
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent?) {
         loadModule(this)
 
-        loadModule(MinecraftData())
         loadModule(GuiEditorManager)
+
+        //utils
+        loadModule(HypixelUtils)
+
+        //data
+        loadModule(MinecraftData())
         loadModule(RenderGuiData())
+        loadModule(ScoreboardData)
+
+        //features
+        loadModule(PauseButton())
 
         Commands.init()
     }
@@ -69,28 +81,30 @@ object BedWarMod {
         }
     }
 
-    const val MODID = "bedwar"
+    companion object {
+        const val MODID = "bedwar"
 
-    @JvmStatic
-    val version: String get() = Loader.instance().indexedModList[MODID]!!.version
+        @JvmStatic
+        val version: String get() = Loader.instance().indexedModList[MODID]!!.version
 
-    @JvmStatic
-    val feature: Features get() = configManager.features
+        @JvmStatic
+        val feature: Features get() = configManager.features
 
-    lateinit var configManager: ConfigManager
+        lateinit var configManager: ConfigManager
 
-    private val logger: Logger = LogManager.getLogger("BedWar")
+        private val logger: Logger = LogManager.getLogger("BedWar")
+        fun consoleLog(message: String) {
+            logger.log(Level.INFO, message)
+        }
 
-    private val modules: MutableList<Any> = ArrayList()
-    private val globalJob: Job = Job(null)
-    val coroutineScope = CoroutineScope(
-        CoroutineName("BedWar") + SupervisorJob(globalJob)
-    )
+        private val modules: MutableList<Any> = ArrayList()
+        private val globalJob: Job = Job(null)
 
-    fun consoleLog(message: String) {
-        logger.log(Level.INFO, message)
+        val coroutineScope = CoroutineScope(
+            CoroutineName("BedWar") + SupervisorJob(globalJob)
+        )
+
+        var screenToOpen: GuiScreen? = null
+        private var screenTicks = 0
     }
-
-    var screenToOpen: GuiScreen? = null
-    private var screenTicks = 0
 }

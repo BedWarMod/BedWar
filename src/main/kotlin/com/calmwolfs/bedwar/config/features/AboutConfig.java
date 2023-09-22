@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.data.config.features;
+package com.calmwolfs.bedwar.config.features;
 
 import com.calmwolfs.bedwar.utils.computer.WebUtils;
 import com.google.gson.annotations.Expose;

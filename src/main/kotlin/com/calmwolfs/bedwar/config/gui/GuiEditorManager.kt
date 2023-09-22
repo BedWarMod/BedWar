@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.data.config.gui
+package com.calmwolfs.bedwar.config.gui
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.events.GuiRenderEvent

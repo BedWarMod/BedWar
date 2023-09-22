@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.data.commands
+package com.calmwolfs.bedwar.commands
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.utils.ModUtils

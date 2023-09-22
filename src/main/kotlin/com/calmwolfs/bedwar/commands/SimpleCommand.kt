@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.data.commands
+package com.calmwolfs.bedwar.commands
 
 import net.minecraft.command.CommandBase
 import net.minecraft.command.ICommandSender

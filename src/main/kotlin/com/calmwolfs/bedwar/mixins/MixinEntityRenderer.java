@@ -1,6 +1,6 @@
 package com.calmwolfs.bedwar.mixins;
 
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager;
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

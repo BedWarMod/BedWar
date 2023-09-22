@@ -1,7 +1,7 @@
-package com.calmwolfs.bedwar.data.commands
+package com.calmwolfs.bedwar.commands
 
-import com.calmwolfs.bedwar.data.config.gui.ConfigGuiManager
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager
+import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import net.minecraft.command.ICommandSender
 import net.minecraftforge.client.ClientCommandHandler
 

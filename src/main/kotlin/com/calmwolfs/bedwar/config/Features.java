@@ -1,8 +1,8 @@
-package com.calmwolfs.bedwar.data.config;
+package com.calmwolfs.bedwar.config;
 
 import com.calmwolfs.bedwar.BedWarMod;
-import com.calmwolfs.bedwar.data.config.features.AboutConfig;
-import com.calmwolfs.bedwar.data.config.features.GuiConfig;
+import com.calmwolfs.bedwar.config.features.AboutConfig;
+import com.calmwolfs.bedwar.config.features.GuiConfig;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.Config;
 import io.github.moulberry.moulconfig.annotations.Category;

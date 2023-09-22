@@ -1,9 +1,9 @@
 package com.calmwolfs.bedwar.utils.gui
 
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager.getAbsX
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager.getAbsY
-import com.calmwolfs.bedwar.data.config.gui.Position
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getAbsX
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getAbsY
+import com.calmwolfs.bedwar.config.gui.Position
 import com.calmwolfs.bedwar.utils.computer.MouseUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager

@@ -1,8 +1,8 @@
-package com.calmwolfs.bedwar.data.config.gui
+package com.calmwolfs.bedwar.config.gui
 
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager.getAbsX
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager.getAbsY
-import com.calmwolfs.bedwar.data.config.gui.GuiEditorManager.getDummySize
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getAbsX
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getAbsY
+import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getDummySize
 import com.calmwolfs.bedwar.utils.NumberUtils.round
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import com.calmwolfs.bedwar.utils.gui.GuiScreenUtils

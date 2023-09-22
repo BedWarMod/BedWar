@@ -11,6 +11,8 @@ import kotlin.time.Duration
 
 object ModUtils {
 
+
+
     fun chat(message: String) {
         internalChat(message)
     }

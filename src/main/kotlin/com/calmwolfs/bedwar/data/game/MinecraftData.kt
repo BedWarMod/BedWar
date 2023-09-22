@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.data
+package com.calmwolfs.bedwar.data.game
 
 import com.calmwolfs.bedwar.events.ModTickEvent
 import net.minecraft.client.Minecraft
