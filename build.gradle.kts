@@ -33,28 +33,6 @@ repositories {
     maven("https://maven.notenoughupdates.org/releases")
 }
 
-loom {
-    launchConfigs {
-        "client" {
-            property("mixin.debug", "true")
-            property("asmhelper.verbose", "true")
-            arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
-        }
-    }
-    forge {
-        pack200Provider.set(dev.architectury.pack200.java.Pack200Adapter())
-        mixinConfig("mixins.bedwar.json")
-    }
-    @Suppress("UnstableApiUsage")
-    mixin {
-        defaultRefmapName.set("mixins.bedwar.refmap.json")
-    }
-}
-
-tasks.compileJava {
-    dependsOn(tasks.processResources)
-}
-
 val shadowImpl: Configuration by configurations.creating {
     configurations.implementation.get().extendsFrom(this)
 }
@@ -86,11 +64,33 @@ dependencies {
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.2")
 
     shadowModImpl(libs.moulconfig)
-    devenvMod(libs.moulconfig)
+    devenvMod(variantOf(libs.moulconfig) { classifier("test") })
 
     shadowImpl(libs.libautoupdate)
     shadowImpl("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
+}
 
+loom {
+    launchConfigs {
+        "client" {
+            property("mixin.debug", "true")
+            property("asmhelper.verbose", "true")
+            arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+            arg("--mods", devenvMod.resolve().joinToString(",") { it.relativeTo(file("run")).path })
+        }
+    }
+    forge {
+        pack200Provider.set(dev.architectury.pack200.java.Pack200Adapter())
+        mixinConfig("mixins.bedwar.json")
+    }
+    @Suppress("UnstableApiUsage")
+    mixin {
+        defaultRefmapName.set("mixins.bedwar.refmap.json")
+    }
+}
+
+tasks.compileJava {
+    dependsOn(tasks.processResources)
 }
 
 tasks.withType(JavaCompile::class) {
