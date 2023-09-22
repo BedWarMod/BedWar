@@ -1,15 +1,13 @@
 [
   {
-    "modid": "${modid}",
-    "name": "Xample Mod",
-    "description": "A mod that is used as an example.",
+    "modid": "bedwar",
+    "name": "BedWar",
+    "description": "Mod for Hypixel Bedwars.",
     "version": "${version}",
-    "mcversion": "${mcversion}",
-    "url": "https://github.com/romangraef/Forge1.8.9Template/",
+    "mcversion": "1.8.9}",
+    "url": "",
     "updateUrl": "",
-    "authorList": [
-      "You"
-    ],
+    "authorList": ["CalMWolfs"],
     "credits": "",
     "logoFile": "",
     "screenshots": [],
