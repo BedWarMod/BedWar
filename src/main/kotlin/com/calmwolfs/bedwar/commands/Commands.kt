@@ -8,7 +8,6 @@ import net.minecraft.command.ICommandSender
 import net.minecraftforge.client.ClientCommandHandler
 
 object Commands {
-
     private val openConfig: (Array<String>) -> Unit = {
         if (it.isNotEmpty()) {
             if (it[0].lowercase() == "gui") {
@@ -34,10 +33,9 @@ object Commands {
         ClientCommandHandler.instance.registerCommand(SimpleCommand(name, createCommand(function)))
     }
 
-    private fun createCommand(function: (Array<String>) -> Unit) =
-        object : SimpleCommand.ProcessCommandRunnable() {
-            override fun processCommand(sender: ICommandSender?, args: Array<String>?) {
-                if (args != null) function(args.asList().toTypedArray())
-            }
+    private fun createCommand(function: (Array<String>) -> Unit) = object : SimpleCommand.ProcessCommandRunnable() {
+        override fun processCommand(sender: ICommandSender?, args: Array<String>?) {
+            if (args != null) function(args.asList().toTypedArray())
         }
+    }
 }

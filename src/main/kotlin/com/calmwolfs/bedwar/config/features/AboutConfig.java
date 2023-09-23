@@ -6,7 +6,6 @@ import io.github.moulberry.moulconfig.annotations.*;
 import io.github.moulberry.moulconfig.observer.Property;
 
 public class AboutConfig {
-
     @ConfigOption(name = "Auto Updates", desc = "Automatically check for updates on each startup")
     @Expose
     @ConfigEditorBoolean
@@ -45,7 +44,6 @@ public class AboutConfig {
     }
 
     public static class Licenses {
-
         @ConfigOption(name = "MoulConfig", desc = "MoulConfig is available under the LGPL 3.0 License or later version")
         @ConfigEditorButton(buttonText = "Source")
         public Runnable moulConfig = () -> WebUtils.openBrowser("https://github.com/NotEnoughUpdates/MoulConfig");

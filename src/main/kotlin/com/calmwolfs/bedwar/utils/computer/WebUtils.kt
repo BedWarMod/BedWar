@@ -6,7 +6,6 @@ import java.io.IOException
 import java.net.URI
 
 object WebUtils {
-
     @JvmStatic
     fun openBrowser(url: String) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {

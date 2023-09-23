@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
-
     @Inject(method = "updateCameraAndRender", at = @At("TAIL"))
     private void onLastRender(float partialTicks, long nanoTime, CallbackInfo ci) {
         GuiEditorManager.renderLast();

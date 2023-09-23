@@ -35,12 +35,10 @@ object TablistData {
         }
         tablist = result
 
-
         val tablistData = Minecraft.getMinecraft().ingameGUI.tabList as AccessorGuiPlayerTabOverlay
         header = tablistData.bedwar_getHeader().formattedText
         footer = tablistData.bedwar_getFooter().formattedText
     }
-
 
     @SideOnly(Side.CLIENT)
     internal class PlayerComparator : Comparator<NetworkPlayerInfo> {
@@ -50,12 +48,10 @@ object TablistData {
             return ComparisonChain.start().compareTrueFirst(
                 o1.gameType != WorldSettings.GameType.SPECTATOR,
                 o2.gameType != WorldSettings.GameType.SPECTATOR
-            )
-                .compare(
-                    if (team1 != null) team1.registeredName else "",
-                    if (team2 != null) team2.registeredName else ""
-                )
-                .compare(o1.gameProfile.name, o2.gameProfile.name).result()
+            ).compare(
+                if (team1 != null) team1.registeredName else "",
+                if (team2 != null) team2.registeredName else ""
+            ).compare(o1.gameProfile.name, o2.gameProfile.name).result()
         }
     }
 }

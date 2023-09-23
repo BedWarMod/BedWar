@@ -5,7 +5,6 @@ import net.minecraft.client.gui.inventory.GuiContainer
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 
 class GuiContainerHook(guiAny: Any) {
-
     val gui: GuiContainer
 
     init {

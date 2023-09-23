@@ -64,7 +64,6 @@ object ScoreboardData {
             newLine = newLine.toCharArray().filter { it.code in 21..126 || it.code == 167 }.joinToString(separator = "")
             list.add(newLine)
         }
-
         return list
     }
 }

@@ -4,7 +4,6 @@ import net.minecraft.command.CommandBase
 import net.minecraft.command.ICommandSender
 import net.minecraft.util.BlockPos
 
-
 class SimpleCommand : CommandBase {
     private val commandName: String
     private val runnable: ProcessCommandRunnable

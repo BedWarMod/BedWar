@@ -74,14 +74,14 @@ object GuiEditorManager {
 
     fun isInGui() = Minecraft.getMinecraft().currentScreen is GuiPositionEditor
 
-    fun Position.getDummySize(random: Boolean = false): Vector2i {
-        if (random) return Vector2i(5, 5)
-        val (x, y) = currentBorderSize[internalName] ?: return Vector2i(1, 1)
-        return Vector2i((x * effectiveScale).toInt(), (y * effectiveScale).toInt())
+    fun Position.getDummySize(random: Boolean = false): Vector2 {
+        if (random) return Vector2(5, 5)
+        val (x, y) = currentBorderSize[internalName] ?: return Vector2(1, 1)
+        return Vector2((x * effectiveScale).toInt(), (y * effectiveScale).toInt())
     }
 
     fun Position.getAbsX() = getAbsX0(getDummySize(true).x)
     fun Position.getAbsY() = getAbsY0(getDummySize(true).y)
 }
 
-class Vector2i(val x: Int, val y: Int)
+class Vector2(val x: Int, val y: Int)

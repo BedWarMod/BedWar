@@ -45,7 +45,6 @@ class GuiPositionEditor(private val positions: List<Position>, private val borde
             displayPos = hoveredPos
         }
 
-        // When the mouse isn't currently hovering over a gui element
         if (displayPos == -1) {
             GuiScreenUtils.drawStringCentered(
                 "§eTo edit hidden GUI elements set a key in /bw edit",

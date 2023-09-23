@@ -5,7 +5,6 @@ import net.minecraft.client.gui.ScaledResolution
 import org.lwjgl.opengl.GL11
 
 object GuiScreenUtils {
-
     fun scaledHeight() = ScaledResolution(Minecraft.getMinecraft()).scaledHeight
     fun scaledWidth() = ScaledResolution(Minecraft.getMinecraft()).scaledWidth
 

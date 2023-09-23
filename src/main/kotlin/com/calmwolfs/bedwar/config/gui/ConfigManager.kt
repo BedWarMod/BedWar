@@ -80,7 +80,6 @@ object ConfigManager {
             }
         }
 
-
         if (!ConfigManager::features.isInitialized) {
             println("Creating blank config and saving to file")
             features = Features()

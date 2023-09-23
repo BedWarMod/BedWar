@@ -6,9 +6,6 @@ import net.minecraft.inventory.Container
 import net.minecraftforge.fml.common.eventhandler.Cancelable
 
 abstract class GuiContainerEvent(open val gui: GuiContainer, open val container: Container) : ModEvent() {
-
     @Cancelable
-    data class CloseWindowEvent(override val gui: GuiContainer, override val container: Container) :
-        GuiContainerEvent(gui, container)
-
+    data class CloseWindowEvent(override val gui: GuiContainer, override val container: Container) : GuiContainerEvent(gui, container)
 }

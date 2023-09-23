@@ -9,7 +9,6 @@ import net.minecraftforge.client.event.GuiScreenEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 class PauseButton {
-
     private val config get() =BedWarMod.feature.gui
     private val buttonId = 13
 

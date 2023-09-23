@@ -11,7 +11,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 class RenderGuiData {
-
     @SubscribeEvent
     fun onRenderOverlay(event: RenderGameOverlayEvent.Pre) {
         if (event.type != RenderGameOverlayEvent.ElementType.HOTBAR) return

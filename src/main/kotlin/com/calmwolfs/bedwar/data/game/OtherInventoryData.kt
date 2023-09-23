@@ -12,8 +12,8 @@ import net.minecraft.network.play.server.S2EPacketCloseWindow
 import net.minecraft.network.play.server.S2FPacketSetSlot
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
-class OtherInventoryData {
-    private var currentInventory: Inventory? = null
+object OtherInventoryData {
+    var currentInventory: Inventory? = null
     private var acceptItems = false
     private var lateEvent: InventoryUpdatedEvent? = null
 

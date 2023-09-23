@@ -9,7 +9,6 @@ import io.github.moulberry.moulconfig.Config;
 import io.github.moulberry.moulconfig.annotations.Category;
 
 public class Features extends Config {
-
     @Override
     public void saveNow() {
         BedWarMod.configManager.saveConfig("close-gui");
@@ -31,5 +30,4 @@ public class Features extends Config {
     @Expose
     @Category(name = "Inventory", desc = "Features related to your inventory and the shop")
     public InventoryConfig inventory = new InventoryConfig();
-
 }
