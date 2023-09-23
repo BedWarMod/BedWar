@@ -4,7 +4,7 @@ import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.events.inventory.InventoryCloseEvent
 import com.calmwolfs.bedwar.events.inventory.InventoryFullyOpenedEvent
 import com.calmwolfs.bedwar.events.inventory.SlotClickEvent
-import com.calmwolfs.bedwar.utils.HypixelUtils
+import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -22,9 +22,7 @@ class ShopMiddleClick {
     fun onInventoryOpen(event: InventoryFullyOpenedEvent) {
         inInventory = false
 
-        //todo only work in bedwars game
-
-        if (!HypixelUtils.inBedwarsArea) return
+        if (!BedwarsUtils.inBedwarsGame) return
         if (event.inventoryName !in shopNames) {
             return
         }

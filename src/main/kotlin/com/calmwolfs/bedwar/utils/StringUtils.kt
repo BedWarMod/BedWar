@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
 object StringUtils {
-    fun String.removeColour(): String {
+    fun String.unformat(): String {
         val builder = StringBuilder()
 
         var counter = 0
@@ -13,7 +13,18 @@ object StringUtils {
                 counter++
             }
         }
-
         return builder.toString()
+    }
+
+    fun String.stripResets(): String {
+        var message = this
+
+        while (message.startsWith("§r")) {
+            message = message.substring(2)
+        }
+        while (message.endsWith("§r")) {
+            message = message.substring(0, message.length - 2)
+        }
+        return message
     }
 }

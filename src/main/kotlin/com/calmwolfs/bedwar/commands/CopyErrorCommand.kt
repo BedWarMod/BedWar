@@ -2,7 +2,7 @@ package com.calmwolfs.bedwar.commands
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.utils.ModUtils
-import com.calmwolfs.bedwar.utils.StringUtils.removeColour
+import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import com.google.common.cache.CacheBuilder
@@ -51,7 +51,7 @@ object CopyErrorCommand {
         val stackTrace = throwable.getExactStackTrace(false).joinToString("\n").removeSpam()
         val randomId = UUID.randomUUID().toString()
 
-        val rawMessage = message.removeColour()
+        val rawMessage = message.unformat()
         errorMessages[randomId] = "```\nBedWar Mod ${BedWarMod.version}: $rawMessage\n \n$stackTrace\n```"
         fullErrorMessages[randomId] =
             "```\nBedWar Mod ${BedWarMod.version}: $rawMessage\n(full stack trace)\n \n$fullStackTrace\n```"

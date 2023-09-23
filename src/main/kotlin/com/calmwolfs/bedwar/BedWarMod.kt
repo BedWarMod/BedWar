@@ -8,9 +8,11 @@ import com.calmwolfs.bedwar.data.RenderGuiData
 import com.calmwolfs.bedwar.data.game.MinecraftData
 import com.calmwolfs.bedwar.data.game.OtherInventoryData
 import com.calmwolfs.bedwar.data.game.ScoreboardData
+import com.calmwolfs.bedwar.data.game.TablistData
 import com.calmwolfs.bedwar.events.ModTickEvent
 import com.calmwolfs.bedwar.features.config.PauseButton
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
+import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +46,7 @@ class BedWarMod {
         loadModule(GuiEditorManager)
 
         //utils
+        loadModule(BedwarsUtils)
         loadModule(HypixelUtils)
 
         //data
@@ -51,6 +54,7 @@ class BedWarMod {
         loadModule(OtherInventoryData())
         loadModule(RenderGuiData())
         loadModule(ScoreboardData)
+        loadModule(TablistData)
 
         //features
         loadModule(PauseButton())

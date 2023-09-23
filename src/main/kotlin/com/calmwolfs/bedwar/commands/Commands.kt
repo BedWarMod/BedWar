@@ -1,5 +1,7 @@
 package com.calmwolfs.bedwar.commands
 
+import com.calmwolfs.bedwar.commands.testcommands.CopyScoreboardCommand
+import com.calmwolfs.bedwar.commands.testcommands.CopyTablistCommand
 import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import net.minecraft.command.ICommandSender
@@ -24,6 +26,8 @@ object Commands {
         registerCommand("bedwar", openConfig)
 
         registerCommand("bwcopyerror") { CopyErrorCommand.command(it) }
+        registerCommand("bwcopyscoreboard") { CopyScoreboardCommand.command(it) }
+        registerCommand("bwcopytablist") { CopyTablistCommand.command(it) }
     }
 
     private fun registerCommand(name: String, function: (Array<String>) -> Unit) {

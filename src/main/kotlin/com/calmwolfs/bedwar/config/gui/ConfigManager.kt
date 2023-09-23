@@ -56,11 +56,15 @@ object ConfigManager {
                 val builder = StringBuilder()
 
                 println("load-config-now")
+                BufferedReader(FileReader(configFile!!)).use { reader ->
+                    var line: String?
+                    while (reader.readLine().also { line = it } != null) {
+                        builder.append(line).append('\n')
+                    }
+                }
                 val configJson = gson.fromJson(builder.toString(), JsonObject::class.java)
-                features = gson.fromJson(
-                    configJson,
-                    Features::class.java
-                )
+                features = gson.fromJson(configJson, Features::class.java)
+
                 println("Loaded config from file")
             } catch (error: Exception) {
                 error.printStackTrace()

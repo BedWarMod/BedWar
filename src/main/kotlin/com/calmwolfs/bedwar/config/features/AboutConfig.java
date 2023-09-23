@@ -19,7 +19,6 @@ public class AboutConfig {
 
     @ConfigOption(name = "Used Software", desc = "Information about used software and licenses")
     @Accordion
-    @Expose
     public Licenses licenses = new Licenses();
 
     public enum UpdateStream {

@@ -2,7 +2,6 @@ package com.calmwolfs.bedwar.data.game
 
 import com.calmwolfs.bedwar.events.ModTickEvent
 import net.minecraft.client.Minecraft
-import net.minecraft.scoreboard.Score
 import net.minecraft.scoreboard.ScorePlayerTeam
 import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -26,6 +25,7 @@ object ScoreboardData {
         "\uD83C\uDF81",
         "\uD83C\uDF89",
         "\uD83C\uDF82",
+        "\uD83D\uDD2B"
     )
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -43,15 +43,8 @@ object ScoreboardData {
         val scoreboard = Minecraft.getMinecraft().theWorld?.scoreboard ?: return emptyList()
         val objective = scoreboard.getObjectiveInDisplaySlot(1) ?: return emptyList()
         objectiveLine = objective.displayName
-        var scores = scoreboard.getSortedScores(objective)
-        val list = scores.filter { input: Score? ->
-            input != null && input.playerName != null && !input.playerName.startsWith("#")
-        }
-        scores = if (list.size > 15) {
-            list.drop(15)
-        } else {
-            list
-        }
+        val scores = scoreboard.getSortedScores(objective)
+
         return scores.map {
             ScorePlayerTeam.formatPlayerName(scoreboard.getPlayersTeam(it.playerName), it.playerName)
         }

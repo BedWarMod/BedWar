@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.utils.StringUtils.removeColour
+import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraft.client.Minecraft
 import net.minecraft.event.ClickEvent
 import net.minecraft.event.HoverEvent
@@ -27,13 +27,13 @@ object ModUtils {
     private fun internalChat(message: String): Boolean {
         val minecraft = Minecraft.getMinecraft()
         if (minecraft == null) {
-            BedWarMod.consoleLog(message.removeColour())
+            BedWarMod.consoleLog(message.unformat())
             return false
         }
 
         val thePlayer = minecraft.thePlayer
         if (thePlayer == null) {
-            BedWarMod.consoleLog(message.removeColour())
+            BedWarMod.consoleLog(message.unformat())
             return false
         }
 
