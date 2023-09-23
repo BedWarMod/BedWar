@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.mixins;
+package com.calmwolfs.bedwar.mixins.transformers;
 
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager;
 import net.minecraft.client.renderer.EntityRenderer;

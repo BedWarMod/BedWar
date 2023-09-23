@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object ScoreboardData {
     var scoreboard = listOf<String>()
+    var objectiveLine = ""
 
     private val splitIcons = listOf(
         "\uD83C\uDF6B",
@@ -41,6 +42,7 @@ object ScoreboardData {
     private fun fetchScoreboardLines(): List<String> {
         val scoreboard = Minecraft.getMinecraft().theWorld?.scoreboard ?: return emptyList()
         val objective = scoreboard.getObjectiveInDisplaySlot(1) ?: return emptyList()
+        objectiveLine = objective.displayName
         var scores = scoreboard.getSortedScores(objective)
         val list = scores.filter { input: Score? ->
             input != null && input.playerName != null && !input.playerName.startsWith("#")

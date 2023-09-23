@@ -1,8 +1,8 @@
 package com.calmwolfs.bedwar.config.gui
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.events.GuiRenderEvent
 import com.calmwolfs.bedwar.events.ModTickEvent
+import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.inventory.GuiChest
 import net.minecraft.client.gui.inventory.GuiEditSign

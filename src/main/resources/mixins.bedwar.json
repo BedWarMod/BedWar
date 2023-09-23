@@ -1,9 +1,12 @@
 {
-  "package": "com.calmwolfs.bedwar.mixins",
+  "package": "com.calmwolfs.bedwar.mixins.transformers",
   "refmap": "mixins.bedwar.refmap.json",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinGuiContainer",
+    "MixinNetHandlerPlayClient",
+    "MixinNetworkManager"
   ],
   "client": [
     "MixinEntityRenderer"

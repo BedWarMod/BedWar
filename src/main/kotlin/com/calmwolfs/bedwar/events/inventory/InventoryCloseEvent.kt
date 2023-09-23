@@ -1,0 +1,12 @@
+package com.calmwolfs.bedwar.events.inventory
+
+import com.calmwolfs.bedwar.data.types.Inventory
+import com.calmwolfs.bedwar.events.ModEvent
+import net.minecraft.item.ItemStack
+
+class InventoryCloseEvent(val inventory: Inventory) : ModEvent() {
+    val inventoryId: Int by lazy { inventory.windowId }
+    val inventoryName: String by lazy { inventory.title }
+    val inventorySize: Int by lazy { inventory.slotCount }
+    val inventoryItems: Map<Int, ItemStack> by lazy { inventory.items }
+}

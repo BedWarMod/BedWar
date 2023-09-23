@@ -3,6 +3,7 @@ package com.calmwolfs.bedwar.config;
 import com.calmwolfs.bedwar.BedWarMod;
 import com.calmwolfs.bedwar.config.features.AboutConfig;
 import com.calmwolfs.bedwar.config.features.GuiConfig;
+import com.calmwolfs.bedwar.config.features.InventoryConfig;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.Config;
 import io.github.moulberry.moulconfig.annotations.Category;
@@ -26,5 +27,9 @@ public class Features extends Config {
     @Expose
     @Category(name = "GUI", desc = "Change the locations of GUI elements. (§e/bw gui§7)")
     public GuiConfig gui = new GuiConfig();
+
+    @Expose
+    @Category(name = "Inventory", desc = "Features related to your inventory and the shop")
+    public InventoryConfig inventory = new InventoryConfig();
 
 }

@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.data
 
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
-import com.calmwolfs.bedwar.events.GuiRenderEvent
+import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.inventory.GuiChest
 import net.minecraft.client.gui.inventory.GuiInventory
