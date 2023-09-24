@@ -1,6 +1,13 @@
 package com.calmwolfs.bedwar.utils
 
 object StringUtils {
+    private val whiteSpaceResetPattern = "^(?:\\s|§r)*|(?:\\s|§r)*$".toPattern()
+    private val resetPattern = "(?i)§R".toPattern()
+
+
+    fun String.trimWhiteSpaceAndResets(): String = whiteSpaceResetPattern.matcher(this).replaceAll("")
+    fun String.removeResets(): String = resetPattern.matcher(this).replaceAll("")
+
     fun String.unformat(): String {
         val builder = StringBuilder()
 

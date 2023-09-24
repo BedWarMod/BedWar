@@ -22,7 +22,7 @@ class ShopMiddleClick {
     fun onInventoryOpen(event: InventoryFullyOpenedEvent) {
         inInventory = false
 
-        if (!BedwarsUtils.inBedwarsGame) return
+        if (!BedwarsUtils.playingBedwars) return
         if (event.inventoryName !in shopNames) {
             return
         }

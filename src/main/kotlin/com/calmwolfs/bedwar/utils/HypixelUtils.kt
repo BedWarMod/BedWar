@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.data.game.ScoreboardData
+import com.calmwolfs.bedwar.events.HypixelJoinEvent
 import com.calmwolfs.bedwar.events.ModTickEvent
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -9,6 +10,9 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent
 object HypixelUtils {
     private var hypixelMain = false
     private var hypixelAlpha = false
+    var currentName = ""
+    // todo deal with nicks
+    private var currentNick = ""
 
     val onHypixel get() = (hypixelMain || hypixelAlpha) && Minecraft.getMinecraft().thePlayer != null
 
@@ -24,10 +28,18 @@ object HypixelUtils {
 
         if (!onHypixel) {
             checkHypixel()
+            if (onHypixel) {
+                HypixelJoinEvent().postAndCatch()
+            }
         }
         if (!onHypixel) return
 
         BedwarsUtils.bedwarsCheck()
+    }
+
+    @SubscribeEvent
+    fun onHypixelJoin(event: HypixelJoinEvent) {
+        currentName = Minecraft.getMinecraft().thePlayer.name
     }
 
     private fun checkHypixel() {

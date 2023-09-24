@@ -53,15 +53,15 @@ object ScoreboardData {
     private fun formatLines(rawList: List<String>): List<String> {
         val list = mutableListOf<String>()
         for (line in rawList) {
-            val seperator = splitIcons.find { line.contains(it) } ?: continue
-            val split = line.split(seperator)
+            val separator = splitIcons.find { line.contains(it) } ?: continue
+            val split = line.split(separator)
             val start = split[0]
             var end = split[1]
             if (end.length >= 2) {
                 end = end.substring(2)
             }
             var newLine = start + end
-            newLine = newLine.toCharArray().filter { it.code in 21..126 || it.code == 167 }.joinToString(separator = "")
+            newLine = newLine.toCharArray().filter { it.code in 21..126 || it.code == 167 || it.code == 0x2713 || it.code == 0x2717}.joinToString(separator = "")
             list.add(newLine)
         }
         return list

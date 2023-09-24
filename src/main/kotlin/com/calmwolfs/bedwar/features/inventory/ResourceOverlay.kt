@@ -1,7 +1,6 @@
 package com.calmwolfs.bedwar.features.inventory
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.data.game.OtherInventoryData
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import com.calmwolfs.bedwar.events.inventory.InventoryCloseEvent
 import com.calmwolfs.bedwar.events.inventory.InventoryFullyOpenedEvent
@@ -25,16 +24,14 @@ class ResourceOverlay {
 
     @SubscribeEvent
     fun onInventoryClose(event: InventoryCloseEvent) {
-        if (inInventory && OtherInventoryData.currentInventory?.items != null) {
-            println("was in echest last: ${event.inventoryName == " Ender Chest"}")
-            val otherInventoryItems = OtherInventoryData.currentInventory!!.items
-
+        if (inInventory) {
             for (trackedItem in trackedItems) {
-                val count = InventoryUtils.countItemsInInventory(otherInventoryItems) { it.item == trackedItem.item }
+                val count = InventoryUtils.countItemsInOpenInventory { it.item == trackedItem.item }
                 enderChestResources[trackedItem] = count
             }
         }
 
+        display = drawResourceDisplay()
         inInventory = false
     }
 
@@ -48,7 +45,6 @@ class ResourceOverlay {
         }
 
         inInventory = true
-        display = drawResourceDisplay()
     }
 
     @SubscribeEvent
@@ -60,11 +56,9 @@ class ResourceOverlay {
             ownResources[trackedItem] = count
         }
 
-        if (inInventory && OtherInventoryData.currentInventory?.items != null) {
-            val otherInventoryItems = OtherInventoryData.currentInventory!!.items
-
+        if (inInventory) {
             for (trackedItem in trackedItems) {
-                val count = InventoryUtils.countItemsInInventory(otherInventoryItems) { it.item == trackedItem.item }
+                val count = InventoryUtils.countItemsInOpenInventory { it.item == trackedItem.item }
                 enderChestResources[trackedItem] = count
             }
         }
@@ -75,7 +69,7 @@ class ResourceOverlay {
     @SubscribeEvent
     fun onRenderOverlay(event: GuiRenderEvent.GuiOverlayRenderEvent) {
         if (!config.enabled) return
-        if (!BedwarsUtils.inBedwarsGame) return
+        if (!BedwarsUtils.playingBedwars) return
 
         config.position.renderStringsAndItems(display, posLabel = "Resource Overlay")
     }

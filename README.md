@@ -2,6 +2,6 @@
 
 Uses Nea's Forge Template
 
-## Licensing
+### Licensing
 
-This template is licensed under the nothing currently
+This project will be licensed shortly

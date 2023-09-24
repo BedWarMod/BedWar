@@ -2,7 +2,12 @@ package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.data.game.ScoreboardData
 import com.calmwolfs.bedwar.data.game.TablistData
+import com.calmwolfs.bedwar.events.ModTickEvent
 import com.calmwolfs.bedwar.events.WorldChangeEvent
+import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
+import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
+import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
+import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -12,16 +17,19 @@ object BedwarsUtils {
     private var bedwarsArea = false
     private var bedwarsQueue = false
     private var bedwarsGame = false
-    private var isEliminated = false
-    private var isDead = false
-    private var gameEnded = false
+    private var gameOngoing = false
 
-    private var tabStatPattern = "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
+    private var tabStatPattern =
+        "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
+    private var scoreboardTeamPattern = "\\w.(?<team>\\w+):\\s.+\\sYOU".toPattern()
+
+    var currentTeam = ""
 
     val inBedwarsArea get() = bedwarsArea && Minecraft.getMinecraft().thePlayer != null
-    val inBedwarsQueue get() = bedwarsArea && bedwarsQueue
-    val inBedwarsGame get() = bedwarsArea && bedwarsGame
-    val inBedwarsLobby get() = bedwarsArea && !bedwarsGame && !bedwarsQueue
+    val inBedwarsQueue get() = inBedwarsArea && bedwarsQueue
+    val inBedwarsGame get() = inBedwarsArea && bedwarsGame
+    val inBedwarsLobby get() = inBedwarsArea && !bedwarsGame && !bedwarsQueue
+    val playingBedwars get() = inBedwarsGame && gameOngoing
 
     @SubscribeEvent
     fun onWorldChange(event: WorldChangeEvent) {
@@ -50,8 +58,44 @@ object BedwarsUtils {
             if (bedwarsGame) continue
             val matcher = tabStatPattern.matcher(line.unformat())
             if (matcher.matches()) {
+                SessionDisplay.currentKills = matcher.group("kills").toInt()
+                SessionDisplay.currentFinals = matcher.group("finals").toInt()
+                SessionDisplay.currentBeds = matcher.group("beds").toInt()
                 bedwarsGame = true
             }
+        }
+    }
+
+    // todo rejoin stuff not breaking
+
+    @SubscribeEvent
+    fun onGameStart(event: StartGameEvent) {
+        gameOngoing = true
+        currentTeam = ""
+    }
+
+    @SubscribeEvent
+    fun onTick(event: ModTickEvent) {
+        if (inBedwarsGame && currentTeam == "") {
+            for (line in ScoreboardData.scoreboard) {
+                if (currentTeam != "") continue
+                val matcher = scoreboardTeamPattern.matcher(line.unformat())
+                if (matcher.matches()) {
+                    currentTeam = matcher.group("team")
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    fun onGameEnd(event: EndGameEvent) {
+        gameOngoing = false
+    }
+
+    @SubscribeEvent
+    fun onTeamEliminated(event: TeamEliminatedEvent) {
+        if (event.team == currentTeam) {
+            gameOngoing = false
         }
     }
 

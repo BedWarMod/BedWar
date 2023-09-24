@@ -6,10 +6,12 @@ import com.calmwolfs.bedwar.config.gui.ConfigManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.data.RenderGuiData
 import com.calmwolfs.bedwar.data.game.*
+import com.calmwolfs.bedwar.events.BedwarsEventManager
 import com.calmwolfs.bedwar.events.ModTickEvent
 import com.calmwolfs.bedwar.features.config.PauseButton
 import com.calmwolfs.bedwar.features.inventory.ResourceOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
+import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import kotlinx.coroutines.CoroutineName
@@ -41,6 +43,9 @@ class BedWarMod {
     fun preInit(event: FMLPreInitializationEvent?) {
         loadModule(this)
 
+        //other
+        loadModule(BedwarsEventManager)
+        loadModule(ChatManager)
         loadModule(GuiEditorManager)
 
         //utils
@@ -58,6 +63,7 @@ class BedWarMod {
         //features
         loadModule(PauseButton())
         loadModule(ResourceOverlay())
+        loadModule(SessionDisplay)
         loadModule(ShopMiddleClick())
 
         Commands.init()
