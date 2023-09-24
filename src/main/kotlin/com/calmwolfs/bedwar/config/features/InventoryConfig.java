@@ -28,8 +28,8 @@ public class InventoryConfig {
         public Position position = new Position(-100, 10, false, true);
     }
 
-    @ConfigOption(name = "Middle Click", desc = "Middle clicks in shops to speed up buying")
+    @ConfigOption(name = "Middle Click", desc = "Middle clicks in shops to stop items sticking to your cursor")
     @Expose
     @ConfigEditorBoolean
-    public boolean shopMiddleClick = true;
+    public boolean shopMiddleClick = false;
 }

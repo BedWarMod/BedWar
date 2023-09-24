@@ -8,6 +8,7 @@ import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
 import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
 import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -56,11 +57,10 @@ object BedwarsUtils {
         val splitFooter = TablistData.footer.split("\n")
         for (line in splitFooter) {
             if (bedwarsGame) continue
-            val matcher = tabStatPattern.matcher(line.unformat())
-            if (matcher.matches()) {
-                SessionDisplay.currentKills = matcher.group("kills").toInt()
-                SessionDisplay.currentFinals = matcher.group("finals").toInt()
-                SessionDisplay.currentBeds = matcher.group("beds").toInt()
+            tabStatPattern.matchMatcher(line.unformat()) {
+                SessionDisplay.currentKills = group("kills").toInt()
+                SessionDisplay.currentFinals = group("finals").toInt()
+                SessionDisplay.currentBeds = group("beds").toInt()
                 bedwarsGame = true
             }
         }
@@ -79,9 +79,8 @@ object BedwarsUtils {
         if (inBedwarsGame && currentTeam == "") {
             for (line in ScoreboardData.scoreboard) {
                 if (currentTeam != "") continue
-                val matcher = scoreboardTeamPattern.matcher(line.unformat())
-                if (matcher.matches()) {
-                    currentTeam = matcher.group("team")
+                scoreboardTeamPattern.matchMatcher(line.unformat()) {
+                    currentTeam = group("team")
                 }
             }
         }

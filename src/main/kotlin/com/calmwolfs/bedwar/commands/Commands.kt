@@ -5,6 +5,7 @@ import com.calmwolfs.bedwar.commands.testcommands.CopyTablistCommand
 import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.utils.PartyUtils
 import net.minecraft.command.ICommandSender
 import net.minecraftforge.client.ClientCommandHandler
 
@@ -30,6 +31,7 @@ object Commands {
         registerCommand("bwcopyerror") { CopyErrorCommand.command(it) }
         registerCommand("bwcopyscoreboard") { CopyScoreboardCommand.command(it) }
         registerCommand("bwcopytablist") { CopyTablistCommand.command(it) }
+        registerCommand("bwpartylist") { PartyUtils.listMembers() }
     }
 
     private fun registerCommand(name: String, function: (Array<String>) -> Unit) {

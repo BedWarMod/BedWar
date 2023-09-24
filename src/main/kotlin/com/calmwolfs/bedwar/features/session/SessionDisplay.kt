@@ -121,11 +121,11 @@ object SessionDisplay {
 
     @SubscribeEvent
     fun onBedBreak(event: BedBreakEvent) {
-        if (event.teamBroken == BedwarsUtils.currentTeam) {
+        if (event.team == BedwarsUtils.currentTeam) {
             sessionBedsLost++
         }
         // todo nicks
-        if (event.playerBreaking == HypixelUtils.currentName) {
+        if (event.player == HypixelUtils.currentName) {
             sessionBedsBroken++
         }
     }

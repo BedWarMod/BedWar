@@ -1,10 +1,7 @@
 package com.calmwolfs.bedwar.config;
 
 import com.calmwolfs.bedwar.BedWarMod;
-import com.calmwolfs.bedwar.config.features.AboutConfig;
-import com.calmwolfs.bedwar.config.features.GuiConfig;
-import com.calmwolfs.bedwar.config.features.InventoryConfig;
-import com.calmwolfs.bedwar.config.features.SessionConfig;
+import com.calmwolfs.bedwar.config.features.*;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.Config;
 import io.github.moulberry.moulconfig.annotations.Category;
@@ -35,4 +32,8 @@ public class Features extends Config {
     @Expose
     @Category(name = "Session", desc = "Tracker for current session and current game")
     public SessionConfig session = new SessionConfig();
+
+    @Expose
+    @Category(name = "Party", desc = "Features relating to you being in a party")
+    public PartyConfig party = new PartyConfig();
 }

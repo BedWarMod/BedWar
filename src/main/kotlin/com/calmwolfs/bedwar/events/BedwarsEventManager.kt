@@ -4,6 +4,7 @@ import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.SoundUtils
+import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.removeResets
 import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
@@ -11,17 +12,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object BedwarsEventManager {
     private val gameEndPattern = "(?<team>\\w+)\\s+-(\\s+(?:\\[[^]]*]\\s+)?(\\w+)).".toPattern()
-    private val bedBreakPattern = "BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|to) (?<player>\\w+)!".toPattern()
+    private val bedBreakPattern = "BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|to) (?<player>\\w+)[!.]".toPattern()
     private val finalKillPattern = "(?<killed>\\w+) .* (?<killer>\\w+)(?:.|'s final #.*.) FINAL KILL!".toPattern()
-    private val killPattern = "§\\w(?<killed>\\w+) §7.* (?:by|for) §\\w(?<killer>\\w+)§7.".toPattern()
+    private val killPattern = "§\\w(?<killed>\\w+) §7.*(?:by|for) §\\w(?<killer>\\w+)§7.".toPattern()
     private val voidPattern = "§\\w(?<killed>\\w+) §7fell into the void.".toPattern()
     private val teamEliminatedPattern = "TEAM ELIMINATED > (?<team>\\w+) Team has been eliminated!".toPattern()
 
     @SubscribeEvent
     fun onChat(event: ModChatEvent) {
         if (!BedwarsUtils.inBedwarsArea) return
-        var message = event.message.trimWhiteSpaceAndResets()
-        message = message.removeResets()
+        val message = event.message.trimWhiteSpaceAndResets().removeResets()
 
         println("trimmed: $message")
 
@@ -65,22 +65,19 @@ object BedwarsEventManager {
             }
         }
 
-        matcher = killPattern.matcher(message)
-        if (matcher.matches()) {
-            val killer = matcher.group("killer")
-            val killed = matcher.group("killed")
+        killPattern.matchMatcher(message) {
+            val killer = group("killer")
+            val killed = group("killed")
             KillEvent(killer, killed).postAndCatch()
         }
 
-        matcher = voidPattern.matcher(message)
-        if (matcher.matches()) {
-            val killed = matcher.group("killed")
+        voidPattern.matchMatcher(message) {
+            val killed = group("killed")
             KillEvent("-", killed).postAndCatch()
         }
 
-        matcher = teamEliminatedPattern.matcher(message.unformat())
-        if (matcher.matches()) {
-            val team = matcher.group("team")
+        teamEliminatedPattern.matchMatcher(message.unformat()) {
+            val team = group("team")
             TeamEliminatedEvent(team).postAndCatch()
         }
     }

@@ -11,9 +11,11 @@ import com.calmwolfs.bedwar.events.ModTickEvent
 import com.calmwolfs.bedwar.features.config.PauseButton
 import com.calmwolfs.bedwar.features.inventory.ResourceOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
+import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
+import com.calmwolfs.bedwar.utils.PartyUtils
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -51,6 +53,7 @@ class BedWarMod {
         //utils
         loadModule(BedwarsUtils)
         loadModule(HypixelUtils)
+        loadModule(PartyUtils)
 
         //data
         loadModule(MinecraftData())
@@ -61,6 +64,7 @@ class BedWarMod {
         loadModule(TablistData)
 
         //features
+        loadModule(PartyGameStats())
         loadModule(PauseButton())
         loadModule(ResourceOverlay())
         loadModule(SessionDisplay)

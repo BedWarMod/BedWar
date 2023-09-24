@@ -1,9 +1,11 @@
 package com.calmwolfs.bedwar.utils
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 object StringUtils {
     private val whiteSpaceResetPattern = "^(?:\\s|§r)*|(?:\\s|§r)*$".toPattern()
     private val resetPattern = "(?i)§R".toPattern()
-
 
     fun String.trimWhiteSpaceAndResets(): String = whiteSpaceResetPattern.matcher(this).replaceAll("")
     fun String.removeResets(): String = resetPattern.matcher(this).replaceAll("")
@@ -33,5 +35,21 @@ object StringUtils {
             message = message.substring(0, message.length - 2)
         }
         return message
+    }
+
+    fun String.toPlayerName(): String {
+        val split = split(" ")
+        return if (split.size > 1) {
+            split[1].unformat()
+        } else {
+            split[0].unformat()
+        }
+    }
+
+    inline fun <T> Pattern.matchMatcher(text: String, consumer: Matcher.() -> T) =
+        matcher(text).let { if (it.matches()) consumer(it) else null }
+
+    fun optionalPlural(number: Int, singular: String, plural: String): String {
+        return "$number " + if (number == 1) singular else plural
     }
 }
