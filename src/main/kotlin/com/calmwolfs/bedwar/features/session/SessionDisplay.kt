@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.features.session
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
@@ -42,7 +43,11 @@ object SessionDisplay {
 
     init {
         fixedRateTimer(name = "bedwar-session-tracker", period = 1000) {
-            updateDisplay()
+            try {
+                updateDisplay()
+            } catch (error: Throwable) {
+                CopyErrorCommand.logError(error, "Error updating BedWars session tracker!")
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.config.gui
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.config.Features
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
@@ -87,7 +88,11 @@ object ConfigManager {
         }
 
         fixedRateTimer(name = "bedwar-config-auto-save", period = 60_000L, initialDelay = 60_000L) {
-            saveConfig("auto-save-60s")
+            try {
+                saveConfig("auto-save-60s")
+            } catch (error: Throwable) {
+                CopyErrorCommand.logError(error, "Error auto-saving config!")
+            }
         }
 
         val features = BedWarMod.feature

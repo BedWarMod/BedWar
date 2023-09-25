@@ -36,4 +36,8 @@ public class Features extends Config {
     @Expose
     @Category(name = "Party", desc = "Features relating to you being in a party")
     public PartyConfig party = new PartyConfig();
+
+    @Expose
+    @Category(name = "Misc", desc = "Settings without a category")
+    public MiscConfig misc = new MiscConfig();
 }

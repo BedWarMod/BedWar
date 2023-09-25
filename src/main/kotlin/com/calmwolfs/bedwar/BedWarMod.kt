@@ -11,6 +11,7 @@ import com.calmwolfs.bedwar.events.ModTickEvent
 import com.calmwolfs.bedwar.features.config.PauseButton
 import com.calmwolfs.bedwar.features.inventory.ResourceOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
+import com.calmwolfs.bedwar.features.misc.CopyChat
 import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.BedwarsUtils
@@ -64,6 +65,7 @@ class BedWarMod {
         loadModule(TablistData)
 
         //features
+        loadModule(CopyChat())
         loadModule(PartyGameStats())
         loadModule(PauseButton())
         loadModule(ResourceOverlay())
