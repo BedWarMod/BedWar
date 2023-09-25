@@ -19,7 +19,7 @@ object BedwarsEventManager {
     private val teamEliminatedPattern = "TEAM ELIMINATED > (?<team>\\w+) Team has been eliminated!".toPattern()
 
     @SubscribeEvent
-    fun onChat(event: ModChatEvent) {
+    fun onChat(event: GameChatEvent) {
         if (!BedwarsUtils.inBedwarsArea) return
         val message = event.message.trimWhiteSpaceAndResets().removeResets()
 

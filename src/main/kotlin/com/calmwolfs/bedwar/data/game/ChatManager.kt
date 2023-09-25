@@ -1,7 +1,11 @@
 package com.calmwolfs.bedwar.data.game
 
-import com.calmwolfs.bedwar.events.ModChatEvent
+import com.calmwolfs.bedwar.events.GameChatEvent
+import com.calmwolfs.bedwar.events.PlayerChatEvent
+import com.calmwolfs.bedwar.utils.ChatUtils.getPlayerName
+import com.calmwolfs.bedwar.utils.StringUtils.removeResets
 import com.calmwolfs.bedwar.utils.StringUtils.stripResets
+import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
 import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
@@ -15,11 +19,19 @@ object ChatManager {
 
         if (message.startsWith("§f{\"server\":\"")) return
 
-        val chatEvent = ModChatEvent(message, original)
-        chatEvent.postAndCatch()
-        val blockReason = chatEvent.blockedReason
+        val sender = message.trimWhiteSpaceAndResets().removeResets().getPlayerName()
 
-        if (blockReason != "") {
+        val blockedReason = if (sender == "-") {
+            val chatEvent = GameChatEvent(message, original)
+            chatEvent.postAndCatch()
+            chatEvent.blockedReason
+        } else {
+            val chatEvent = PlayerChatEvent(message, original, sender)
+            chatEvent.postAndCatch()
+            chatEvent.blockedReason
+        }
+
+        if (blockedReason != "") {
             event.isCanceled = true
         }
     }

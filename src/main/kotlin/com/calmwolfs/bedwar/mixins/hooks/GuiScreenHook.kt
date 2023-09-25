@@ -6,5 +6,5 @@ import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 fun onComponentClick(cir: CallbackInfoReturnable<Boolean>) {
-    if (HypixelUtils.onHypixel && BedWarMod.feature.misc.copyChat && KeyboardUtils.isControlKeyDown()) cir.returnValue = false
+    if (HypixelUtils.onHypixel && BedWarMod.feature.chat.copyChat && KeyboardUtils.isControlKeyDown()) cir.returnValue = false
 }

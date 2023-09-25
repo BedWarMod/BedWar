@@ -1,4 +1,4 @@
-package com.calmwolfs.bedwar.features.misc
+package com.calmwolfs.bedwar.features.chat
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.mixins.transformers.AccessorGuiNewChat
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import org.lwjgl.input.Mouse
 
 class CopyChat {
-    private val config get() = BedWarMod.feature.misc
+    private val config get() = BedWarMod.feature.chat
     private var lastChatX = 0
     private var lastChatY = 0
     private var hoveredChatLine: ChatLine? = null

@@ -24,6 +24,7 @@ object BedwarsUtils {
         "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
     private var scoreboardTeamPattern = "\\w.(?<team>\\w+):\\s.+\\sYOU".toPattern()
 
+    // todo deal with swap gamemode tbh could just check scoreboard each tick for some stuff and fix rejoins as well
     var currentTeam = ""
 
     val inBedwarsArea get() = bedwarsArea && Minecraft.getMinecraft().thePlayer != null

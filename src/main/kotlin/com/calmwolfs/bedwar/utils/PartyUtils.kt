@@ -1,7 +1,8 @@
 package com.calmwolfs.bedwar.utils
 
-import com.calmwolfs.bedwar.events.ModChatEvent
+import com.calmwolfs.bedwar.events.GameChatEvent
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
+import com.calmwolfs.bedwar.utils.StringUtils.optionalPlural
 import com.calmwolfs.bedwar.utils.StringUtils.removeResets
 import com.calmwolfs.bedwar.utils.StringUtils.toPlayerName
 import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
@@ -14,7 +15,7 @@ object PartyUtils {
     // todo stuff with nicks
 
     @SubscribeEvent
-    fun onChat(event: ModChatEvent) {
+    fun onChat(event: GameChatEvent) {
         val message = event.message.trimWhiteSpaceAndResets().removeResets()
 
         // new member joined
@@ -77,9 +78,15 @@ object PartyUtils {
     }
 
     fun listMembers() {
-        ModUtils.chat("§a[BedWar] §7${partyMembers.size} §atracked party members§f:")
-        for (member in partyMembers) {
-            ModUtils.chat(" §a- §7$member")
+        val size = partyMembers.size
+        if (size == 0) {
+            ModUtils.chat("§e[BedWar] No tracked party members!")
+        } else {
+            val memberLine = optionalPlural(size, "§atracked party member", "§atracked party members")
+            ModUtils.chat("§a[BedWar] §7$memberLine§f:")
+            for (member in partyMembers) {
+                ModUtils.chat(" §a- §7$member")
+            }
         }
     }
 }
