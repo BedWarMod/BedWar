@@ -1,5 +1,6 @@
-package com.calmwolfs.bedwar.events
+package com.calmwolfs.bedwar.events.game
 
+import com.calmwolfs.bedwar.events.ModEvent
 import net.minecraft.network.Packet
 import net.minecraftforge.fml.common.eventhandler.Cancelable
 

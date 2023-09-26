@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.commands.testcommands
 
 import com.calmwolfs.bedwar.data.game.ScoreboardData
-import com.calmwolfs.bedwar.utils.ModUtils
+import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 
@@ -20,6 +20,6 @@ object CopyScoreboardCommand {
 
         val string = resultList.joinToString("\n")
         ClipboardUtils.copyToClipboard(string)
-        ModUtils.chat("§e[BedWar] scoreboard copied into your clipboard!")
+        ChatUtils.chat("§e[BedWar] scoreboard copied into your clipboard!")
     }
 }

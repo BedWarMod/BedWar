@@ -3,6 +3,7 @@ package com.calmwolfs.bedwar.config.features;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.annotations.Accordion;
 import io.github.moulberry.moulconfig.annotations.ConfigEditorBoolean;
+import io.github.moulberry.moulconfig.annotations.ConfigEditorDropdown;
 import io.github.moulberry.moulconfig.annotations.ConfigOption;
 
 public class PartyConfig {
@@ -21,5 +22,21 @@ public class PartyConfig {
         @Expose
         @ConfigEditorBoolean
         public boolean showSolo = true;
+
+        @Expose
+        @ConfigOption(name = "Action Type", desc = "What the mod will do with your stats at the end of the game. " +
+                "§eRequires above setting to be enabled. §cAuto sending messages is use at your own risk")
+        @ConfigEditorDropdown(values = {"Nothing", "Copy to clipboard", "Send to party", "Copy and Send"})
+        public int actionType = 0;
+
+        @ConfigOption(name = "Compressed Style", desc = "Will remove all the formatting for the above setting if enabled: Kills Finals Beds")
+        @Expose
+        @ConfigEditorBoolean
+        public boolean compressed = true;
+
+        @ConfigOption(name = "Copy Mid Game", desc = "Will still copy or send your stats if your team is eliminated in the middle of the game")
+        @Expose
+        @ConfigEditorBoolean
+        public boolean copyMidGame = false;
     }
 }

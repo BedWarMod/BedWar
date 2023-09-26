@@ -2,9 +2,9 @@ package com.calmwolfs.bedwar.features.chat
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.mixins.transformers.AccessorGuiNewChat
+import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.MinecraftUtils
-import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
@@ -16,7 +16,6 @@ import net.minecraft.util.MathHelper
 import net.minecraftforge.client.event.GuiScreenEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
 import net.minecraftforge.fml.common.eventhandler.EventPriority
-
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import org.lwjgl.input.Mouse
 
@@ -48,6 +47,7 @@ class CopyChat {
         return null
     }
 
+    // todo copy the whole message not just a single line of it
     @SubscribeEvent
     fun onAttemptCopy(event: GuiScreenEvent.MouseInputEvent.Pre) {
         if (!HypixelUtils.onHypixel || event.gui !is GuiChat || !Mouse.getEventButtonState()) return
@@ -60,7 +60,7 @@ class CopyChat {
             val chatLine = hoveredChatLine ?: return
             val chatText = chatLine.chatComponent.unformattedText.unformat()
             ClipboardUtils.copyToClipboard(chatText)
-            ModUtils.chat("§a[BedWar] §7Copied chat to clipboard!")
+            ChatUtils.chat("§a[BedWar] §7Copied chat to clipboard!")
         }
     }
 

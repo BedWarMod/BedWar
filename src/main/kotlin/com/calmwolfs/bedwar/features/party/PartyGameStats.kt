@@ -3,10 +3,9 @@ package com.calmwolfs.bedwar.features.party
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.types.BedwarsGameStat
 import com.calmwolfs.bedwar.events.bedwars.*
-import com.calmwolfs.bedwar.utils.HypixelUtils
-import com.calmwolfs.bedwar.utils.ModUtils
-import com.calmwolfs.bedwar.utils.PartyUtils
-import com.calmwolfs.bedwar.utils.StringUtils
+import com.calmwolfs.bedwar.utils.*
+import com.calmwolfs.bedwar.utils.StringUtils.unformat
+import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -16,6 +15,7 @@ class PartyGameStats {
     // todo deal with nicks
     private val config get() = BedWarMod.feature.party.matchStats
     private var gamePartyMembers = mutableMapOf<String, BedwarsGameStat>()
+
     @SubscribeEvent
     fun onGameStart(event: StartGameEvent) {
         gamePartyMembers.clear()
@@ -50,18 +50,51 @@ class PartyGameStats {
     }
 
     @SubscribeEvent
+    fun onElimination(event: TeamEliminatedEvent) {
+        if (event.team == BedwarsUtils.currentTeam) {
+            printPartyStats(false)
+        }
+    }
+
+    @SubscribeEvent
     fun onGameEnd(event: EndGameEvent) {
+        printPartyStats()
+    }
+
+    private fun printPartyStats(gameEnded: Boolean = true) {
         if (!config.enabled) return
+        if (gamePartyMembers.size < 2 && !config.showSolo) return
         BedWarMod.coroutineScope.launch {
-            delay(1500.milliseconds)
+            delay(1250.milliseconds)
+            ChatUtils.chat("")
+            ChatUtils.chat("§6[BedWar] §7Parties match stats")
+            var line = ""
             for ((player, stats) in gamePartyMembers) {
-                if (player == HypixelUtils.currentName && !config.showSolo) continue
+                val isPlayer = HypixelUtils.currentName == player
+                if (isPlayer && !config.showSolo) continue
 
                 val kills = StringUtils.optionalPlural(stats.kills, "§7Kill", "§7Kills")
                 val finals = StringUtils.optionalPlural(stats.finals, "§7Final kill", "§7Final kills")
                 val beds = StringUtils.optionalPlural(stats.beds, "§7Bed", "§7Beds")
 
-                ModUtils.chat("§6[BedWar] §3$player §7got §6$kills, §6$finals and §6$beds")
+                line = "§6[BW] §3$player §7got §6$kills§7, §6$finals §7and §6$beds"
+                ChatUtils.chat(line)
+                if (!gameEnded && !config.copyMidGame) continue
+                if (isPlayer && config.actionType != 0) {
+                    line = if (config.compressed) "${stats.kills} ${stats.finals} ${stats.beds}" else line.unformat()
+                    if (config.actionType == 1 || config.actionType == 3) {
+                        ClipboardUtils.copyToClipboard(line)
+                        if (config.actionType == 1) {
+                            ChatUtils.chat("§a[BedWar] §7Copied match stats to clipboard!")
+                        }
+                    }
+                }
+            }
+            ChatUtils.chat("")
+            if (!gameEnded && !config.copyMidGame) return@launch
+            if (line != "" && (config.actionType == 2 || config.actionType == 3) && PartyUtils.partyMembers.isNotEmpty()) {
+                delay(100.milliseconds)
+                ChatUtils.sendCommandToServer("pc $line")
             }
         }
     }

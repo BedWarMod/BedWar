@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.features.chat
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.events.PlayerChatEvent
+import com.calmwolfs.bedwar.events.game.PlayerChatEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils

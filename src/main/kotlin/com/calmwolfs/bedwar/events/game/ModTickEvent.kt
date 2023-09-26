@@ -1,4 +1,6 @@
-package com.calmwolfs.bedwar.events
+package com.calmwolfs.bedwar.events.game
+
+import com.calmwolfs.bedwar.events.ModEvent
 
 class ModTickEvent(private val tick: Int) : ModEvent() {
     fun isMod(i: Int) = tick % i == 0

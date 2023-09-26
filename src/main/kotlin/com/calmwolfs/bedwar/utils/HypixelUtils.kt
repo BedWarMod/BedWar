@@ -2,7 +2,7 @@ package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.data.game.ScoreboardData
 import com.calmwolfs.bedwar.events.HypixelJoinEvent
-import com.calmwolfs.bedwar.events.ModTickEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent

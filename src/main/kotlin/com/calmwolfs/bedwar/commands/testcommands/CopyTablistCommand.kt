@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.commands.testcommands
 
 import com.calmwolfs.bedwar.data.game.TablistData
-import com.calmwolfs.bedwar.utils.ModUtils
+import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 
@@ -20,6 +20,6 @@ object CopyTablistCommand {
 
         val string = "Header:\n\n$header\n\nBody:\n\n${resultList.joinToString("\n")}\n\nFooter:\n\n$footer"
         ClipboardUtils.copyToClipboard(string)
-        ModUtils.chat("§e[BedWar] tablist copied into your clipboard!")
+        ChatUtils.chat("§e[BedWar] tablist copied into your clipboard!")
     }
 }

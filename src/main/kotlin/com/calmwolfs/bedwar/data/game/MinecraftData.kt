@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.data.game
 
-import com.calmwolfs.bedwar.events.ModTickEvent
-import com.calmwolfs.bedwar.events.WorldChangeEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.WorldChangeEvent
 import net.minecraft.client.Minecraft
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent

@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.commands
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.utils.ModUtils
+import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
@@ -18,7 +18,7 @@ object CopyErrorCommand {
 
     fun command(array: Array<String>) {
         if (array.size != 1) {
-            ModUtils.chat("§cUse /bwcopyerror <error id> or just click on the error in chat!")
+            ChatUtils.chat("§cUse /bwcopyerror <error id> or just click on the error in chat!")
             return
         }
 
@@ -30,7 +30,7 @@ object CopyErrorCommand {
             errorMessages[id]
         }
         val name = if (fullError) "Full error" else "Error"
-        ModUtils.chat(errorMessage?.let {
+        ChatUtils.chat(errorMessage?.let {
             ClipboardUtils.copyToClipboard(it)
             "§e[BedWar] $name copied into the clipboard, uhh do something with it"
         } ?: "§c[BedWar] Error id not found!")
@@ -56,7 +56,7 @@ object CopyErrorCommand {
         fullErrorMessages[randomId] =
             "```\nBedWar Mod ${BedWarMod.version}: $rawMessage\n(full stack trace)\n \n$fullStackTrace\n```"
 
-        ModUtils.clickableChat(
+        ChatUtils.clickableChat(
             "§c[BedWar] ${BedWarMod.version}]: $message§c. Click here to copy the error into the clipboard.",
             "bwcopyerror $randomId"
         )

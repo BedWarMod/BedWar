@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.data.game
 
-import com.calmwolfs.bedwar.events.GameChatEvent
-import com.calmwolfs.bedwar.events.PlayerChatEvent
+import com.calmwolfs.bedwar.events.game.GameChatEvent
+import com.calmwolfs.bedwar.events.game.PlayerChatEvent
 import com.calmwolfs.bedwar.utils.ChatUtils.getPlayerName
 import com.calmwolfs.bedwar.utils.StringUtils.removeResets
 import com.calmwolfs.bedwar.utils.StringUtils.stripResets

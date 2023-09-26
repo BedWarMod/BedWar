@@ -7,7 +7,7 @@ import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.data.RenderGuiData
 import com.calmwolfs.bedwar.data.game.*
 import com.calmwolfs.bedwar.events.BedwarsEventManager
-import com.calmwolfs.bedwar.events.ModTickEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.features.chat.ChatMentions
 import com.calmwolfs.bedwar.features.chat.CopyChat
 import com.calmwolfs.bedwar.features.config.PauseButton
@@ -15,6 +15,8 @@ import com.calmwolfs.bedwar.features.inventory.ResourceOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
 import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.features.stats.ChatStatDisplay
+import com.calmwolfs.bedwar.utils.ApiUtils
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.PartyUtils
@@ -53,6 +55,7 @@ class BedWarMod {
         loadModule(GuiEditorManager)
 
         //utils
+        loadModule(ApiUtils)
         loadModule(BedwarsUtils)
         loadModule(HypixelUtils)
         loadModule(PartyUtils)
@@ -67,6 +70,7 @@ class BedWarMod {
 
         //features
         loadModule(ChatMentions())
+        loadModule(ChatStatDisplay)
         loadModule(CopyChat())
         loadModule(PartyGameStats())
         loadModule(PauseButton())

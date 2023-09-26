@@ -5,6 +5,7 @@ import com.calmwolfs.bedwar.commands.testcommands.CopyTablistCommand
 import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.features.stats.ChatStatDisplay
 import com.calmwolfs.bedwar.utils.PartyUtils
 import net.minecraft.command.ICommandSender
 import net.minecraftforge.client.ClientCommandHandler
@@ -25,6 +26,9 @@ object Commands {
     fun init() {
         registerCommand("bw", openConfig)
         registerCommand("bedwar", openConfig)
+
+        // todo autocomplete names in lobby and party
+        registerCommand("bws") { ChatStatDisplay.command(it) }
 
         registerCommand("bwresettracker") { SessionDisplay.resetTracker() }
 

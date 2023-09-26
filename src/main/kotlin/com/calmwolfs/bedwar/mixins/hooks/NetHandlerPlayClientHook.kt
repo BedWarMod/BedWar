@@ -1,6 +1,6 @@
 package com.calmwolfs.bedwar.mixins.hooks
 
-import com.calmwolfs.bedwar.events.PacketEvent
+import com.calmwolfs.bedwar.events.game.PacketEvent
 import net.minecraft.network.Packet
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 

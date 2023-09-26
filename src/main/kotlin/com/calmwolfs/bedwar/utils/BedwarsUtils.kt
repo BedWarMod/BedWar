@@ -2,11 +2,11 @@ package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.data.game.ScoreboardData
 import com.calmwolfs.bedwar.data.game.TablistData
-import com.calmwolfs.bedwar.events.ModTickEvent
-import com.calmwolfs.bedwar.events.WorldChangeEvent
 import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
 import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
 import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.WorldChangeEvent
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.unformat

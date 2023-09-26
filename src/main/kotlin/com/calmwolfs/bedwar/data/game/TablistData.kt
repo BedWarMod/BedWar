@@ -1,8 +1,10 @@
 package com.calmwolfs.bedwar.data.game
 
-import com.calmwolfs.bedwar.events.ModTickEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.mixins.transformers.AccessorGuiPlayerTabOverlay
+import com.calmwolfs.bedwar.utils.StringUtils.findMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.stripResets
+import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.google.common.collect.ComparisonChain
 import com.google.common.collect.Ordering
 import net.minecraft.client.Minecraft
@@ -14,8 +16,11 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 object TablistData {
     var tablist = listOf<String>()
+    var lobbyPlayers = listOf<String>()
     var header = ""
     var footer = ""
+
+    private val tabUsernamePattern = "^(?:\\[\\w.+] )?(?:.\\s)?(?<username>\\w+)".toPattern()
 
     private val playerOrdering = Ordering.from(PlayerComparator())
 
@@ -28,12 +33,18 @@ object TablistData {
 
         val players = playerOrdering.sortedCopy(thePlayer.sendQueue.playerInfoMap)
         val result = mutableListOf<String>()
+        val playersResult = mutableListOf<String>()
 
         for (player in players) {
-            val name = Minecraft.getMinecraft().ingameGUI.tabList.getPlayerName(player)
-            result.add(name.stripResets())
+            val name = Minecraft.getMinecraft().ingameGUI.tabList.getPlayerName(player).stripResets()
+            result.add(name)
+            if (name.startsWith("§8[NPC]")) continue
+            tabUsernamePattern.findMatcher(name.unformat()) {
+                playersResult.add(group("username"))
+            }
         }
         tablist = result
+        lobbyPlayers = playersResult
 
         val tablistData = Minecraft.getMinecraft().ingameGUI.tabList as AccessorGuiPlayerTabOverlay
         header = tablistData.bedwar_getHeader().formattedText

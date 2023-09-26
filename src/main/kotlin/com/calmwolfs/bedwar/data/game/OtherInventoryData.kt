@@ -1,8 +1,8 @@
 package com.calmwolfs.bedwar.data.game
 
 import com.calmwolfs.bedwar.data.types.Inventory
-import com.calmwolfs.bedwar.events.ModTickEvent
-import com.calmwolfs.bedwar.events.PacketEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.PacketEvent
 import com.calmwolfs.bedwar.events.gui.GuiContainerEvent
 import com.calmwolfs.bedwar.events.inventory.InventoryCloseEvent
 import com.calmwolfs.bedwar.events.inventory.InventoryFullyOpenedEvent

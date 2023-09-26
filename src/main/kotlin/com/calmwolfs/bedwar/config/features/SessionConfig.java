@@ -29,27 +29,27 @@ public class SessionConfig {
         public boolean showInLobby = true;
 
         @Expose
-        @ConfigOption(name = "Text Format", desc = "Drag text to change the appearance of the overlay.")
+        @ConfigOption(name = "Text Format", desc = "Drag text to change the appearance of the overlay")
         @ConfigEditorDraggableList(exampleText = {
-                // todo make these numbers actually make sense (get own numbers after session)
                 "§e§lGame",
                 "Kills: §a3",
                 "Finals: §a5",
                 "Beds: §a2",
                 " ",
                 "§e§lSession",
-                "Kills: §a12 §7| §fKDR: §a1.47",
-                "Finals: §a22 §7| §fFKDR: §a5.43",
-                "Beds: §a14 §7| §fBBLR: §a4.46",
-                "Wins: §a6 §7| §fWLR: §a3.22",
+                "Kills: §a12 §17| §fKDR: §a0.59",
+                "Finals: §a24 §7| §fFKDR: §a12",
+                "Beds: §a7 §7| §fBBLR: §a3.5",
+                "Wins: §a6 §7| §fWLR: §a3",
                 " ",
                 "Winstreak: §a3",
-                "Session Games: §a7",
-                "Session Time: §a32:47",
-                "Game Time: §a5:31",
-                "AVG Game Time: §a3:53",
+                "Win Rate: §a75.00%",
+                "Session Games: §a8",
+                "Session Time: §a53:03",
+                "Game Time: §a11:58",
+                "AVG Game Time: §a6:38",
         })
-        public List<Integer> order = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
+        public List<Integer> order = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16));
 
         @Expose
         public Position position = new Position(10, 10, false, true);

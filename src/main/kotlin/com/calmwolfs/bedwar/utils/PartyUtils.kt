@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
-import com.calmwolfs.bedwar.events.GameChatEvent
+import com.calmwolfs.bedwar.events.PlayerJoinPartyEvent
+import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.optionalPlural
 import com.calmwolfs.bedwar.utils.StringUtils.removeResets
@@ -25,7 +26,10 @@ object PartyUtils {
         }
         "(?<name>.*) §ejoined the party.".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
-            if (!partyMembers.contains(name)) partyMembers.add(name)
+            if (!partyMembers.contains(name)) {
+                partyMembers.add(name)
+                PlayerJoinPartyEvent(name).postAndCatch()
+            }
         }
         "§eYou'll be partying with: (?<names>.*)".toPattern().matchMatcher(message) {
             for (name in group("names").split(", ")) {
@@ -51,7 +55,10 @@ object PartyUtils {
             val name = group("name").toPlayerName()
             partyMembers.remove(name)
         }
-        
+        "The party was transferred to .* because (?<name>.*) left".toPattern().matchMatcher(message.unformat()) {
+            val name = group("name").toPlayerName()
+            partyMembers.remove(name)
+        }
 
         // party disbanded
         ".* §ehas disbanded the party!".toPattern().matchMatcher(message) {
@@ -80,12 +87,12 @@ object PartyUtils {
     fun listMembers() {
         val size = partyMembers.size
         if (size == 0) {
-            ModUtils.chat("§e[BedWar] No tracked party members!")
+            ChatUtils.chat("§e[BedWar] No tracked party members!")
         } else {
             val memberLine = optionalPlural(size, "§atracked party member", "§atracked party members")
-            ModUtils.chat("§a[BedWar] §7$memberLine§f:")
+            ChatUtils.chat("§a[BedWar] §7$memberLine§f:")
             for (member in partyMembers) {
-                ModUtils.chat(" §a- §7$member")
+                ChatUtils.chat("   §a- §7$member")
             }
         }
     }

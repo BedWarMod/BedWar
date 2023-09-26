@@ -38,6 +38,10 @@ public class Features extends Config {
     public PartyConfig party = new PartyConfig();
 
     @Expose
-    @Category(name = "Chat", desc = "Any Features todo with the chat")
+    @Category(name = "Chat", desc = "Any features relating to the chat")
     public ChatConfig chat = new ChatConfig();
+
+    @Expose
+    @Category(name = "Dev", desc = "Mostly developer features")
+    public DevConfig dev = new DevConfig();
 }

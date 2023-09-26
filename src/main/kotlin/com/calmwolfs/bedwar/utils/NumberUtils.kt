@@ -1,6 +1,10 @@
 package com.calmwolfs.bedwar.utils
 
+import java.text.NumberFormat
+
 object NumberUtils {
+    fun Number.addSeparators(): String = NumberFormat.getNumberInstance().format(this)
+    
     fun Float.round(decimals: Int): Float {
         var multiplier = 1.0
         repeat(decimals) { multiplier *= 10 }
@@ -17,5 +21,13 @@ object NumberUtils {
         val a = result.toString()
         val b = toString()
         return if (a.length > b.length) this else result
+    }
+
+    fun getRatio(good: Int, bad: Int): String {
+        val first = good.toDouble()
+        val second = if (bad == 0) 1.0 else bad.toDouble()
+        val result = first / second
+
+        return result.round(2).addSeparators()
     }
 }

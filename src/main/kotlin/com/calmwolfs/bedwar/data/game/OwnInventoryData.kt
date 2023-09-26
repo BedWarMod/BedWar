@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.data.game
 
-import com.calmwolfs.bedwar.events.ModTickEvent
-import com.calmwolfs.bedwar.events.PacketEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.PacketEvent
 import com.calmwolfs.bedwar.events.inventory.OwnInventoryUpdateEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack

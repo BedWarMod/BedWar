@@ -49,6 +49,9 @@ object StringUtils {
     inline fun <T> Pattern.matchMatcher(text: String, consumer: Matcher.() -> T) =
         matcher(text).let { if (it.matches()) consumer(it) else null }
 
+    inline fun <T> Pattern.findMatcher(text: String, consumer: Matcher.() -> T) =
+        matcher(text).let { if (it.find()) consumer(it) else null }
+
     fun optionalPlural(number: Int, singular: String, plural: String): String {
         return "$number " + if (number == 1) singular else plural
     }

@@ -2,11 +2,13 @@ package com.calmwolfs.bedwar.features.session
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
+import com.calmwolfs.bedwar.data.types.GameModeData
 import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.ListUtils.addAsSingletonList
+import com.calmwolfs.bedwar.utils.NumberUtils.getRatio
 import com.calmwolfs.bedwar.utils.NumberUtils.round
 import com.calmwolfs.bedwar.utils.computer.TimeUtils
 import com.calmwolfs.bedwar.utils.gui.GuiElementUtils.renderStringsAndItems
@@ -25,21 +27,10 @@ object SessionDisplay {
     private var currentSeconds = 0
     private var averageSeconds = 0
 
-    private var sessionGames = 0
-    private var sessionWins = 0
-    private var sessionLosses = 0
+    private var currentlyAlive = false
+    private var sessionStats = GameModeData()
 
-    private var sessionKills = 0
-    private var sessionDeaths = 0
-
-    private var sessionFinalKills = 0
-    private var sessionFinalDeaths = 0
-
-    private var sessionBedsBroken = 0
-    private var sessionBedsLost = 0
-
-    //todo get from the npc
-    private var currentWinstreak = 0
+    //todo update winstreak from the npc
 
     init {
         fixedRateTimer(name = "bedwar-session-tracker", period = 1000) {
@@ -61,6 +52,7 @@ object SessionDisplay {
         if (BedwarsUtils.playingBedwars) {
             secondsPassed++
             currentSeconds++
+            val sessionGames = sessionStats.wins + sessionStats.losses
             if (sessionGames != 0) {
                 averageSeconds = (secondsPassed - currentSeconds) / sessionGames
             }
@@ -70,18 +62,30 @@ object SessionDisplay {
     }
 
     private fun drawSessionDisplay() = buildList<List<Any>> {
+        val sessionGames = sessionStats.wins + sessionStats.losses
+        val kdr = getRatio(sessionStats.kills, sessionStats.deaths)
+        val fkdr = getRatio(sessionStats.finalKills, sessionStats.finalDeaths)
+        val bblr = getRatio(sessionStats.bedsBroken, sessionStats.bedsLost)
+        val wlr = getRatio(sessionStats.wins, sessionStats.losses)
+        val winRate = if (sessionStats.wins + sessionStats.losses > 0) {
+            ((sessionStats.wins.toDouble() / (sessionStats.wins + sessionStats.losses)) * 100).round(3)
+        } else {
+            "0.00%"
+        }
+
         addAsSingletonList("§e§lGame")
         addAsSingletonList("Kills: §a$currentKills")
         addAsSingletonList("Finals: §a$currentFinals")
         addAsSingletonList("Beds: §a$currentBeds")
         addAsSingletonList(" ")
         addAsSingletonList("§e§lSession")
-        addAsSingletonList("Kills: §a$sessionKills §7| §fKDR: §a${getRatio(sessionKills, sessionDeaths)}")
-        addAsSingletonList("Finals: §a$sessionFinalKills §7| §fFKDR: §a${getRatio(sessionFinalKills, sessionFinalDeaths)}")
-        addAsSingletonList("Beds: §a$sessionBedsBroken §7| §fBBLR: §a${getRatio(sessionBedsBroken, sessionBedsLost)}")
-        addAsSingletonList("Wins: §a$sessionWins §7| §fWLR: §a${getRatio(sessionWins, sessionLosses)}")
+        addAsSingletonList("Kills: §a${sessionStats.kills} §7| §fKDR: §a$kdr")
+        addAsSingletonList("Finals: §a${sessionStats.finalKills} §7| §fFKDR: §a$fkdr")
+        addAsSingletonList("Beds: §a${sessionStats.bedsBroken} §7| §fBBLR: §a$bblr")
+        addAsSingletonList("Wins: §a${sessionStats.wins} §7| §fWLR: §a$wlr")
         addAsSingletonList(" ")
-        addAsSingletonList("Winstreak: §a$currentWinstreak")
+        addAsSingletonList("Winstreak: §a${sessionStats.winstreak}")
+        addAsSingletonList("Win Rate: §a$winRate%")
         addAsSingletonList("Session Games: §a$sessionGames")
         addAsSingletonList("Session Time: §a${TimeUtils.formatSeconds(secondsPassed)}")
         addAsSingletonList("Game Time: §a${TimeUtils.formatSeconds(currentSeconds)}")
@@ -109,29 +113,43 @@ object SessionDisplay {
     @SubscribeEvent
     fun onGameStart(event: StartGameEvent) {
         currentSeconds = 0
+        currentlyAlive = false
     }
 
     @SubscribeEvent
     fun onGameEnd(event: EndGameEvent) {
+        if (!currentlyAlive) return
         if (event.winningTeam == BedwarsUtils.currentTeam) {
-            sessionWins++
-            currentWinstreak++
+            sessionStats.wins++
+            sessionStats.winstreak++
         } else {
-            sessionLosses++
-            currentWinstreak = 0
+            sessionStats.losses++
+            sessionStats.winstreak = 0
         }
-        sessionGames++
+        val sessionGames = sessionStats.wins + sessionStats.losses
         averageSeconds = (secondsPassed - currentSeconds) / sessionGames
+        currentlyAlive = false
+    }
+
+    @SubscribeEvent
+    fun onTeamEliminated(event: TeamEliminatedEvent) {
+        if (event.team == BedwarsUtils.currentTeam && currentlyAlive) {
+            sessionStats.losses++
+            sessionStats.winstreak = 0
+            val sessionGames = sessionStats.wins + sessionStats.losses
+            averageSeconds = (secondsPassed - currentSeconds) / sessionGames
+            currentlyAlive = false
+        }
     }
 
     @SubscribeEvent
     fun onBedBreak(event: BedBreakEvent) {
         if (event.team == BedwarsUtils.currentTeam) {
-            sessionBedsLost++
+            sessionStats.bedsLost++
         }
         // todo nicks
         if (event.player == HypixelUtils.currentName) {
-            sessionBedsBroken++
+            sessionStats.bedsBroken++
         }
     }
 
@@ -139,10 +157,10 @@ object SessionDisplay {
     fun onKill(event: KillEvent) {
         // todo nicks
         if (event.killer == HypixelUtils.currentName) {
-            sessionKills++
+            sessionStats.kills++
         }
         if (event.killed == HypixelUtils.currentName) {
-            sessionDeaths++
+            sessionStats.deaths++
         }
     }
 
@@ -150,10 +168,10 @@ object SessionDisplay {
     fun onFinalKill(event: FinalKillEvent) {
         // todo nicks
         if (event.killer == HypixelUtils.currentName) {
-            sessionFinalKills++
+            sessionStats.finalKills++
         }
         if (event.killed == HypixelUtils.currentName) {
-            sessionFinalDeaths++
+            sessionStats.finalDeaths++
         }
     }
 
@@ -162,25 +180,6 @@ object SessionDisplay {
         currentSeconds = 0
         averageSeconds = 0
 
-        sessionGames = 0
-        sessionWins = 0
-        sessionLosses = 0
-
-        sessionKills = 0
-        sessionDeaths = 0
-
-        sessionFinalKills = 0
-        sessionFinalDeaths = 0
-
-        sessionBedsBroken = 0
-        sessionBedsLost = 0
-    }
-
-    private fun getRatio(good: Int, bad: Int): Double {
-        val first = good.toDouble()
-        val second = if (bad == 0) 1.0 else bad.toDouble()
-        val result = first / second
-
-        return result.round(2)
+        sessionStats = GameModeData()
     }
 }

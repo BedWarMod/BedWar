@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.events
 
 import com.calmwolfs.bedwar.events.bedwars.*
+import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.SoundUtils
@@ -12,9 +13,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object BedwarsEventManager {
     private val gameEndPattern = "(?<team>\\w+)\\s+-(\\s+(?:\\[[^]]*]\\s+)?(\\w+)).".toPattern()
-    private val bedBreakPattern = "BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|to) (?<player>\\w+)[!.]".toPattern()
-    private val finalKillPattern = "(?<killed>\\w+) .* (?<killer>\\w+)(?:.|'s final #.*.) FINAL KILL!".toPattern()
-    private val killPattern = "§\\w(?<killed>\\w+) §7.*(?:by|for) §\\w(?<killer>\\w+)§7.".toPattern()
+    private val bedBreakPattern = "^BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|for|to) (?<player>\\w+)[!.']".toPattern()
+    private val finalKillPattern = "(?<killed>\\w+) .* (?<killer>\\w+)[.!'].+FINAL KILL!".toPattern()
+    private val killPattern = "§\\w(?<killed>\\w+) §7.*(?:by|for|to) §\\w(?<killer>\\w+)§7[.!]".toPattern()
     private val voidPattern = "§\\w(?<killed>\\w+) §7fell into the void.".toPattern()
     private val teamEliminatedPattern = "TEAM ELIMINATED > (?<team>\\w+) Team has been eliminated!".toPattern()
 
@@ -40,7 +41,7 @@ object BedwarsEventManager {
         // todo proper warning or remove thing
         if (message.unformat().startsWith("BED DESTRUCTION")) {
             matcher = bedBreakPattern.matcher(message.unformat())
-            if (matcher.matches()) {
+            if (matcher.find()) {
                 var team = matcher.group("team")
                 val player = matcher.group("player")
                 if (team == "Your") team = BedwarsUtils.currentTeam
