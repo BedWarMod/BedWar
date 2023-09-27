@@ -14,7 +14,7 @@ import org.lwjgl.input.Keyboard
 import java.util.*
 
 object GuiEditorManager {
-    var currentPositions = mutableMapOf<String, Position>()
+    private var currentPositions = mutableMapOf<String, Position>()
     private var latestPositions = mapOf<String, Position>()
     private var currentBorderSize = mutableMapOf<String, Pair<Int, Int>>()
 

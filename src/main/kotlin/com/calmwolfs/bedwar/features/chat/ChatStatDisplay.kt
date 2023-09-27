@@ -24,6 +24,9 @@ object ChatStatDisplay {
     }
 
     fun command(args: Array<String>) {
+        if (BedWarMod.feature.dev.apiKey == "") {
+            ModUtils.error("You need an api key to use this until a new system is made")
+        }
         if (args.isEmpty()) {
             displayStats(HypixelUtils.currentName, config.statType.get())
         }

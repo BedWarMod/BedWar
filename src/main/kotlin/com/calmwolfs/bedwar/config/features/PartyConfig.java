@@ -29,11 +29,6 @@ public class PartyConfig {
         @ConfigEditorDropdown(values = {"Nothing", "Copy to clipboard", "Send to party", "Copy and Send"})
         public int actionType = 0;
 
-        @ConfigOption(name = "Compressed Style", desc = "Will remove all the formatting for the above setting if enabled: Kills Finals Beds")
-        @Expose
-        @ConfigEditorBoolean
-        public boolean compressed = true;
-
         @ConfigOption(name = "Send On Loss", desc = "Will still send your stats if your team lost")
         @Expose
         @ConfigEditorBoolean

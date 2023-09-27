@@ -4,7 +4,6 @@ import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.types.BedwarsGameStat
 import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.utils.*
-import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -71,7 +70,7 @@ class PartyGameStats {
                 ChatUtils.chat(line)
                 if (!winner && !config.sendOnLoss) continue
                 if (isPlayer && config.actionType != 0) {
-                    line = if (config.compressed) "${stats.kills} ${stats.finals} ${stats.beds}" else line.unformat()
+                    line = "[BW] ${stats.kills} ${stats.finals} ${stats.beds}"
                     if (config.actionType == 1 || config.actionType == 3) {
                         ClipboardUtils.copyToClipboard(line)
                         if (config.actionType == 1) {

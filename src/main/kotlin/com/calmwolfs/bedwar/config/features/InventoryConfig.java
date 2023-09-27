@@ -34,11 +34,6 @@ public class InventoryConfig {
     public ShopInventoryOverlay shopInventoryOverlay = new ShopInventoryOverlay();
 
     public static class ShopInventoryOverlay {
-        @ConfigOption(name = "Enabled", desc = "Enable shading of items in the shop based on certain conditions")
-        @Expose
-        @ConfigEditorBoolean
-        public boolean enabled = true;
-
         @Expose
         @ConfigOption(name = "Hide Already Purchased", desc = "Greys out items that you cannot purchase because you already bought them")
         @ConfigEditorBoolean

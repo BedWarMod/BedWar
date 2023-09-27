@@ -12,7 +12,7 @@ public class ChatConfig {
     @ConfigOption(name = "Copy Chat", desc = "Allows you to copy chat while control clicking it")
     @Expose
     @ConfigEditorBoolean
-    public boolean copyChat = false;
+    public boolean copyChat = true;
 
     @ConfigOption(name = "Mention Notification", desc = "Play a ding sound when someone says your name in chat")
     @Expose

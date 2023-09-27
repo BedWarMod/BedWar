@@ -3,7 +3,6 @@ package com.calmwolfs.bedwar.test;
 import java.awt.*;
 
 public class GuiElementButton extends GuiElementText {
-
     public GuiElementButton(String text, int colour) {
         super(text, colour);
     }

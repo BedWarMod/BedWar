@@ -43,7 +43,7 @@ class ShopInventoryOverlay {
     @SubscribeEvent
     fun onInventoryOpen(event: InventoryFullyOpenedEvent) {
         inInventory = false
-        if (!config.enabled) return
+        if (!config.blockClicks && !config.hidePurchased && !config.showAffordable) return
 
         if (!BedwarsUtils.playingBedwars) return
         if (event.inventoryName !in InventoryUtils.shopNames) {

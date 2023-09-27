@@ -7,7 +7,7 @@ import io.github.moulberry.moulconfig.annotations.*;
 import io.github.moulberry.moulconfig.observer.Property;
 
 public class AboutConfig {
-    @ConfigOption(name = "Current Version", desc = "This is the SkyHanni version you are running currently")
+    @ConfigOption(name = "Current Version", desc = "This is the BedWar Mod version you are running currently")
     @ConfigVersionDisplay
     public transient Void currentVersion = null;
 
