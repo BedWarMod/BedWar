@@ -39,7 +39,7 @@ import org.apache.logging.log4j.Logger
     clientSideOnly = true,
     useMetadata = true,
     guiFactory = "com.calmwolfs.bedwar.config.gui.ConfigGuiForgeInterop",
-    version = "0.1",
+    version = "0.1.1",
 )
 class BedWarMod {
     @Mod.EventHandler
