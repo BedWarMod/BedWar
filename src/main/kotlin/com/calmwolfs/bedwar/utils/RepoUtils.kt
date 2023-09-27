@@ -37,8 +37,7 @@ object RepoUtils {
                     File(newFile.parent).mkdirs()
                     if (!isInTree(dir, newFile)) {
                         throw RuntimeException(
-                            // todo proper thing here
-                            "BedWarMod unexpected zip file, this could be an issue."
+                            "BedWarMod unexpected zip file, please report this on the GitHub."
                         )
                     }
                     val fos = FileOutputStream(newFile)

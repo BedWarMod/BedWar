@@ -44,4 +44,7 @@ public class Features extends Config {
     @Expose
     @Category(name = "Dev", desc = "Mostly developer features")
     public DevConfig dev = new DevConfig();
+
+    @Expose
+    public Storage storage = new Storage();
 }

@@ -1,5 +1,6 @@
 package com.calmwolfs.bedwar.utils
 
+import io.github.moulberry.moulconfig.observer.Property
 import java.util.*
 import kotlin.time.Duration
 
@@ -19,5 +20,9 @@ object ModUtils {
                 runnable()
             }
         }, duration.inWholeMilliseconds)
+    }
+
+    fun <T> Property<out T>.onToggle(observer: Runnable) {
+        whenChanged { _, _ -> observer.run() }
     }
 }

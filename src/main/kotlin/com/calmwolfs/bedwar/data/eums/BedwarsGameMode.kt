@@ -11,4 +11,10 @@ enum class BedwarsGameMode(
     DOUBLES("Doubles", "eight_two", "2s"),
     SOLOS("Solos", "eight_one", "1s"),
     FOURVFOUR("4v4", "two_four", "4v4");
+
+    companion object {
+        fun getMapNames(): List<String> {
+            return entries.filter { it != OVERALL }.map { "bedwars_${it.apiName}" }
+        }
+    }
 }

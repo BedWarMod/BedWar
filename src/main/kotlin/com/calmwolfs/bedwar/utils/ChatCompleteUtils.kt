@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.data.eums.BedwarsGameMode
 import com.calmwolfs.bedwar.data.game.TablistData
 import com.calmwolfs.bedwar.features.party.PartyCommands
 
@@ -35,6 +36,9 @@ object ChatCompleteUtils {
             return resultList + PartyCommands.otherPartyCommands
         }
 
+        if (command == "play") {
+            return BedwarsGameMode.getMapNames()
+        }
         return null
     }
 

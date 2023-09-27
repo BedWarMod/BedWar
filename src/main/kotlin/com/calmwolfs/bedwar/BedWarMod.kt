@@ -1,9 +1,7 @@
 package com.calmwolfs.bedwar
 
 import com.calmwolfs.bedwar.commands.Commands
-import com.calmwolfs.bedwar.config.ConfigManager
-import com.calmwolfs.bedwar.config.Features
-import com.calmwolfs.bedwar.config.RepoManager
+import com.calmwolfs.bedwar.config.*
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.data.RenderGuiData
 import com.calmwolfs.bedwar.data.game.*
@@ -41,7 +39,7 @@ import org.apache.logging.log4j.Logger
     clientSideOnly = true,
     useMetadata = true,
     guiFactory = "com.calmwolfs.bedwar.config.gui.ConfigGuiForgeInterop",
-    version = "0.1",
+    version = "0.0",
 )
 class BedWarMod {
     @Mod.EventHandler
@@ -52,6 +50,8 @@ class BedWarMod {
         loadModule(BedwarsEventManager)
         loadModule(ChatManager)
         loadModule(GuiEditorManager)
+        loadModule(PlayerData)
+        loadModule(UpdateManager)
 
         //utils
         loadModule(ApiUtils)

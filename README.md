@@ -19,7 +19,44 @@
     </a>
 </div>
 
+## About
+
 BedWar Mod is a mod for Minecraft 1.8.9 forge. It provides many features to be used while playing Hypixel Bedwars
+
+This mod is still early in development but if you would like to test it is available. There will be some bugs, but they should not impact gameplay too much.
+If you find any bugs feel free to report them. Mod suggestions are also welcome and in the coming weeks I hope to get a server setup to deal with api requests.
+
+Currently, this mod does not use Hypixel's new API system but that will be changed soon. It only makes API requests when you run `/bws <player>`.
+
+Also feel free to contribute to the mod!
+
+## Features
+All features are toggleable and should not introduce any lag or break other mods
+#### General
+* Auto Updater - Be notified about updates in game
+
+#### Inventory
+* Resource Overlay - See what resources you have in your inventory and in your enderchest
+* Shop Inventory Overlay - Highlight items in the shop based on if you can afford them or if they are already bought/maxed
+* Middle Clip In Shops - Replaces your left/right click with middle click to stop you picking up the item
+
+## Session Display
+* Shows Stats From Current Session - Keep track of stats from current session e.g. Final Kills, KDA, average game time
+* Fully Customisable - The order of the list can be fully changed and anything in the list can be removed if you don't want it
+
+## Party
+* Party Match Stats - At the conclusion of the game display how many kills, finals and beds each party member got
+* Copy or Send Stats - Option for at the conclusion of the game to either copy your stats into the clipboard or send it to party in the format `kills finals beds` e.g. `5 4 1`
+* Party Commands - Shortens many commands such as `/pt` as `/p transfer`. Also allows tab completion for anyone in your party for party commands and can tab complete for inviting someone to your party
+
+## Chat
+* Copy Chat - Upon control clicking a message in chat it will copy that chat line to your clipboard
+* Chat Mentions - Options to hear a ding when someone types your name in chat along with highlighting your name in chat
+
+**Requires API**
+* Player Stats - Upon clicking someone's message in chat or doing `/bws <player>` you will see their BedWars stats.
+* Stat Mode - Change the default BedWars stat mode that is sent in chat.
+* Send On Party Join - When someone joins your party their stats will automatically be sent into your chat
 
 ## Getting Started
 
@@ -45,7 +82,7 @@ There are many other mods that I would recommend to use in addition to BedWar Mo
 Through these mods you can get all the same features as popular clients such as Lunar or Badlion while also having access to many more mods (such as this one).
 You will also get the same performance if not better while using forge and the mods below.
 
-#### [EverGreeen Hud](https://www.curseforge.com/minecraft/mc-mods/evergreenhud)
+#### [EverGreen Hud](https://www.curseforge.com/minecraft/mc-mods/evergreenhud)
 
 A Mod that provides many different useful gui displays such as your armor
 
@@ -70,7 +107,7 @@ If any mods are missing from here feel free to recommend them!
 
 ## License
 
-This project is licensed under LGPL-3.0-or-later, see [LICENSE](LICENSE) for more details.
+This project is currently licensed under LGPL-3.0, see [LICENSE](LICENSE) for more details.
 
 #### Contribution licensing
 

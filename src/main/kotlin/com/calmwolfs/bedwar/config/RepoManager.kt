@@ -20,6 +20,9 @@ class RepoManager(private val configLocation: File) {
     private var latestRepoCommit: String? = null
     private val repoLocation: File = File(configLocation, "repo")
 
+    val successfulConstants = mutableListOf<String>()
+    val unsuccessfulConstants = mutableListOf<String>()
+
     fun loadRepoInformation() {
         atomicShouldManuallyReload.set(true)
         if (BedWarMod.feature.dev.repoAutoUpdate) {
@@ -86,8 +89,7 @@ class RepoManager(private val configLocation: File) {
                     }
                 } catch (e: IOException) {
                     Exception(
-                        // todo this message
-                        "Failed to download BedWar Mod Repo! Please report this issue somewhere!",
+                        "Failed to download BedWar Mod Repo! Please report this issue on the GitHub!",
                         e
                     ).printStackTrace()
                     if (command) {
@@ -119,6 +121,8 @@ class RepoManager(private val configLocation: File) {
         if (!atomicShouldManuallyReload.get()) return comp
         Minecraft.getMinecraft().addScheduledTask {
             try {
+                successfulConstants.clear()
+                unsuccessfulConstants.clear()
                 RepositoryReloadEvent(repoLocation, gson).postAndCatch()
                 comp.complete(null)
                 if (answerMessage.isNotEmpty()) {
@@ -129,6 +133,21 @@ class RepoManager(private val configLocation: File) {
             }
         }
         return comp
+    }
+
+    fun displayRepoStatus() {
+        if (unsuccessfulConstants.isEmpty() && successfulConstants.isNotEmpty()) {
+            ChatUtils.chat("§a[BedWar] Repo working fine!")
+            return
+        }
+        ChatUtils.chat("§a[BedWar] Successful Constants:")
+        for (constant in successfulConstants) {
+            ChatUtils.chat("   §a- §7$constant")
+        }
+        ChatUtils.chat("§c[BedWar] Unsuccessful Constants:")
+        for (constant in unsuccessfulConstants) {
+            ChatUtils.chat("   §a- §7$constant")
+        }
     }
 
     private fun getJsonFromFile(file: File?): JsonObject? {
@@ -148,14 +167,14 @@ class RepoManager(private val configLocation: File) {
 
     private fun getCommitApiUrl(): String {
         val repoUser = "BedWarMod"
-        val repoName = "BedWar-repo"
+        val repoName = "BedWar-Repo"
         val repoBranch = "main"
         return String.format("https://api.github.com/repos/%s/%s/commits/%s", repoUser, repoName, repoBranch)
     }
 
     private fun getDownloadUrl(commitId: String?): String {
         val repoUser = "BedWarMod"
-        val repoName = "BedWar-repo"
+        val repoName = "BedWar-Repo"
         return String.format("https://github.com/%s/%s/archive/%s.zip", repoUser, repoName, commitId)
     }
 

@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
-import com.calmwolfs.bedwar.data.jsonobjects.BedwarsExpJson
+import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.data.jsonobjects.ExperienceJson
 import com.calmwolfs.bedwar.events.RepositoryReloadEvent
 import com.calmwolfs.bedwar.utils.NumberUtils.addSeparators
 import com.calmwolfs.bedwar.utils.NumberUtils.round
@@ -8,7 +9,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import kotlin.math.floor
 
 object BedwarsStarUtils {
-    // todo proper repo fail warnings
     private var easyLevelCount = -1
     private var easyLevelExp = listOf<Int>()
     private var easyLevelExpTotal = -1
@@ -18,13 +18,19 @@ object BedwarsStarUtils {
 
     @SubscribeEvent
     fun onRepoReload(event: RepositoryReloadEvent) {
-        val data = event.getConstant<BedwarsExpJson>("Experience") ?: return
-        easyLevelCount = data.easyLevelCount
-        easyLevelExp = data.easyLevelExp
-        easyLevelExpTotal = data.easyLevelExpTotal
-        expPerLevel = data.expPerLevel
-        expPerPrestige = data.expPerPrestige
-        levelsPerPrestige = data.levelsPerPrestige
+        try {
+            val data = event.getConstant<ExperienceJson>("Experience") ?: return
+            easyLevelCount = data.easyLevelCount
+            easyLevelExp = data.easyLevelExp
+            easyLevelExpTotal = data.easyLevelExpTotal
+            expPerLevel = data.expPerLevel
+            expPerPrestige = data.expPerPrestige
+            levelsPerPrestige = data.levelsPerPrestige
+            BedWarMod.repo.successfulConstants.add("Experience")
+        } catch (e: Exception) {
+            ModUtils.error("Error in repository reload event (Experience)")
+            BedWarMod.repo.unsuccessfulConstants.add("Experience")
+        }
     }
 
     fun testExperience(args: Array<String>) {

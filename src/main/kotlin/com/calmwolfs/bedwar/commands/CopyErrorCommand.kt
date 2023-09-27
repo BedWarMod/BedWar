@@ -32,7 +32,7 @@ object CopyErrorCommand {
         val name = if (fullError) "Full error" else "Error"
         ChatUtils.chat(errorMessage?.let {
             ClipboardUtils.copyToClipboard(it)
-            "§e[BedWar] $name copied into the clipboard, uhh do something with it"
+            "§e[BedWar] $name copied into the clipboard, please report it on the GitHub!"
         } ?: "§c[BedWar] Error id not found!")
     }
 

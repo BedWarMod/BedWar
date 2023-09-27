@@ -97,8 +97,7 @@ object ConfigManager {
         val features = BedWarMod.feature
         processor = MoulConfigProcessor(BedWarMod.feature)
         BuiltinMoulConfigGuis.addProcessors(processor)
-        // todo auto-update
-//        UpdateManager.injectConfigProcessor(processor)
+        UpdateManager.injectConfigProcessor(processor)
         ConfigProcessorDriver.processConfig(
             features.javaClass,
             features,

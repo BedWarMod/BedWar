@@ -1,11 +1,16 @@
 package com.calmwolfs.bedwar.config.features;
 
+import com.calmwolfs.bedwar.config.update.ConfigVersionDisplay;
 import com.calmwolfs.bedwar.utils.computer.WebUtils;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.annotations.*;
 import io.github.moulberry.moulconfig.observer.Property;
 
 public class AboutConfig {
+    @ConfigOption(name = "Current Version", desc = "This is the SkyHanni version you are running currently")
+    @ConfigVersionDisplay
+    public transient Void currentVersion = null;
+
     @ConfigOption(name = "Auto Updates", desc = "Automatically check for updates on each startup")
     @Expose
     @ConfigEditorBoolean
@@ -22,7 +27,7 @@ public class AboutConfig {
 
     public enum UpdateStream {
         NONE("None", "none"),
-        BETA("Beta", "pre"),
+        PRE("Pre", "pre"),
         RELEASES("Full", "full");
 
         private final String label;

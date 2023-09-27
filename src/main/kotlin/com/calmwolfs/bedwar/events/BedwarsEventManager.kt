@@ -1,5 +1,7 @@
 package com.calmwolfs.bedwar.events
 
+import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.data.jsonobjects.ChatRegexJson
 import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
@@ -12,12 +14,12 @@ import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object BedwarsEventManager {
-    private val gameEndPattern = "(?<team>\\w+)\\s+-(\\s+(?:\\[[^]]*]\\s+)?(\\w+)).".toPattern()
-    private val bedBreakPattern = "^BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|for|to|seeing) (?<player>\\w+)[!.']".toPattern()
-    private val finalKillPattern = "(?<killed>\\w+) .* (?<killer>\\w+)[.!'].+FINAL KILL!".toPattern()
-    private val killPattern = "§\\w(?<killed>\\w+) §7.*(?:by|for|to) §\\w(?<killer>\\w+)§7[.!]".toPattern()
-    private val voidPattern = "§\\w(?<killed>\\w+) §7fell into the void.".toPattern()
-    private val teamEliminatedPattern = "TEAM ELIMINATED > (?<team>\\w+) Team has been eliminated!".toPattern()
+    private var gameEndPattern = "".toPattern()
+    private var bedBreakPattern = "".toPattern()
+    private var finalKillPattern = "".toPattern()
+    private var killPattern = "".toPattern()
+    private var voidPattern = "".toPattern()
+    private var teamEliminatedPattern = "".toPattern()
 
     @SubscribeEvent
     fun onChat(event: GameChatEvent) {
@@ -38,7 +40,6 @@ object BedwarsEventManager {
             }
         }
 
-        // todo proper warning or remove thing
         if (message.unformat().startsWith("BED DESTRUCTION")) {
             matcher = bedBreakPattern.matcher(message.unformat())
             if (matcher.find()) {
@@ -49,11 +50,11 @@ object BedwarsEventManager {
                 BedBreakEvent(team, player).postAndCatch()
             } else {
                 SoundUtils.playBeepSound()
-                ModUtils.warning("Bed Break did not match")
+                ModUtils.warning("Bed Break message did not match!\n" +
+                        "Please report this bed break message on the github so your stats can be more accurate :)")
             }
         }
 
-        // todo proper warning or remove thing
         if (message.endsWith("§7. §b§lFINAL KILL!")) {
             matcher = finalKillPattern.matcher(message.unformat())
             if (matcher.matches()) {
@@ -62,7 +63,8 @@ object BedwarsEventManager {
                 FinalKillEvent(killer, killed).postAndCatch()
             } else {
                 SoundUtils.playBeepSound()
-                ModUtils.warning("Final Kill did not match")
+                ModUtils.warning("Final Kill message did not match!\n" +
+                        "Please report this final kill message on the github so your stats can be more accurate :)")
             }
         }
 
@@ -80,6 +82,23 @@ object BedwarsEventManager {
         teamEliminatedPattern.matchMatcher(message.unformat()) {
             val team = group("team")
             TeamEliminatedEvent(team).postAndCatch()
+        }
+    }
+
+    @SubscribeEvent
+    fun onRepoReload(event: RepositoryReloadEvent) {
+        try {
+            val data = event.getConstant<ChatRegexJson>("ChatRegex") ?: return
+            gameEndPattern = data.gameEndPattern.toPattern()
+            bedBreakPattern = data.bedBreakPattern.toPattern()
+            finalKillPattern = data.finalKillPattern.toPattern()
+            killPattern = data.killPattern.toPattern()
+            voidPattern = data.voidPattern.toPattern()
+            teamEliminatedPattern = data.teamEliminatedPattern.toPattern()
+            BedWarMod.repo.successfulConstants.add("ChatRegex")
+        } catch (e: Exception) {
+            ModUtils.error("Error in repository reload event (ChatRegex)")
+            BedWarMod.repo.unsuccessfulConstants.add("ChatRegex")
         }
     }
 
