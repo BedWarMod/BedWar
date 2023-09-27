@@ -16,7 +16,7 @@ public class ChatRegexJson {
     public String killPattern;
 
     @Expose
-    public String voidPattern;
+    public String selfKillPattern;
     @Expose
     public String teamEliminatedPattern;
 }

@@ -39,7 +39,7 @@ class RepoManager(private val configLocation: File) {
         fetchRepository(true).thenRun { this.reloadRepository("Repo updated successful :)") }
     }
 
-    fun reloadLocalRepo() {
+    fun reloadRepo() {
         atomicShouldManuallyReload.set(true)
         reloadRepository("Repo loaded from local files successful :)")
     }

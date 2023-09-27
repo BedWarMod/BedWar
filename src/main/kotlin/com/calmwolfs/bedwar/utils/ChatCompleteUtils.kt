@@ -3,9 +3,25 @@ package com.calmwolfs.bedwar.utils
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.eums.BedwarsGameMode
 import com.calmwolfs.bedwar.data.game.TablistData
+import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
 import com.calmwolfs.bedwar.features.party.PartyCommands
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object ChatCompleteUtils {
+    private var gamePlayers = mutableListOf<String>()
+
+    @SubscribeEvent
+    fun onGameStart(event: StartGameEvent) {
+        gamePlayers = TablistData.lobbyPlayers.toMutableList()
+    }
+
+    private fun getLobbyPlayers(): List<String> {
+        if (BedwarsUtils.inBedwarsGame) {
+            return gamePlayers
+        }
+        return TablistData.lobbyPlayers
+    }
+
     @JvmStatic
     fun handleTabComplete(leftOfCursor: String, originalArray: Array<String>): Array<String>? {
         val splits = leftOfCursor.split(" ")
@@ -23,7 +39,7 @@ object ChatCompleteUtils {
 
     private fun customTabComplete(command: String): List<String>? {
         if (command == "bws") {
-            val resultList = TablistData.lobbyPlayers
+            val resultList = getLobbyPlayers()
             return resultList + PartyUtils.partyMembers
         }
 
@@ -32,7 +48,7 @@ object ChatCompleteUtils {
         }
 
         if (command == "p") {
-            val resultList = TablistData.lobbyPlayers
+            val resultList = getLobbyPlayers()
             return resultList + PartyCommands.otherPartyCommands
         }
 

@@ -1,11 +1,11 @@
 package com.calmwolfs.bedwar.config
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.config.features.AboutConfig
 import com.calmwolfs.bedwar.config.update.ConfigVersionDisplay
 import com.calmwolfs.bedwar.config.update.GuiOptionEditorUpdateCheck
 import com.calmwolfs.bedwar.events.ConfigLoadEvent
+import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.MinecraftExecutor
 import com.calmwolfs.bedwar.utils.ModUtils.onToggle
@@ -91,8 +91,8 @@ object UpdateManager {
                 if (it.isUpdateAvailable) {
                     updateState = UpdateState.AVAILABLE
                     ChatUtils.clickableChat(
-                        "§e[BedWar] §aBedWar Mod found a new update: ${it.update.versionName}. " +
-                                "Go check §b/bw download update §afor more info.",
+                        "§e[BedWar] §afound a new update: ${it.update.versionName}. " +
+                                "§aGo check §b/bw download §aupdate for more info.",
                         "bw download"
                     )
                 }

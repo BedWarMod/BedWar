@@ -70,7 +70,7 @@ class PartyGameStats {
                 ChatUtils.chat(line)
                 if (!winner && !config.sendOnLoss) continue
                 if (isPlayer && config.actionType != 0) {
-                    line = "[BW] ${stats.kills} ${stats.finals} ${stats.beds}"
+                    line = "${stats.kills} ${stats.finals} ${stats.beds}"
                     if (config.actionType == 1 || config.actionType == 3) {
                         ClipboardUtils.copyToClipboard(line)
                         if (config.actionType == 1) {

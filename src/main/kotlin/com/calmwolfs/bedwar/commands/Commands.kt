@@ -48,7 +48,7 @@ object Commands {
         registerCommand("pp") { PartyCommands.promote(it) }
 
         registerCommand("bwupdaterepo") { BedWarMod.repo.updateRepo() }
-        registerCommand("bwreloadrepo") { BedWarMod.repo.reloadLocalRepo() }
+        registerCommand("bwreloadrepo") { BedWarMod.repo.reloadRepo() }
         registerCommand("bwrepostatus") { BedWarMod.repo.displayRepoStatus() }
     }
 

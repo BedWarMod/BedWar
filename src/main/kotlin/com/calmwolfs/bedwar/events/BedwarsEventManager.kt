@@ -7,6 +7,7 @@ import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.SoundUtils
+import com.calmwolfs.bedwar.utils.StringUtils.findMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.removeResets
 import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
@@ -18,7 +19,7 @@ object BedwarsEventManager {
     private var bedBreakPattern = "".toPattern()
     private var finalKillPattern = "".toPattern()
     private var killPattern = "".toPattern()
-    private var voidPattern = "".toPattern()
+    private var selfKillPattern = "".toPattern()
     private var teamEliminatedPattern = "".toPattern()
 
     @SubscribeEvent
@@ -57,7 +58,7 @@ object BedwarsEventManager {
 
         if (message.endsWith("§7. §b§lFINAL KILL!")) {
             matcher = finalKillPattern.matcher(message.unformat())
-            if (matcher.matches()) {
+            if (matcher.find()) {
                 val killer = matcher.group("killer")
                 val killed = matcher.group("killed")
                 FinalKillEvent(killer, killed).postAndCatch()
@@ -68,13 +69,13 @@ object BedwarsEventManager {
             }
         }
 
-        killPattern.matchMatcher(message) {
+        killPattern.findMatcher(message) {
             val killer = group("killer")
             val killed = group("killed")
             KillEvent(killer, killed).postAndCatch()
         }
 
-        voidPattern.matchMatcher(message) {
+        selfKillPattern.findMatcher(message) {
             val killed = group("killed")
             KillEvent("-", killed).postAndCatch()
         }
@@ -93,7 +94,7 @@ object BedwarsEventManager {
             bedBreakPattern = data.bedBreakPattern.toPattern()
             finalKillPattern = data.finalKillPattern.toPattern()
             killPattern = data.killPattern.toPattern()
-            voidPattern = data.voidPattern.toPattern()
+            selfKillPattern = data.selfKillPattern.toPattern()
             teamEliminatedPattern = data.teamEliminatedPattern.toPattern()
             BedWarMod.repo.successfulConstants.add("ChatRegex")
         } catch (e: Exception) {
