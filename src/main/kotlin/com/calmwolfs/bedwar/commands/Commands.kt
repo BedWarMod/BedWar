@@ -1,11 +1,14 @@
 package com.calmwolfs.bedwar.commands
 
+import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.testcommands.CopyScoreboardCommand
 import com.calmwolfs.bedwar.commands.testcommands.CopyTablistCommand
 import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
+import com.calmwolfs.bedwar.features.chat.ChatStatDisplay
+import com.calmwolfs.bedwar.features.party.PartyCommands
 import com.calmwolfs.bedwar.features.session.SessionDisplay
-import com.calmwolfs.bedwar.features.stats.ChatStatDisplay
+import com.calmwolfs.bedwar.utils.BedwarsStarUtils
 import com.calmwolfs.bedwar.utils.PartyUtils
 import net.minecraft.command.ICommandSender
 import net.minecraftforge.client.ClientCommandHandler
@@ -27,7 +30,6 @@ object Commands {
         registerCommand("bw", openConfig)
         registerCommand("bedwar", openConfig)
 
-        // todo autocomplete names in lobby and party
         registerCommand("bws") { ChatStatDisplay.command(it) }
 
         registerCommand("bwresettracker") { SessionDisplay.resetTracker() }
@@ -35,7 +37,18 @@ object Commands {
         registerCommand("bwcopyerror") { CopyErrorCommand.command(it) }
         registerCommand("bwcopyscoreboard") { CopyScoreboardCommand.command(it) }
         registerCommand("bwcopytablist") { CopyTablistCommand.command(it) }
+
         registerCommand("bwpartylist") { PartyUtils.listMembers() }
+        registerCommand("bwexp") { BedwarsStarUtils.testExperience(it) }
+
+        registerCommand("pko") { PartyCommands.kickOffline() }
+        registerCommand("pw") { PartyCommands.warp() }
+        registerCommand("pk") { PartyCommands.kick(it) }
+        registerCommand("pt") { PartyCommands.transfer(it) }
+        registerCommand("pp") { PartyCommands.promote(it) }
+
+        registerCommand("bwupdaterepo") { BedWarMod.repo.updateRepo() }
+        registerCommand("bwreloadrepo") { BedWarMod.repo.reloadLocalRepo() }
     }
 
     private fun registerCommand(name: String, function: (Array<String>) -> Unit) {

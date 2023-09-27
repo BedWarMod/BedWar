@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object BedwarsEventManager {
     private val gameEndPattern = "(?<team>\\w+)\\s+-(\\s+(?:\\[[^]]*]\\s+)?(\\w+)).".toPattern()
-    private val bedBreakPattern = "^BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|for|to) (?<player>\\w+)[!.']".toPattern()
+    private val bedBreakPattern = "^BED DESTRUCTION > (?<team>\\w+) Bed .* (?:by|for|to|seeing) (?<player>\\w+)[!.']".toPattern()
     private val finalKillPattern = "(?<killed>\\w+) .* (?<killer>\\w+)[.!'].+FINAL KILL!".toPattern()
     private val killPattern = "§\\w(?<killed>\\w+) §7.*(?:by|for|to) §\\w(?<killer>\\w+)§7[.!]".toPattern()
     private val voidPattern = "§\\w(?<killed>\\w+) §7fell into the void.".toPattern()

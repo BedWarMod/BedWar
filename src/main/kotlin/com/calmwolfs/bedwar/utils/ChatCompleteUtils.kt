@@ -1,6 +1,8 @@
 package com.calmwolfs.bedwar.utils
 
+import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.game.TablistData
+import com.calmwolfs.bedwar.features.party.PartyCommands
 
 object ChatCompleteUtils {
     @JvmStatic
@@ -23,6 +25,16 @@ object ChatCompleteUtils {
             val resultList = TablistData.lobbyPlayers
             return resultList + PartyUtils.partyMembers
         }
+
+        if ((command == "pk" || command == "pt" || command == "pp") && BedWarMod.feature.party.shortCommands) {
+            return PartyUtils.partyMembers
+        }
+
+        if (command == "p") {
+            val resultList = TablistData.lobbyPlayers
+            return resultList + PartyCommands.otherPartyCommands
+        }
+
         return null
     }
 

@@ -4,6 +4,7 @@ import com.calmwolfs.bedwar.config.gui.Position;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.annotations.Accordion;
 import io.github.moulberry.moulconfig.annotations.ConfigEditorBoolean;
+import io.github.moulberry.moulconfig.annotations.ConfigEditorSlider;
 import io.github.moulberry.moulconfig.annotations.ConfigOption;
 
 public class InventoryConfig {
@@ -18,14 +19,50 @@ public class InventoryConfig {
         @ConfigEditorBoolean
         public boolean enabled = true;
 
-        @ConfigOption(name = "Show Total", desc = "Adds another number that combines the count of each item you have" +
-                "in your inventory and enderchest")
+        @ConfigOption(name = "Show Total", desc = "Adds another number that combines the count of each item you have" + "in your inventory and enderchest")
         @Expose
         @ConfigEditorBoolean
         public boolean showTotal = true;
 
         @Expose
         public Position position = new Position(-100, 10, false, true);
+    }
+
+    @Expose
+    @ConfigOption(name = "Shop Inventory Overlay", desc = "")
+    @Accordion
+    public ShopInventoryOverlay shopInventoryOverlay = new ShopInventoryOverlay();
+
+    public static class ShopInventoryOverlay {
+        @ConfigOption(name = "Enabled", desc = "Enable shading of items in the shop based on certain conditions")
+        @Expose
+        @ConfigEditorBoolean
+        public boolean enabled = true;
+
+        @Expose
+        @ConfigOption(name = "Hide Already Purchased", desc = "Greys out items that you cannot purchase because you already bought them")
+        @ConfigEditorBoolean
+        public boolean hidePurchased = false;
+
+        @Expose
+        @ConfigOption(name = "Block Clicks", desc = "Block the clicks on already purchased items to speed up time in the shop")
+        @ConfigEditorBoolean
+        public boolean blockClicks = false;
+
+        @Expose
+        @ConfigOption(name = "Purchased Opacity", desc = "How strong should the items be greyed out?")
+        @ConfigEditorSlider(minValue = 0, maxValue = 255, minStep = 5)
+        public int opacityGrey = 210;
+
+        @Expose
+        @ConfigOption(name = "Display Affordable", desc = "Adds a green background behind all the items in the shop that you can afford")
+        @ConfigEditorBoolean
+        public boolean showAffordable = false;
+
+        @Expose
+        @ConfigOption(name = "Affordable Opacity", desc = "How green should the affordable items be?")
+        @ConfigEditorSlider(minValue = 0, maxValue = 255, minStep = 5)
+        public int opacityGreen = 45;
     }
 
     @ConfigOption(name = "Middle Click", desc = "Middle clicks in shops to stop items sticking to your cursor")

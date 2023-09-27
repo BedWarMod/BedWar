@@ -37,7 +37,7 @@ public class SessionConfig {
                 "Beds: §a2",
                 " ",
                 "§e§lSession",
-                "Kills: §a12 §17| §fKDR: §a0.59",
+                "Kills: §a12 §7| §fKDR: §a0.59",
                 "Finals: §a24 §7| §fFKDR: §a12",
                 "Beds: §a7 §7| §fBBLR: §a3.5",
                 "Wins: §a6 §7| §fWLR: §a3",

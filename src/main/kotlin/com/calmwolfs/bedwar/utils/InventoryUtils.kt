@@ -11,12 +11,14 @@ object InventoryUtils {
     }
 
     fun countItemsInOpenInventory(predicate: (ItemStack) -> Boolean): Int {
-        return getItemsInOpenChest().filter { predicate(it) }.sumOf { it.stackSize }
+        return getItemsInOpenChest().values
+            .filter { predicate(it) }
+            .sumOf { it.stackSize }
     }
 
-    private fun getItemsInOpenChest(): MutableList<ItemStack> {
-        val list = mutableListOf<ItemStack>()
-        val guiChest = Minecraft.getMinecraft().currentScreen as? GuiChest ?: return list
+    fun getItemsInOpenChest(): MutableMap<Int, ItemStack> {
+        val map = mutableMapOf<Int, ItemStack>()
+        val guiChest = Minecraft.getMinecraft().currentScreen as? GuiChest ?: return map
 
         val inventorySlots = guiChest.inventorySlots.inventorySlots
         val skipAt = inventorySlots.size - 9 * 4
@@ -24,12 +26,24 @@ object InventoryUtils {
         for (slot in inventorySlots) {
             val stack = slot.stack
             if (stack != null) {
-                list.add(stack)
+                map[slot.slotIndex] = stack
             }
             i++
             if (i == skipAt) break
         }
-
-        return list
+        return map
     }
+
+    val shopNames = listOf(
+        "Quick Buy",
+        "Blocks",
+        "Melee",
+        "Armor",
+        "Tools",
+        "Ranged",
+        "Potions",
+        "Rotating Items",
+        "Upgrades & Traps",
+        "Guns"
+    )
 }

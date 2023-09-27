@@ -35,10 +35,14 @@ public class ChatConfig {
         @ConfigEditorDropdown
         public Property<BedwarsGameMode> statType = Property.of(BedwarsGameMode.OVERALL);
 
-        @ConfigOption(name = "Show on Join", desc = "Shows the stats of a player when they join your party. " +
-                "Will also use the above setting as the default")
+        @ConfigOption(name = "Show on Join", desc = "Shows the stats of a player when they join your party")
         @Expose
         @ConfigEditorBoolean
         public boolean partyJoin = false;
+
+        @ConfigOption(name = "Click Message", desc = "Clicking on a message from someone while in the hub will display their stats")
+        @Expose
+        @ConfigEditorBoolean
+        public boolean clickName = true;
     }
 }

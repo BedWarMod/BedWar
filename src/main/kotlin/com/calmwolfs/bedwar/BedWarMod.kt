@@ -1,25 +1,25 @@
 package com.calmwolfs.bedwar
 
 import com.calmwolfs.bedwar.commands.Commands
+import com.calmwolfs.bedwar.config.ConfigManager
 import com.calmwolfs.bedwar.config.Features
-import com.calmwolfs.bedwar.config.gui.ConfigManager
+import com.calmwolfs.bedwar.config.RepoManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.data.RenderGuiData
 import com.calmwolfs.bedwar.data.game.*
 import com.calmwolfs.bedwar.events.BedwarsEventManager
 import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.features.chat.ChatMentions
+import com.calmwolfs.bedwar.features.chat.ChatStatDisplay
 import com.calmwolfs.bedwar.features.chat.CopyChat
+import com.calmwolfs.bedwar.features.chat.PlayerChatClick
 import com.calmwolfs.bedwar.features.config.PauseButton
 import com.calmwolfs.bedwar.features.inventory.ResourceOverlay
+import com.calmwolfs.bedwar.features.inventory.ShopInventoryOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
 import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
-import com.calmwolfs.bedwar.features.stats.ChatStatDisplay
-import com.calmwolfs.bedwar.utils.ApiUtils
-import com.calmwolfs.bedwar.utils.BedwarsUtils
-import com.calmwolfs.bedwar.utils.HypixelUtils
-import com.calmwolfs.bedwar.utils.PartyUtils
+import com.calmwolfs.bedwar.utils.*
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -44,7 +44,6 @@ import org.apache.logging.log4j.Logger
     version = "0.1",
 )
 class BedWarMod {
-
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent?) {
         loadModule(this)
@@ -56,8 +55,10 @@ class BedWarMod {
 
         //utils
         loadModule(ApiUtils)
+        loadModule(BedwarsStarUtils)
         loadModule(BedwarsUtils)
         loadModule(HypixelUtils)
+        loadModule(ItemRenderUtils)
         loadModule(PartyUtils)
 
         //data
@@ -67,13 +68,16 @@ class BedWarMod {
         loadModule(RenderGuiData())
         loadModule(ScoreboardData)
         loadModule(TablistData)
+        loadModule(TooltipData())
 
         //features
         loadModule(ChatMentions())
         loadModule(ChatStatDisplay)
         loadModule(CopyChat())
+        loadModule(ShopInventoryOverlay())
         loadModule(PartyGameStats())
         loadModule(PauseButton())
+        loadModule(PlayerChatClick())
         loadModule(ResourceOverlay())
         loadModule(SessionDisplay)
         loadModule(ShopMiddleClick())
@@ -88,6 +92,12 @@ class BedWarMod {
         Runtime.getRuntime().addShutdownHook(Thread {
             configManager.saveConfig("shutdown-hook")
         })
+        repo = RepoManager(configManager.configDirectory)
+        try {
+            repo.loadRepoInformation()
+        } catch (e: Exception) {
+            Exception("Error reading repo data", e).printStackTrace()
+        }
     }
 
     private fun loadModule(obj: Any) {
@@ -116,6 +126,7 @@ class BedWarMod {
         @JvmStatic
         val feature: Features get() = configManager.features
 
+        lateinit var repo: RepoManager
         lateinit var configManager: ConfigManager
 
         private val logger: Logger = LogManager.getLogger("BedWar")

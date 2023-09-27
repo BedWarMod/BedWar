@@ -75,6 +75,10 @@ object PartyUtils {
         }
 
         // party list
+        "§6Party Members \\(\\d+\\)".toPattern().matchMatcher(message) {
+            partyMembers.clear()
+        }
+
         "Party (?:Leader|Moderators|Members): (?<names>.*)".toPattern().matchMatcher(message.unformat()) {
             for (name in group("names").split(" ● ")) {
                 val playerName = name.replace(" ●", "").toPlayerName()

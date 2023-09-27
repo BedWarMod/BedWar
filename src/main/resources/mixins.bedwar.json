@@ -10,7 +10,8 @@
     "MixinGuiContainer",
     "MixinGuiScreen",
     "MixinNetHandlerPlayClient",
-    "MixinNetworkManager"
+    "MixinNetworkManager",
+    "MixinRenderItem"
   ],
   "client": [
     "MixinEntityRenderer",

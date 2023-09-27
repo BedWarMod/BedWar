@@ -50,20 +50,10 @@ class PartyGameStats {
     }
 
     @SubscribeEvent
-    fun onElimination(event: TeamEliminatedEvent) {
-        if (event.team == BedwarsUtils.currentTeam) {
-            printPartyStats(false)
-        }
-    }
-
-    @SubscribeEvent
     fun onGameEnd(event: EndGameEvent) {
-        printPartyStats()
-    }
-
-    private fun printPartyStats(gameEnded: Boolean = true) {
         if (!config.enabled) return
         if (gamePartyMembers.size < 2 && !config.showSolo) return
+        val winner = event.winningTeam == BedwarsUtils.currentTeam
         BedWarMod.coroutineScope.launch {
             delay(1250.milliseconds)
             ChatUtils.chat("")
@@ -79,7 +69,7 @@ class PartyGameStats {
 
                 line = "§6[BW] §3$player §7got §6$kills§7, §6$finals §7and §6$beds"
                 ChatUtils.chat(line)
-                if (!gameEnded && !config.copyMidGame) continue
+                if (!winner && !config.sendOnLoss) continue
                 if (isPlayer && config.actionType != 0) {
                     line = if (config.compressed) "${stats.kills} ${stats.finals} ${stats.beds}" else line.unformat()
                     if (config.actionType == 1 || config.actionType == 3) {
@@ -91,7 +81,7 @@ class PartyGameStats {
                 }
             }
             ChatUtils.chat("")
-            if (!gameEnded && !config.copyMidGame) return@launch
+            if (!winner && !config.sendOnLoss) return@launch
             if (line != "" && (config.actionType == 2 || config.actionType == 3) && PartyUtils.partyMembers.isNotEmpty()) {
                 delay(100.milliseconds)
                 ChatUtils.sendCommandToServer("pc $line")

@@ -5,6 +5,7 @@ import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
 data class BedwarsPlayerData(
     val displayName: String = "-",
     val lastUpdated: SimpleTimeMark = SimpleTimeMark.farPast(),
+    val experience: Int = -1,
     val overallStats: GameModeData = GameModeData(),
     val foursStats: GameModeData = GameModeData(),
     val threesStats: GameModeData = GameModeData(),

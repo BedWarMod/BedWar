@@ -13,7 +13,7 @@ public class PartyConfig {
     public MatchStats matchStats = new MatchStats();
 
     public static class MatchStats {
-        @ConfigOption(name = "Enabled", desc = "At the conclusion of a game will list each player in your parties stats fro the game")
+        @ConfigOption(name = "Enabled", desc = "At the conclusion of a game will list each player in your parties stats for the game")
         @Expose
         @ConfigEditorBoolean
         public boolean enabled = true;
@@ -34,9 +34,15 @@ public class PartyConfig {
         @ConfigEditorBoolean
         public boolean compressed = true;
 
-        @ConfigOption(name = "Copy Mid Game", desc = "Will still copy or send your stats if your team is eliminated in the middle of the game")
+        @ConfigOption(name = "Send On Loss", desc = "Will still send your stats if your team lost")
         @Expose
         @ConfigEditorBoolean
-        public boolean copyMidGame = false;
+        public boolean sendOnLoss = false;
     }
+
+    @ConfigOption(name = "Party Commands", desc = "Shortens party commands and allows tab-completing for them. " +
+            "\n§eCommands: /pt /pp /pko /pk")
+    @Expose
+    @ConfigEditorBoolean
+    public boolean shortCommands = true;
 }

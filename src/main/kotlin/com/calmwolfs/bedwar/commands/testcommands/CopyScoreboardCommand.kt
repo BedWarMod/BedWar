@@ -8,13 +8,13 @@ import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 object CopyScoreboardCommand {
     fun command(args: Array<String>) {
         val resultList = mutableListOf<String>()
-        val noColor = args.size == 1 && args[0] == "true"
+        val noColour = args.size == 1 && args[0] == "true"
         resultList.add("Header:")
-        resultList.add(if (noColor) ScoreboardData.objectiveLine.unformat() else ScoreboardData.objectiveLine)
+        resultList.add(if (noColour) ScoreboardData.objectiveLine.unformat() else ScoreboardData.objectiveLine)
         resultList.add("")
 
         for (line in ScoreboardData.scoreboard) {
-            val scoreboardLine = if (noColor) line.unformat() else line
+            val scoreboardLine = if (noColour) line.unformat() else line
             resultList.add("'$scoreboardLine'")
         }
 

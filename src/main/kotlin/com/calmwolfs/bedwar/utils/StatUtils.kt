@@ -40,6 +40,7 @@ object StatUtils {
 
     private fun getBedwarsPlayerData(uuid: String, stats: JsonObject): BedwarsPlayerData {
         val playerName = ApiUtils.uuidToName[uuid] ?: "-"
+        val experience = ApiUtils.uuidToExp[uuid] ?: -1
         val timeStamp = if (stats.entrySet().isEmpty()) SimpleTimeMark.farPast() else SimpleTimeMark.now()
 
         val overallStats = mapGameModeStats(BedwarsGameMode.OVERALL, stats)
@@ -52,6 +53,7 @@ object StatUtils {
         return BedwarsPlayerData(
             displayName = playerName,
             lastUpdated = timeStamp,
+            experience = experience,
             overallStats = overallStats,
             foursStats = foursStats,
             threesStats = threesStats,

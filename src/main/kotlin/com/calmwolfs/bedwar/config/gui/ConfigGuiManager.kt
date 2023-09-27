@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.config.gui
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.config.ConfigManager
 import io.github.moulberry.moulconfig.gui.GuiScreenElementWrapper
 import io.github.moulberry.moulconfig.gui.MoulConfigEditor
 

@@ -2,6 +2,7 @@ package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
+import com.calmwolfs.bedwar.utils.JsonUtils.getIntOr
 import com.calmwolfs.bedwar.utils.JsonUtils.getStringOr
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -25,11 +26,11 @@ object ApiUtils {
     private val currentFetchedUuids = mutableListOf<String>()
 
     val uuidToName = mutableMapOf<String, String>()
+    val uuidToExp = mutableMapOf<String, Int>()
+
     private const val maxRequestsPerMin = 55
     private const val maxRequestBank = 250
     var requestBank = 250
-
-    // todo better handling after error on someone. (rerequest returns nothing and no warning to user)
 
     init {
         fixedRateTimer(name = "bedwar-api-rate-limit", period = 60_000L) {
@@ -112,6 +113,7 @@ object ApiUtils {
 
         var stats = JsonObject()
         var displayName = "-"
+        var experience = 0
 
         try {
             val result = withContext(Dispatchers.IO) { getJSONResponse(url) }.asJsonObject
@@ -122,6 +124,7 @@ object ApiUtils {
                     val statsJson = playerJson.get("stats").asJsonObject
                     if (statsJson.has("Bedwars")) {
                         stats = statsJson.get("Bedwars").asJsonObject
+                        experience = stats.getIntOr("Experience")
                     }
                 }
             }
@@ -130,6 +133,7 @@ object ApiUtils {
         }
 
         uuidToName[uuid] = displayName
+        uuidToExp[uuid] = experience
         currentFetchedUuids.remove(uuid)
         return stats
     }

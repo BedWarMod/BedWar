@@ -24,7 +24,7 @@ class ChatMentions {
         }
         if (config.chatHighlight) {
             val formattingCode = message[message.indexOf(':') - 1]
-            ChatUtils.replaceFirstChatText(event.chatComponent, name, "§e$name§$formattingCode")
+            ChatUtils.replaceFirstChatText(event.component, name, "§e$name§$formattingCode")
         }
     }
 }

@@ -1,8 +1,7 @@
-package com.calmwolfs.bedwar.config.gui
+package com.calmwolfs.bedwar.config
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
-import com.calmwolfs.bedwar.config.Features
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.TypeAdapter

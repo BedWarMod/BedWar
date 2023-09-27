@@ -91,6 +91,29 @@ object ChatUtils {
         return textComponent
     }
 
+    fun makeHoverChat(message: String, description: String): ChatComponentText {
+        val textComponent = ChatComponentText(message)
+        textComponent.chatStyle.chatHoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, ChatComponentText(description))
+
+        return textComponent
+    }
+
+    fun makeMultiLineHoverChat(message: String, description: List<String>): ChatComponentText {
+        val textComponent = ChatComponentText(message)
+        val hoverText = ChatComponentText("")
+        val lastIndex = description.size - 1
+
+        for ((index, line) in description.withIndex()) {
+            hoverText.appendSibling(ChatComponentText(line))
+            if (index < lastIndex) {
+                hoverText.appendSibling(ChatComponentText("\n"))
+            }
+        }
+
+        textComponent.chatStyle.chatHoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText)
+        return textComponent
+    }
+
     private fun modifyFirstChatComponent(chatComponent: IChatComponent, action: Predicate<IChatComponent>): Boolean {
         if (action.test(chatComponent)) {
             return true
