@@ -1,5 +1,6 @@
 package com.calmwolfs.bedwar.utils
 
+import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.google.gson.Gson
 import java.io.*
@@ -79,6 +80,7 @@ object RepoUtils {
 
         val jsonFile = File(repo, "constants/$constant.json")
         if (!jsonFile.isFile) {
+            BedWarMod.repo.unsuccessfulConstants.add("Constant")
             CopyErrorCommand.logError(
                 Error("File '$jsonFile' not found!"),
                 "File in repo missing! ($jsonFile). Try §e/bwupdaterepo"

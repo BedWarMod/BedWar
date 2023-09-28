@@ -82,7 +82,7 @@ class PartyGameStats {
             ChatUtils.chat("")
             if (!winner && !config.sendOnLoss) return@launch
             if (line != "" && (config.actionType == 2 || config.actionType == 3) && PartyUtils.partyMembers.isNotEmpty()) {
-                delay(100.milliseconds)
+                delay(250.milliseconds)
                 ChatUtils.sendCommandToServer("pc $line")
             }
         }

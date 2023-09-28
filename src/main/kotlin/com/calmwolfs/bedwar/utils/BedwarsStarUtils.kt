@@ -2,6 +2,7 @@ package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.jsonobjects.ExperienceJson
+import com.calmwolfs.bedwar.data.jsonobjects.PrestigesJson
 import com.calmwolfs.bedwar.events.RepositoryReloadEvent
 import com.calmwolfs.bedwar.utils.NumberUtils.addSeparators
 import com.calmwolfs.bedwar.utils.NumberUtils.round
@@ -15,6 +16,8 @@ object BedwarsStarUtils {
     private var expPerLevel = -1
     private var expPerPrestige = -1
     private var levelsPerPrestige = -1
+
+    private var prestiges = mapOf<Int, PrestigesJson.PrestigeInfo>()
 
     @SubscribeEvent
     fun onRepoReload(event: RepositoryReloadEvent) {
@@ -31,6 +34,14 @@ object BedwarsStarUtils {
             ModUtils.error("Error in repository reload event (Experience)")
             BedWarMod.repo.unsuccessfulConstants.add("Experience")
         }
+        try {
+            val data = event.getConstant<PrestigesJson>("Prestiges") ?: return
+            prestiges = data.prestiges
+            BedWarMod.repo.successfulConstants.add("Prestiges")
+        } catch (e: Exception) {
+            ModUtils.error("Error in repository reload event (Prestiges)")
+            BedWarMod.repo.unsuccessfulConstants.add("Prestiges")
+        }
     }
 
     fun testExperience(args: Array<String>) {
@@ -44,8 +55,19 @@ object BedwarsStarUtils {
         }
     }
 
+    fun testStars(args: Array<String>) {
+        if (args.isEmpty()) return
+        val amount = args[0]
+        try {
+            val intValue = amount.toInt()
+            ChatUtils.chat(formatStar(intValue))
+        } catch (_: NumberFormatException) {
+            ModUtils.warning("[BedWar] ${args[0]} is not a valid integer")
+        }
+    }
+
     fun getStarForExp(experience: Int, test: Boolean = false): Double {
-        if (test) ChatUtils.chat("\nInput exp: $experience")
+        if (test) ChatUtils.chat("\nStar Level Debug - Input exp: $experience")
         var remainingExp = experience.toDouble()
         var level = 0.0
         val prestiges = (floor(remainingExp / expPerPrestige)).toInt()
@@ -71,7 +93,7 @@ object BedwarsStarUtils {
                     level++
                     remainingExp -= expAmount
                 } else {
-                    if (test) ChatUtils.chat("didnt add level needed: ${expAmount.addSeparators()} had: ${remainingExp.addSeparators()}")
+                    if (test) ChatUtils.chat("didn't add level needed: ${expAmount.addSeparators()} had: ${remainingExp.addSeparators()}")
                     level += remainingExp / expAmount
                     remainingExp = 0.0
                 }
@@ -80,5 +102,22 @@ object BedwarsStarUtils {
 
         if (test) ChatUtils.chat("Final level: $level\n")
         return level.round(2)
+    }
+
+    fun formatStar(star: Int): String {
+        val prestige = star / 100
+
+        val prestigeInfo = prestiges[prestige] ?: return "[$star✫]"
+        val colourInfo = prestigeInfo.colours
+
+        val starNumbers = star.toString().toList()
+
+        var outPutString = "${colourInfo.leftBracket}["
+        for ((index, char) in starNumbers.withIndex()) {
+            outPutString += "${colourInfo.numberColours[index]}$char"
+        }
+        outPutString += "${colourInfo.starColour}${prestigeInfo.starSymbol}${colourInfo.rightBracket}]"
+
+        return outPutString
     }
 }

@@ -40,6 +40,7 @@ object Commands {
 
         registerCommand("bwpartylist") { PartyUtils.listMembers() }
         registerCommand("bwexp") { BedwarsStarUtils.testExperience(it) }
+        registerCommand("bwstars") { BedwarsStarUtils.testStars(it) }
 
         registerCommand("pko") { PartyCommands.kickOffline() }
         registerCommand("pw") { PartyCommands.warp() }

@@ -1,6 +1,7 @@
 # BedWar Mod - Change Log
 
 # Version 0.1.2
+- BedWars star colour now should reflect Hypixel colours in `/bws`
 - Various bug fixes
 - Formatting improvements for stats features
 

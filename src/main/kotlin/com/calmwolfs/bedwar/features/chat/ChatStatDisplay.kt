@@ -77,6 +77,7 @@ object ChatStatDisplay {
         }
 
         val stars = BedwarsStarUtils.getStarForExp(stats.experience)
+        val starsFormatted = BedwarsStarUtils.formatStar(stars.toInt())
         val kdr = getRatio(modeStats.kills, modeStats.deaths)
         val fkdr = getRatio(modeStats.finalKills, modeStats.finalDeaths)
         val bblr = getRatio(modeStats.bedsBroken, modeStats.bedsLost)
@@ -91,9 +92,8 @@ object ChatStatDisplay {
         val outputLines = mutableListOf<ChatComponentText>()
 
         outputLines.add(ChatComponentText(""))
-        //todo star colours and prestige name in thing
         outputLines.add(ChatUtils.makeHoverChat(
-            "§6[BedWar] §7${type.displayName} stats for §3$player §7[§6${stars.toInt()}✫§7]",
+            "§6[BedWar] §7${type.displayName} stats for §3$player $starsFormatted",
             "§3$player §7has §6${stats.experience.addSeparators()} §7total bedwars experience!"
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
