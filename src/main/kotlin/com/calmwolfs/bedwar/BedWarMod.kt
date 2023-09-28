@@ -57,6 +57,7 @@ class BedWarMod {
         loadModule(ApiUtils)
         loadModule(BedwarsStarUtils)
         loadModule(BedwarsUtils)
+        loadModule(ChatCompleteUtils)
         loadModule(HypixelUtils)
         loadModule(ItemRenderUtils)
         loadModule(PartyUtils)

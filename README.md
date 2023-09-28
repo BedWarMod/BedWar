@@ -42,22 +42,22 @@ All features are toggleable and should not introduce any lag or break other mods
 * Shop Inventory Overlay - Highlight items in the shop based on whether you can afford them or if they are already bought/maxed
 * Middle Clip In Shops - Replace your left/right click with middle click to stop you from picking up the item
 
-## Session Display
+#### Session Display
 * Shows Stats From Current Session - Keep track of stats from the current session e.g. Final Kills, KDA, average game time
 * Fully Customisable - The order of the list can be fully changed and anything in the list can be removed if you don't want it
 
-## Party
+#### Party
 * Party Match Stats - At the conclusion of the game display how many kills, finals and beds each party member got
 * Copy or Send Stats - Option for at the conclusion of the game to either copy your stats into the clipboard or send it 
 * to the party in the format `kills finals beds` e.g. `5 4 1`
 * Party Commands - Shortens commands such as `/pt` as `/p transfer`. Also allows tab completion for anyone in your party 
 * for party commands and can tab complete for inviting someone to your party
 
-## Chat
+#### Chat
 * Copy Chat - Upon control-clicking a message in chat, the mod will copy that chat line to your clipboard
 * Chat Mentions - Options to hear a ding when someone types your name in chat along with highlighting your name in chat
 
-## API
+#### API
 * Player Stats - Upon clicking someone's message in chat or doing `/bws <player>` you will see their BedWars stats.
 * Stat Mode - Change the default BedWars stat mode that is sent in chat.
 * Send On Party Join - When someone joins your party their stats will automatically be sent in your chat

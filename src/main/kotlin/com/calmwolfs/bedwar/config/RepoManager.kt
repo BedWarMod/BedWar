@@ -36,12 +36,12 @@ class RepoManager(private val configLocation: File) {
 
     fun updateRepo() {
         atomicShouldManuallyReload.set(true)
-        fetchRepository(true).thenRun { this.reloadRepository("Repo updated successful :)") }
+        fetchRepository(true).thenRun { this.reloadRepository("Repo updated successfully :)") }
     }
 
     fun reloadRepo() {
         atomicShouldManuallyReload.set(true)
-        reloadRepository("Repo loaded from local files successful :)")
+        reloadRepository("Repo loaded from local files successfully :)")
     }
 
     private fun fetchRepository(command: Boolean): CompletableFuture<Boolean> {
@@ -125,8 +125,12 @@ class RepoManager(private val configLocation: File) {
                 unsuccessfulConstants.clear()
                 RepositoryReloadEvent(repoLocation, gson).postAndCatch()
                 comp.complete(null)
-                if (answerMessage.isNotEmpty()) {
-                    ChatUtils.chat("§e[BedWar] §a$answerMessage")
+                if (unsuccessfulConstants.isNotEmpty()) {
+                    ChatUtils.chat("§e[BedWar] error reloading repository")
+                } else {
+                    if (answerMessage.isNotEmpty()) {
+                        ChatUtils.chat("§e[BedWar] §a$answerMessage")
+                    }
                 }
             } catch (e: java.lang.Exception) {
                 CopyErrorCommand.logError(e, "Error reading repo data!")
@@ -135,7 +139,16 @@ class RepoManager(private val configLocation: File) {
         return comp
     }
 
-    fun displayRepoStatus() {
+    fun displayRepoStatus(joinEvent: Boolean) {
+        if (joinEvent) {
+            if (unsuccessfulConstants.isNotEmpty()) {
+                ChatUtils.chat("§c[BedWar] §7Repo Issue! Features may not work please report this on the GitHub:")
+                for (constant in unsuccessfulConstants) {
+                    ChatUtils.chat("   §a- §7$constant")
+                }
+            }
+            return
+        }
         if (unsuccessfulConstants.isEmpty() && successfulConstants.isNotEmpty()) {
             ChatUtils.chat("§a[BedWar] Repo working fine!")
             return

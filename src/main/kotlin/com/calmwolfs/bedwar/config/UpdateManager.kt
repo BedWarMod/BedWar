@@ -91,8 +91,8 @@ object UpdateManager {
                 if (it.isUpdateAvailable) {
                     updateState = UpdateState.AVAILABLE
                     ChatUtils.clickableChat(
-                        "§e[BedWar] §afound a new update: ${it.update.versionName}. " +
-                                "§aGo check §b/bw download §aupdate for more info.",
+                        "§e[BedWar] §afound a new update: ${getNextVersion()} " +
+                                "§aGo check §b/bw download §afor more info.",
                         "bw download"
                     )
                 }

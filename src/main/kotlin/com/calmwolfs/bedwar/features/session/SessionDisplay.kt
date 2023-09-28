@@ -70,7 +70,7 @@ object SessionDisplay {
         val winRate = if (sessionStats.wins + sessionStats.losses > 0) {
             ((sessionStats.wins.toDouble() / (sessionStats.wins + sessionStats.losses)) * 100).round(3)
         } else {
-            "0.00"
+            "0.0"
         }
 
         addAsSingletonList("§e§lGame")

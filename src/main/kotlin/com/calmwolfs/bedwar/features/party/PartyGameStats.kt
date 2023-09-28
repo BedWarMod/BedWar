@@ -63,7 +63,7 @@ class PartyGameStats {
                 if (isPlayer && !config.showSolo) continue
 
                 val kills = StringUtils.optionalPlural(stats.kills, "§7Kill", "§7Kills")
-                val finals = StringUtils.optionalPlural(stats.finals, "§7Final kill", "§7Final kills")
+                val finals = StringUtils.optionalPlural(stats.finals, "§7Final Kill", "§7Final Kills")
                 val beds = StringUtils.optionalPlural(stats.beds, "§7Bed", "§7Beds")
 
                 line = "§6[BW] §3$player §7got §6$kills§7, §6$finals §7and §6$beds"

@@ -1,5 +1,6 @@
 package com.calmwolfs.bedwar.utils
 
+import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.game.ScoreboardData
 import com.calmwolfs.bedwar.events.HypixelJoinEvent
 import com.calmwolfs.bedwar.events.game.ModTickEvent
@@ -12,7 +13,6 @@ object HypixelUtils {
     private var hypixelAlpha = false
     var currentName = ""
     // todo deal with nicks
-    private var currentNick = ""
 
     val onHypixel get() = (hypixelMain || hypixelAlpha) && Minecraft.getMinecraft().thePlayer != null
 
@@ -39,6 +39,7 @@ object HypixelUtils {
 
     @SubscribeEvent
     fun onHypixelJoin(event: HypixelJoinEvent) {
+        BedWarMod.repo.displayRepoStatus(true)
         currentName = Minecraft.getMinecraft().thePlayer.name
     }
 

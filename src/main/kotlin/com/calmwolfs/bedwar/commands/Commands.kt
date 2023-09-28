@@ -49,7 +49,7 @@ object Commands {
 
         registerCommand("bwupdaterepo") { BedWarMod.repo.updateRepo() }
         registerCommand("bwreloadrepo") { BedWarMod.repo.reloadRepo() }
-        registerCommand("bwrepostatus") { BedWarMod.repo.displayRepoStatus() }
+        registerCommand("bwrepostatus") { BedWarMod.repo.displayRepoStatus(false) }
     }
 
     private fun registerCommand(name: String, function: (Array<String>) -> Unit) {

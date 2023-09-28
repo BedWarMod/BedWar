@@ -49,7 +49,6 @@ object OtherInventoryData {
             val windowId = packet.windowId
             val title = packet.windowTitle.unformattedText
             val slotCount = packet.slotCount
-            close()
 
             currentInventory = Inventory(windowId, title, slotCount)
             acceptItems = true
