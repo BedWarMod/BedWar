@@ -1,9 +1,11 @@
 # BedWar Mod - Change Log
 
 # Version 0.1.2
+- Teammate status display - Shows how much health each of your teammates has along with whether they have been eliminated or disconnected
 - BedWars star colour now should reflect Hypixel colours in `/bws`
 - Various bug fixes
 - Formatting improvements for stats features
+- A few changes that should theoretically improve performance
 
 # Version 0.1.1
 - Made all the chat events work with the repo

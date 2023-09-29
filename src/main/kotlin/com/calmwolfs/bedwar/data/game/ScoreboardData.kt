@@ -1,48 +1,34 @@
 package com.calmwolfs.bedwar.data.game
 
 import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.ScoreboardUpdateEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.scoreboard.ScorePlayerTeam
 import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object ScoreboardData {
-    var scoreboard = listOf<String>()
-    var objectiveLine = ""
+    private var scoreboard = listOf<String>()
+    private var objective = ""
 
-    private val splitIcons = listOf(
-        "\uD83C\uDF6B",
-        "\uD83D\uDCA3",
-        "\uD83D\uDC7D",
-        "\uD83D\uDD2E",
-        "\uD83D\uDC0D",
-        "\uD83D\uDC7E",
-        "\uD83C\uDF20",
-        "\uD83C\uDF6D",
-        "⚽",
-        "\uD83C\uDFC0",
-        "\uD83D\uDC79",
-        "\uD83C\uDF81",
-        "\uD83C\uDF89",
-        "\uD83C\uDF82",
-        "\uD83D\uDD2B"
-    )
+    fun getScoreboard() = scoreboard.reversed()
+    fun getObjective() = objective
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     fun onTick(event: ModTickEvent) {
-
-        var list = fetchScoreboardLines().reversed().take(15)
+        var list = fetchScoreboardLines().take(15)
         list = formatLines(list)
 
         if (list != scoreboard) {
             scoreboard = list
+            ScoreboardUpdateEvent(scoreboard.reversed(), objective).postAndCatch()
         }
     }
 
     private fun fetchScoreboardLines(): List<String> {
         val scoreboard = Minecraft.getMinecraft().theWorld?.scoreboard ?: return emptyList()
         val objective = scoreboard.getObjectiveInDisplaySlot(1) ?: return emptyList()
-        objectiveLine = objective.displayName
+        this.objective = objective.displayName
         val scores = scoreboard.getSortedScores(objective)
 
         return scores.map {
@@ -66,4 +52,22 @@ object ScoreboardData {
         }
         return list
     }
+
+    private val splitIcons = listOf(
+        "\uD83C\uDF6B",
+        "\uD83D\uDCA3",
+        "\uD83D\uDC7D",
+        "\uD83D\uDD2E",
+        "\uD83D\uDC0D",
+        "\uD83D\uDC7E",
+        "\uD83C\uDF20",
+        "\uD83C\uDF6D",
+        "⚽",
+        "\uD83C\uDFC0",
+        "\uD83D\uDC79",
+        "\uD83C\uDF81",
+        "\uD83C\uDF89",
+        "\uD83C\uDF82",
+        "\uD83D\uDD2B"
+    )
 }

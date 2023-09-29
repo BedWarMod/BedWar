@@ -12,14 +12,14 @@ object ChatCompleteUtils {
 
     @SubscribeEvent
     fun onGameStart(event: StartGameEvent) {
-        gamePlayers = TablistData.lobbyPlayers.toMutableList()
+        gamePlayers = TablistData.getPlayers().toMutableList()
     }
 
     private fun getLobbyPlayers(): List<String> {
         if (BedwarsUtils.inBedwarsGame) {
             return gamePlayers
         }
-        return TablistData.lobbyPlayers
+        return TablistData.getPlayers()
     }
 
     @JvmStatic

@@ -52,7 +52,7 @@ class PartyGameStats {
     fun onGameEnd(event: EndGameEvent) {
         if (!config.enabled) return
         if (gamePartyMembers.size < 2 && !config.showSolo) return
-        val winner = event.winningTeam == BedwarsUtils.currentTeam
+        val winner = event.winningTeam == BedwarsUtils.currentTeamName
         BedWarMod.coroutineScope.launch {
             delay(1250.milliseconds)
             ChatUtils.chat("")

@@ -1,13 +1,13 @@
 package com.calmwolfs.bedwar.utils
 
-import com.calmwolfs.bedwar.data.game.ScoreboardData
-import com.calmwolfs.bedwar.data.game.TablistData
 import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
 import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
 import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
-import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.FooterUpdateEvent
+import com.calmwolfs.bedwar.events.game.ScoreboardUpdateEvent
 import com.calmwolfs.bedwar.events.game.WorldChangeEvent
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraft.client.Minecraft
@@ -20,12 +20,11 @@ object BedwarsUtils {
     private var bedwarsGame = false
     private var gameOngoing = false
 
-    private var tabStatPattern =
-        "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
+    private var tabStatPattern = "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
     private var scoreboardTeamPattern = "\\w.(?<team>\\w+):\\s.+\\sYOU".toPattern()
 
     // todo deal with swap gamemode tbh could just check scoreboard each tick for some stuff and fix rejoins as well
-    var currentTeam = ""
+    var currentTeamName = ""
 
     val inBedwarsArea get() = bedwarsArea && Minecraft.getMinecraft().thePlayer != null
     val inBedwarsQueue get() = inBedwarsArea && bedwarsQueue
@@ -43,19 +42,43 @@ object BedwarsUtils {
         bedwarsArea = false
     }
 
-    fun bedwarsCheck() {
-        bedwarsArea = checkScoreboard()
+    // todo rejoin stuff not breaking
+
+    @SubscribeEvent
+    fun onGameStart(event: StartGameEvent) {
+        gameOngoing = true
+        currentTeamName = ""
+    }
+
+    @SubscribeEvent
+    fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+        if (!HypixelUtils.onHypixel) return
+        bedwarsArea = event.objective.unformat().contains("BED WARS")
 
         if (!bedwarsArea) return
 
         bedwarsQueue = false
-        for (line in ScoreboardData.scoreboard) {
-            if (bedwarsQueue) continue
-            if (line.startsWith("Players: ")) bedwarsQueue = true
+
+        for (line in event.scoreboard) {
+            if (currentTeamName == "" && inBedwarsGame) {
+                scoreboardTeamPattern.matchMatcher(line.unformat()) {
+                    currentTeamName = group("team")
+                    TeamStatus.getTeammates()
+                    return
+                }
+            }
+            if (!inBedwarsQueue) {
+                if (line.startsWith("Players: ")) bedwarsQueue = true
+            }
         }
+    }
+
+    @SubscribeEvent
+    fun onFooterUpdate(event: FooterUpdateEvent) {
+        if (!bedwarsArea) return
 
         bedwarsGame = false
-        val splitFooter = TablistData.footer.split("\n")
+        val splitFooter = event.footer.split("\n")
         for (line in splitFooter) {
             if (bedwarsGame) continue
             tabStatPattern.matchMatcher(line.unformat()) {
@@ -67,26 +90,6 @@ object BedwarsUtils {
         }
     }
 
-    // todo rejoin stuff not breaking
-
-    @SubscribeEvent
-    fun onGameStart(event: StartGameEvent) {
-        gameOngoing = true
-        currentTeam = ""
-    }
-
-    @SubscribeEvent
-    fun onTick(event: ModTickEvent) {
-        if (inBedwarsGame && currentTeam == "") {
-            for (line in ScoreboardData.scoreboard) {
-                if (currentTeam != "") continue
-                scoreboardTeamPattern.matchMatcher(line.unformat()) {
-                    currentTeam = group("team")
-                }
-            }
-        }
-    }
-
     @SubscribeEvent
     fun onGameEnd(event: EndGameEvent) {
         gameOngoing = false
@@ -94,12 +97,8 @@ object BedwarsUtils {
 
     @SubscribeEvent
     fun onTeamEliminated(event: TeamEliminatedEvent) {
-        if (event.team == currentTeam) {
+        if (event.team == currentTeamName) {
             gameOngoing = false
         }
-    }
-
-    private fun checkScoreboard(): Boolean {
-        return ScoreboardData.objectiveLine.unformat().contains("BED WARS")
     }
 }

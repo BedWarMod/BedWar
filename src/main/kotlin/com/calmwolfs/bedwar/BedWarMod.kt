@@ -17,6 +17,7 @@ import com.calmwolfs.bedwar.features.inventory.ShopInventoryOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
 import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.*
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
@@ -76,6 +77,7 @@ class BedWarMod {
         loadModule(ChatStatDisplay)
         loadModule(CopyChat())
         loadModule(ShopInventoryOverlay())
+        loadModule(TeamStatus)
         loadModule(PartyGameStats())
         loadModule(PauseButton())
         loadModule(PlayerChatClick())
@@ -109,12 +111,8 @@ class BedWarMod {
     @SubscribeEvent
     fun onTick(event: ModTickEvent) {
         if (screenToOpen != null) {
-            screenTicks++
-            if (screenTicks == 5) {
-                Minecraft.getMinecraft().displayGuiScreen(screenToOpen)
-                screenTicks = 0
-                screenToOpen = null
-            }
+            Minecraft.getMinecraft().displayGuiScreen(screenToOpen)
+            screenToOpen = null
         }
     }
 
@@ -143,6 +141,5 @@ class BedWarMod {
         )
 
         var screenToOpen: GuiScreen? = null
-        private var screenTicks = 0
     }
 }

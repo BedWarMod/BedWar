@@ -29,8 +29,6 @@ object OwnInventoryData {
 
     @SubscribeEvent
     fun onTick(event: ModTickEvent) {
-        if (!event.isMod(5)) return
-
         val invItems = getItemsInOwnInventory()
         if (invItems != inventoryItems) {
             inventoryItems = invItems

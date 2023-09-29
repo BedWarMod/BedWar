@@ -10,13 +10,13 @@ object CopyTablistCommand {
         val resultList = mutableListOf<String>()
         val noColour = args.size == 1 && args[0] == "true"
 
-        for (line in TablistData.tablist) {
+        for (line in TablistData.getTablist()) {
             val tabListLine = if (noColour) line.unformat() else line
             if (tabListLine != "") resultList.add("'$tabListLine'")
         }
 
-        val header = if (noColour) TablistData.header.unformat() else TablistData.header
-        val footer = if (noColour) TablistData.footer.unformat() else TablistData.footer
+        val header = if (noColour) TablistData.getHeader().unformat() else TablistData.getHeader()
+        val footer = if (noColour) TablistData.getFooter().unformat() else TablistData.getFooter()
 
         val string = "Header:\n\n$header\n\nBody:\n\n${resultList.joinToString("\n")}\n\nFooter:\n\n$footer"
         ClipboardUtils.copyToClipboard(string)

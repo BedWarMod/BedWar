@@ -4,6 +4,7 @@ import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.jsonobjects.ChatRegexJson
 import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.events.game.GameChatEvent
+import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.SoundUtils
@@ -27,37 +28,51 @@ object BedwarsEventManager {
         if (!BedwarsUtils.inBedwarsArea) return
         val message = event.message.trimWhiteSpaceAndResets().removeResets()
 
-        println("trimmed: $message")
-
         if (message == "§e§lProtect your bed and destroy the enemy beds.") {
             StartGameEvent().postAndCatch()
+            return
         }
 
-        var matcher = gameEndPattern.matcher(message.unformat())
+        if (!BedwarsUtils.inBedwarsGame) return
+        val unformatted = message.unformat()
+
+        println("trimmed: $message")
+
+        "(?<player>\\w+) disconnected.".toPattern().matchMatcher(unformatted) {
+            TeamStatus.playerDisconnect(group("player"))
+        }
+
+        "(?<player>\\w+) reconnected.".toPattern().matchMatcher(unformatted) {
+            TeamStatus.playerReconnect(group("player"))
+        }
+
+        killPattern.findMatcher(message) {
+            val killer = group("killer")
+            val killed = group("killed")
+            KillEvent(killer, killed).postAndCatch()
+            return
+        }
+
+        selfKillPattern.findMatcher(message) {
+            val killed = group("killed")
+            if (message.endsWith("§7. §b§lFINAL KILL!")) {
+                FinalKillEvent("-", killed).postAndCatch()
+            }
+            KillEvent("-", killed).postAndCatch()
+            return
+        }
+
+        var matcher = gameEndPattern.matcher(unformatted)
         if (matcher.find()) {
             val matchedTeam = matcher.group("team")
             if (matchedTeam in teamColours) {
                 EndGameEvent(matchedTeam).postAndCatch()
-            }
-        }
-
-        if (message.unformat().startsWith("BED DESTRUCTION")) {
-            matcher = bedBreakPattern.matcher(message.unformat())
-            if (matcher.find()) {
-                var team = matcher.group("team")
-                val player = matcher.group("player")
-                if (team == "Your") team = BedwarsUtils.currentTeam
-
-                BedBreakEvent(team, player).postAndCatch()
-            } else {
-                SoundUtils.playBeepSound()
-                ModUtils.warning("Bed Break message did not match!\n" +
-                        "Please report this bed break message on the github so your stats can be more accurate :)")
+                return
             }
         }
 
         if (message.endsWith("§7. §b§lFINAL KILL!")) {
-            matcher = finalKillPattern.matcher(message.unformat())
+            matcher = finalKillPattern.matcher(unformatted)
             if (matcher.find()) {
                 val killer = matcher.group("killer")
                 val killed = matcher.group("killed")
@@ -67,22 +82,28 @@ object BedwarsEventManager {
                 ModUtils.warning("Final Kill message did not match!\n" +
                         "Please report this final kill message on the github so your stats can be more accurate :)")
             }
+            return
         }
 
-        killPattern.findMatcher(message) {
-            val killer = group("killer")
-            val killed = group("killed")
-            KillEvent(killer, killed).postAndCatch()
+        if (message.unformat().startsWith("BED DESTRUCTION")) {
+            matcher = bedBreakPattern.matcher(unformatted)
+            if (matcher.find()) {
+                var team = matcher.group("team")
+                val player = matcher.group("player")
+                if (team == "Your") team = BedwarsUtils.currentTeamName
+                BedBreakEvent(team, player).postAndCatch()
+            } else {
+                SoundUtils.playBeepSound()
+                ModUtils.warning("Bed Break message did not match!\n" +
+                        "Please report this bed break message on the github so your stats can be more accurate :)")
+            }
+            return
         }
 
-        selfKillPattern.findMatcher(message) {
-            val killed = group("killed")
-            KillEvent("-", killed).postAndCatch()
-        }
-
-        teamEliminatedPattern.matchMatcher(message.unformat()) {
+        teamEliminatedPattern.matchMatcher(unformatted) {
             val team = group("team")
             TeamEliminatedEvent(team).postAndCatch()
+            return
         }
     }
 

@@ -75,7 +75,6 @@ object GuiElementUtils {
                 offsetY += 10 + extraSpace + 2
             }
         } catch (e: NullPointerException) {
-            println(" ")
             for (innerList in list) {
                 println("new inner list:")
                 for (any in innerList) {

@@ -119,7 +119,7 @@ object SessionDisplay {
     @SubscribeEvent
     fun onGameEnd(event: EndGameEvent) {
         if (!currentlyAlive) return
-        if (event.winningTeam == BedwarsUtils.currentTeam) {
+        if (event.winningTeam == BedwarsUtils.currentTeamName) {
             sessionStats.wins++
             sessionStats.winstreak++
         } else {
@@ -133,7 +133,7 @@ object SessionDisplay {
 
     @SubscribeEvent
     fun onTeamEliminated(event: TeamEliminatedEvent) {
-        if (event.team == BedwarsUtils.currentTeam && currentlyAlive) {
+        if (event.team == BedwarsUtils.currentTeamName && currentlyAlive) {
             sessionStats.losses++
             sessionStats.winstreak = 0
             val sessionGames = sessionStats.wins + sessionStats.losses
@@ -144,7 +144,7 @@ object SessionDisplay {
 
     @SubscribeEvent
     fun onBedBreak(event: BedBreakEvent) {
-        if (event.team == BedwarsUtils.currentTeam) {
+        if (event.team == BedwarsUtils.currentTeamName) {
             sessionStats.bedsLost++
         }
         // todo nicks
@@ -165,7 +165,7 @@ object SessionDisplay {
     }
 
     @SubscribeEvent
-    fun onFinalKill(event: FinalKillEvent) {
+    fun onFinal(event: FinalKillEvent) {
         // todo nicks
         if (event.killer == HypixelUtils.currentName) {
             sessionStats.finalKills++

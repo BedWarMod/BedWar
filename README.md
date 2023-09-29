@@ -1,23 +1,10 @@
-<h1 align="center">BedWar Mod</h1> 
+# BedWar Mod
 
-<div align="center">
-    <!-- release -->
-    <a href="https://github.com/BedWarMod/BedWar/releases/latest" target="_blank">
-        <img src="https://img.shields.io/github/v/release/BedWarMod/BedWar?color=informational&include_prereleases&label=release&logo=github&logoColor=white" alt="release">
-    </a>
-    <!-- license -->
-    <a href="./LICENSE" target="_blank">
-        <img src="https://img.shields.io/github/license/BedWarMod/BedWar?color=informational" alt="license">
-    </a>
-    <!-- contributors -->
-    <a href="https://github.com/BedWarMod/BedWar/graphs/contributors" target="_blank">
-        <img src="https://img.shields.io/github/contributors/BedWarMod/BedWar?color=informational&logo=GitHub" alt="contributors">
-    </a>
-    <!-- downloads -->
-    <a href="https://github.com/BedWarMod/BedWar/releases" target="_blank">
-        <img src="https://img.shields.io/github/downloads/BedWarMod/BedWar/total?label=downloads&color=informational&logo=GitHub" alt="downloads">
-    </a>
-</div>
+[![Release](https://img.shields.io/github/v/release/BedWarMod/BedWar?color=informational&include_prereleases&label=release&logo=github&logoColor=white)](https://github.com/BedWarMod/BedWar/releases/latest)
+[![Licence](https://img.shields.io/github/license/BedWarMod/BedWar?color=informational)](./LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/BedWarMod/BedWar?color=informational&logo=GitHub)](https://github.com/BedWarMod/BedWar/graphs/contributors)
+[![Downloads](https://img.shields.io/github/downloads/BedWarMod/BedWar/total?label=downloads&color=informational&logo=GitHub)](https://github.com/BedWarMod/BedWar/releases/latest)
+[![Modrinth](https://img.shields.io/modrinth/dt/Al95W2SE?color=informational&logo=modrinth)](https://modrinth.com/mod/bedwar-mod)
 
 ## About
 

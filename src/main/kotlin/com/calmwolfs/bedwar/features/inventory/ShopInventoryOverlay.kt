@@ -91,7 +91,7 @@ class ShopInventoryOverlay {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     fun onTooltip(event: ModTooltipEvent) {
-        if (!inInventory) return
+        if (!inInventory || !config.blockClicks) return
 
         val slot = event.slot
 

@@ -10,10 +10,10 @@ object CopyScoreboardCommand {
         val resultList = mutableListOf<String>()
         val noColour = args.size == 1 && args[0] == "true"
         resultList.add("Header:")
-        resultList.add(if (noColour) ScoreboardData.objectiveLine.unformat() else ScoreboardData.objectiveLine)
+        resultList.add(if (noColour) ScoreboardData.getObjective().unformat() else ScoreboardData.getObjective())
         resultList.add("")
 
-        for (line in ScoreboardData.scoreboard) {
+        for (line in ScoreboardData.getScoreboard()) {
             val scoreboardLine = if (noColour) line.unformat() else line
             resultList.add("'$scoreboardLine'")
         }
