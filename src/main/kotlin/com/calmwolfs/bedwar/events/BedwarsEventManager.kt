@@ -16,6 +16,7 @@ import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object BedwarsEventManager {
+    private var gameStartPattern = "".toPattern()
     private var gameEndPattern = "".toPattern()
     private var bedBreakPattern = "".toPattern()
     private var finalKillPattern = "".toPattern()
@@ -28,7 +29,7 @@ object BedwarsEventManager {
         if (!BedwarsUtils.inBedwarsArea) return
         val message = event.message.trimWhiteSpaceAndResets().removeResets()
 
-        if (message == "§e§lProtect your bed and destroy the enemy beds.") {
+        gameStartPattern.matchMatcher(message) {
             StartGameEvent().postAndCatch()
             return
         }
@@ -111,6 +112,7 @@ object BedwarsEventManager {
     fun onRepoReload(event: RepositoryReloadEvent) {
         try {
             val data = event.getConstant<ChatRegexJson>("ChatRegex") ?: return
+            gameStartPattern = data.gameStartPattern.toPattern()
             gameEndPattern = data.gameEndPattern.toPattern()
             bedBreakPattern = data.bedBreakPattern.toPattern()
             finalKillPattern = data.finalKillPattern.toPattern()

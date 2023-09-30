@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 
 public class ChatRegexJson {
     @Expose
+    public String gameStartPattern;
+
+    @Expose
     public String gameEndPattern;
 
     @Expose

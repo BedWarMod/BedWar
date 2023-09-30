@@ -3,6 +3,7 @@
 # Version 0.1.2
 - Teammate status display - Shows how much health each of your teammates has along with whether they have been eliminated or disconnected
 - BedWars star colour now should reflect Hypixel colours in `/bws`
+- Made the mod work while in lucky block and allows for repo updates for other weird start messages
 - Various bug fixes
 - Formatting improvements for stats features
 - A few changes that should theoretically improve performance
