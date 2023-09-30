@@ -9,7 +9,7 @@ import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.ListUtils.addAsSingletonList
 import com.calmwolfs.bedwar.utils.NumberUtils.getRatio
-import com.calmwolfs.bedwar.utils.NumberUtils.round
+import com.calmwolfs.bedwar.utils.StringUtils
 import com.calmwolfs.bedwar.utils.computer.TimeUtils
 import com.calmwolfs.bedwar.utils.gui.GuiElementUtils.renderStringsAndItems
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -67,11 +67,6 @@ object SessionDisplay {
         val fkdr = getRatio(sessionStats.finalKills, sessionStats.finalDeaths)
         val bblr = getRatio(sessionStats.bedsBroken, sessionStats.bedsLost)
         val wlr = getRatio(sessionStats.wins, sessionStats.losses)
-        val winRate = if (sessionStats.wins + sessionStats.losses > 0) {
-            ((sessionStats.wins.toDouble() / (sessionStats.wins + sessionStats.losses)) * 100).round(3)
-        } else {
-            "0.0"
-        }
 
         addAsSingletonList("§e§lGame")
         addAsSingletonList("Kills: §a$currentKills")
@@ -85,7 +80,7 @@ object SessionDisplay {
         addAsSingletonList("Wins: §a${sessionStats.wins} §7| §fWLR: §a$wlr")
         addAsSingletonList(" ")
         addAsSingletonList("Winstreak: §a${sessionStats.winstreak}")
-        addAsSingletonList("Win Rate: §a$winRate%")
+        addAsSingletonList("Win Rate: §a${StringUtils.getWinrate(sessionStats.wins, sessionStats.losses, 2)}")
         addAsSingletonList("Session Games: §a$sessionGames")
         addAsSingletonList("Session Time: §a${TimeUtils.formatSeconds(secondsPassed)}")
         addAsSingletonList("Game Time: §a${TimeUtils.formatSeconds(currentSeconds)}")

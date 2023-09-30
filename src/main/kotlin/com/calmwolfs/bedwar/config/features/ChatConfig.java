@@ -9,7 +9,9 @@ import io.github.moulberry.moulconfig.annotations.ConfigOption;
 import io.github.moulberry.moulconfig.observer.Property;
 
 public class ChatConfig {
-    @ConfigOption(name = "Copy Chat", desc = "Allows you to copy chat while control clicking it")
+    // todo rename back when fixed
+    @ConfigOption(name = "Copy Chat Line", desc = "Allows you to copy chat while control clicking it. " +
+            "§eCurrently only copies a single chat line")
     @Expose
     @ConfigEditorBoolean
     public boolean copyChat = true;

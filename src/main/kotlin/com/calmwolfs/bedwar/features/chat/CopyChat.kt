@@ -60,7 +60,8 @@ class CopyChat {
             val chatLine = hoveredChatLine ?: return
             val chatText = chatLine.chatComponent.unformattedText.unformat()
             ClipboardUtils.copyToClipboard(chatText)
-            ChatUtils.chat("§a[BedWar] §7Copied chat to clipboard!")
+            // todo proper notifications
+            ChatUtils.chat("§a[BedWar] §7Copied chat line to clipboard!")
         }
     }
 

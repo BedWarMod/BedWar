@@ -15,7 +15,9 @@ class PlayerChatClick {
         if (event.sender == HypixelUtils.currentName) return
         if (!BedwarsUtils.inBedwarsArea) return
         if (BedWarMod.feature.chat.playerStats.clickName) {
-            val lastComponent = if (event.component.siblings.size < 1) event.component else event.component.siblings.last()
+            if (event.component.siblings.isEmpty()) return
+            val lastComponent = event.component.siblings.last()
+            if (lastComponent.chatStyle.chatClickEvent != null) return
             lastComponent.chatStyle.chatClickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/bws ${event.sender}")
             lastComponent.chatStyle.chatHoverEvent = HoverEvent(
                 HoverEvent.Action.SHOW_TEXT,

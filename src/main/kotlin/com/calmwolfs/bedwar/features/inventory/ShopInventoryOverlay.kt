@@ -43,7 +43,7 @@ class ShopInventoryOverlay {
     @SubscribeEvent
     fun onInventoryOpen(event: InventoryFullyOpenedEvent) {
         inInventory = false
-        if (!config.blockClicks && !config.hidePurchased && !config.showAffordable) return
+        if (!config.enabled) return
 
         if (!BedwarsUtils.playingBedwars) return
         if (event.inventoryName !in InventoryUtils.shopNames) {
@@ -64,6 +64,10 @@ class ShopInventoryOverlay {
         for (slot in chest.inventorySlots) {
             if (slot == null) continue
             if (slot.stack == null) continue
+
+            if (chest.inventorySlots.indexOf(slot) !in 9..44) {
+                continue
+            }
 
             if (config.showAffordable && slot.slotIndex in affordableList) {
                 val opacity = config.opacityGreen

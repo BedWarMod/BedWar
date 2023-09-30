@@ -24,6 +24,7 @@ object TeamStatus {
     private var display = emptyList<List<Any>>()
     private var needsUpdate = false
     private val deadTeammates = mutableListOf<String>()
+    private val eliminatedTeammates = mutableListOf<String>()
     private val disconnectedTeammates = mutableListOf<String>()
 
     fun getTeammates() {
@@ -38,6 +39,7 @@ object TeamStatus {
         }
         needsUpdate = true
         deadTeammates.clear()
+        eliminatedTeammates.clear()
         disconnectedTeammates.clear()
     }
 
@@ -72,6 +74,7 @@ object TeamStatus {
         val currentPlayerStatus = currentTeamMembers[event.killed] ?: PlayerStatus(20, SimpleTimeMark.farPast())
         currentPlayerStatus.health = -1
         currentTeamMembers[event.killed] = currentPlayerStatus
+        eliminatedTeammates.add(event.killed)
         needsUpdate = true
     }
 
@@ -95,6 +98,7 @@ object TeamStatus {
     }
 
     private fun drawList() = buildList<List<Any>> {
+        addAsSingletonList("§e§lTeam Status")
         for (teammate in currentTeamMembers) {
             if (teammate.value.respawnTime.isInPast()) {
                 teammate.value.respawnTime = SimpleTimeMark.farPast()
@@ -103,14 +107,19 @@ object TeamStatus {
 
             val key = teammate.key
             val value = teammate.value
+            val dead = key in deadTeammates
+            val eliminated = key in eliminatedTeammates
             val disconnected = key in disconnectedTeammates
             val isFarPast = value.respawnTime == SimpleTimeMark.farPast()
 
+            val health = if (value.health > 20) "§e${value.health}" else "§a${value.health}"
+
             val status = when {
-                disconnected -> "§3$key §7- §cDISCONNECTED"
-                isFarPast && value.health != -1 -> "§3$key §7- §a${value.health}§c❤"
-                isFarPast -> "§3$key §7- §cELIMINATED"
-                else -> "§3$key §7- §cDead ${value.respawnTime.timeUntil()}"
+                disconnected -> "$key §7- §eDISCONNECTED"
+                isFarPast && value.health != -1 -> "$key §7- $health§c❤"
+                dead -> "$key §7- §cDEAD §f${value.respawnTime.timeUntil()}"
+                eliminated -> "$key §7- §cELIMINATED"
+                else -> "$key §7- §6???"
             }
 
             addAsSingletonList(status)

@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinGuiContainer extends GuiScreen {
     @Shadow
     private Slot theSlot;
+
     @Unique
     private final GuiContainerHook bedwar_hook = new GuiContainerHook(this);
 

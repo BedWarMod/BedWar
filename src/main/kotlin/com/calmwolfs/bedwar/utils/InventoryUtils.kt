@@ -44,6 +44,7 @@ object InventoryUtils {
         "Potions",
         "Rotating Items",
         "Upgrades & Traps",
+        "Utility",
         "Guns"
     )
 }

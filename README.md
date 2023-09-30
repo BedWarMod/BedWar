@@ -40,6 +40,9 @@ All features are toggleable and should not introduce any lag or break other mods
 * Party Commands - Shortens commands such as `/pt` as `/p transfer`. Also allows tab completion for anyone in your party 
 * for party commands and can tab complete for inviting someone to your party
 
+#### Team
+* Team Member Status - Shows the health of each of your teammates, how long until they respawn if they are dead, if they are eliminated or if they disconnected
+
 #### Chat
 * Copy Chat - Upon control-clicking a message in chat, the mod will copy that chat line to your clipboard
 * Chat Mentions - Options to hear a ding when someone types your name in chat along with highlighting your name in chat

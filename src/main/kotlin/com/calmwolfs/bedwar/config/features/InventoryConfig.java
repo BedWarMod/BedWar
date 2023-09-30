@@ -34,6 +34,11 @@ public class InventoryConfig {
     public ShopInventoryOverlay shopInventoryOverlay = new ShopInventoryOverlay();
 
     public static class ShopInventoryOverlay {
+        @ConfigOption(name = "Enabled", desc = "Enable highlighting slots based on conditions, settings below")
+        @Expose
+        @ConfigEditorBoolean
+        public boolean enabled = false;
+
         @Expose
         @ConfigOption(name = "Hide Already Purchased", desc = "Greys out items that you cannot purchase because you already bought them")
         @ConfigEditorBoolean

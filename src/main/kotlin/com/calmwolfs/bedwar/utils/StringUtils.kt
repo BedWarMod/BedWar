@@ -55,4 +55,13 @@ object StringUtils {
     fun optionalPlural(number: Int, singular: String, plural: String): String {
         return "$number " + if (number == 1) singular else plural
     }
+
+    fun getWinrate(wins: Int, losses: Int, decimals: Int): String {
+        val games = wins + losses
+        if (games == 0) {
+            return "N/A"
+        }
+        val winrate = (wins * 100.0) / games
+        return "%.${decimals}f".format(winrate).trimEnd('0').trimEnd('.') + '%'
+    }
 }

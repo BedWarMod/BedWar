@@ -28,7 +28,7 @@ object PartyCommands {
     fun transfer(args: Array<String>) {
         if (!config.shortCommands) return
         if (PartyUtils.partyMembers.isEmpty()) return
-        if (args.isEmpty()) return
+        if (args.isEmpty()) ChatUtils.sendCommandToServer("pt")
         ChatUtils.sendCommandToServer("party transfer ${args[0]}")
     }
 

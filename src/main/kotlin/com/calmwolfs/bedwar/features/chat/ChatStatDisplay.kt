@@ -83,11 +83,6 @@ object ChatStatDisplay {
         val bblr = getRatio(modeStats.bedsBroken, modeStats.bedsLost)
         val wlr = getRatio(modeStats.wins, modeStats.losses)
         val winstreak = if (modeStats.winstreak == -1) "§eAPI off" else modeStats.winstreak.addSeparators()
-        val winRate = if (modeStats.wins + modeStats.losses > 0) {
-            ((modeStats.wins.toDouble() / (modeStats.wins + modeStats.losses)) * 100).round(3)
-        } else {
-            "0.0"
-        }
 
         val outputLines = mutableListOf<ChatComponentText>()
 
@@ -136,7 +131,7 @@ object ChatStatDisplay {
                 "§7WLR: §6$wlr"
             )
         ))
-        outputLines.add(ChatComponentText("§6[BW] §7Win Rate: §6$winRate%"))
+        outputLines.add(ChatComponentText("§6[BW] §7Win Rate: §6${StringUtils.getWinrate(modeStats.wins, modeStats.losses, 3)}"))
         outputLines.add(ChatComponentText("§6[BW] §7Winstreak: §6${winstreak}"))
         outputLines.add(makeButtonsLine(type, player))
 
