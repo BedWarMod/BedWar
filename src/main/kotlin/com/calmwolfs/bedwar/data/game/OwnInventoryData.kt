@@ -3,6 +3,7 @@ package com.calmwolfs.bedwar.data.game
 import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.events.game.PacketEvent
 import com.calmwolfs.bedwar.events.inventory.OwnInventoryUpdateEvent
+import com.calmwolfs.bedwar.utils.BedwarsUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 import net.minecraft.network.play.server.S2FPacketSetSlot
@@ -29,6 +30,7 @@ object OwnInventoryData {
 
     @SubscribeEvent
     fun onTick(event: ModTickEvent) {
+        if (!BedwarsUtils.inBedwarsArea && !event.repeatSeconds(1)) return
         val invItems = getItemsInOwnInventory()
         if (invItems != inventoryItems) {
             inventoryItems = invItems

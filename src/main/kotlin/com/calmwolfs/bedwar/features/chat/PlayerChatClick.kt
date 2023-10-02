@@ -17,7 +17,9 @@ class PlayerChatClick {
         if (BedWarMod.feature.chat.playerStats.clickName) {
             if (event.component.siblings.isEmpty()) return
             val lastComponent = event.component.siblings.last()
-            if (lastComponent.chatStyle.chatClickEvent != null) return
+            if (lastComponent.chatStyle.chatClickEvent != null) {
+                if (!lastComponent.chatStyle.chatClickEvent.value.startsWith("/socialoptions")) return
+            }
             lastComponent.chatStyle.chatClickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/bws ${event.sender}")
             lastComponent.chatStyle.chatHoverEvent = HoverEvent(
                 HoverEvent.Action.SHOW_TEXT,

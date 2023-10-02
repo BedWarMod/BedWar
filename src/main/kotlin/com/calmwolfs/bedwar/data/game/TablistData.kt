@@ -5,6 +5,7 @@ import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.events.game.TablistScoresUpdateEvent
 import com.calmwolfs.bedwar.events.game.TablistUpdateEvent
 import com.calmwolfs.bedwar.mixins.transformers.AccessorGuiPlayerTabOverlay
+import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.StringUtils.findMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.stripResets
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
@@ -38,6 +39,7 @@ object TablistData {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     fun onTick(event: ModTickEvent) {
+        if (!BedwarsUtils.inBedwarsArea && !event.repeatSeconds(1)) return
         val thePlayer = Minecraft.getMinecraft()?.thePlayer ?: return
         if (thePlayer.sendQueue == null) return
 

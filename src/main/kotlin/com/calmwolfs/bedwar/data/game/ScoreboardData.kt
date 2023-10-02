@@ -2,6 +2,7 @@ package com.calmwolfs.bedwar.data.game
 
 import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.events.game.ScoreboardUpdateEvent
+import com.calmwolfs.bedwar.utils.BedwarsUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.scoreboard.ScorePlayerTeam
 import net.minecraftforge.fml.common.eventhandler.EventPriority
@@ -16,6 +17,7 @@ object ScoreboardData {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     fun onTick(event: ModTickEvent) {
+        if (!BedwarsUtils.inBedwarsArea && !event.repeatSeconds(1)) return
         var list = fetchScoreboardLines().take(15)
         list = formatLines(list)
 

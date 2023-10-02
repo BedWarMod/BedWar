@@ -4,14 +4,19 @@ import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.data.types.GameModeData
 import com.calmwolfs.bedwar.events.bedwars.*
+import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.WorldChangeEvent
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
+import com.calmwolfs.bedwar.utils.EntityUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.ListUtils.addAsSingletonList
 import com.calmwolfs.bedwar.utils.NumberUtils.getRatio
 import com.calmwolfs.bedwar.utils.StringUtils
+import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.computer.TimeUtils
 import com.calmwolfs.bedwar.utils.gui.GuiElementUtils.renderStringsAndItems
+import net.minecraft.entity.item.EntityArmorStand
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import kotlin.concurrent.fixedRateTimer
 
@@ -29,8 +34,7 @@ object SessionDisplay {
 
     private var currentlyAlive = false
     private var sessionStats = GameModeData()
-
-    //todo update winstreak from the npc
+    private var gotWinstreak = false
 
     init {
         fixedRateTimer(name = "bedwar-session-tracker", period = 1000) {
@@ -38,6 +42,27 @@ object SessionDisplay {
                 updateDisplay()
             } catch (error: Throwable) {
                 CopyErrorCommand.logError(error, "Error updating BedWars session tracker!")
+            }
+        }
+    }
+
+    @SubscribeEvent
+    fun onWorldChange(event: WorldChangeEvent) {
+        gotWinstreak = false
+    }
+
+    @SubscribeEvent
+    fun onTick(event: ModTickEvent) {
+        if (!event.repeatSeconds(2)) return
+        if (!BedwarsUtils.inBedwarsLobby) return
+        if (gotWinstreak) return
+
+        for (entity in EntityUtils.getAllEntities()) {
+            if (entity !is EntityArmorStand) continue
+            "§fCurrent Winstreak: §a(?<winstreak>\\d+)".toPattern().matchMatcher(entity.name) {
+                sessionStats.winstreak = group("winstreak").toInt()
+                gotWinstreak = true
+                return
             }
         }
     }

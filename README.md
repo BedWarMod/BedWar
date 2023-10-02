@@ -8,7 +8,8 @@
 
 ## About
 
-BedWar Mod is a mod for Minecraft 1.8.9 Forge. It provides many features to be used while playing Hypixel Bedwars
+BedWar Mod is a mod for Minecraft 1.8.9 Forge. It provides many features to be used while playing Hypixel Bedwars.
+To open the mods menu either use `/bw` or `/bedwars`. All the mods commands begin with `/bw`.
 
 This mod is still in development, but if you want to test it, it is available. There will be some bugs, but they should 
 not impact gameplay too much. If you find any bugs or have any suggestions feel free to report them through the GitHub issues.
@@ -51,6 +52,7 @@ All features are toggleable and should not introduce any lag or break other mods
 * Player Stats - Upon clicking someone's message in chat or doing `/bws <player>` you will see their BedWars stats.
 * Stat Mode - Change the default BedWars stat mode that is sent in chat.
 * Send On Party Join - When someone joins your party their stats will automatically be sent in your chat
+
 ## Getting Started
 
 #### Installing Forge

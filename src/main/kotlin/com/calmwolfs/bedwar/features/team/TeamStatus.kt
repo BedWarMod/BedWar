@@ -2,11 +2,13 @@ package com.calmwolfs.bedwar.features.team
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.game.TablistData
+import com.calmwolfs.bedwar.data.types.BedwarsGameStat
 import com.calmwolfs.bedwar.events.bedwars.FinalKillEvent
 import com.calmwolfs.bedwar.events.bedwars.KillEvent
 import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.events.game.TablistScoresUpdateEvent
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
+import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ListUtils.addAsSingletonList
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
@@ -33,7 +35,10 @@ object TeamStatus {
             val firstChar = if (BedwarsUtils.currentTeamName == "Gray") 'S' else BedwarsUtils.currentTeamName[0]
             tabTeamPattern.matchMatcher(line.unformat()) {
                 if (group("team")[0] == firstChar) {
-                    currentTeamMembers[group("username")] = PlayerStatus(20, SimpleTimeMark.farPast())
+                currentTeamMembers[group("username")] = PlayerStatus(20, SimpleTimeMark.farPast())
+                    if (group("username") !in PartyGameStats.gameMembers) {
+                        PartyGameStats.gameMembers[group("username")] = BedwarsGameStat(0, 0, 0)
+                    }
                 }
             }
         }
@@ -81,7 +86,7 @@ object TeamStatus {
     @SubscribeEvent
     fun onTick(event: ModTickEvent) {
         if (!config.enabled) return
-        if (!BedwarsUtils.inBedwarsArea) return
+        if (!BedwarsUtils.inBedwarsGame) return
         if (!needsUpdate && deadTeammates.isEmpty()) return
 
         needsUpdate = false
@@ -112,13 +117,18 @@ object TeamStatus {
             val disconnected = key in disconnectedTeammates
             val isFarPast = value.respawnTime == SimpleTimeMark.farPast()
 
-            val health = if (value.health > 20) "§e${value.health}" else "§a${value.health}"
+            val health = when {
+                value.health > 20 -> "§6${value.health}"
+                value.health > 10 -> "§a${value.health}"
+                value.health > 5 -> "§e${value.health}"
+                else -> "§c${value.health}"
+            }
 
             val status = when {
                 disconnected -> "$key §7- §eDISCONNECTED"
-                isFarPast && value.health != -1 -> "$key §7- $health§c❤"
-                dead -> "$key §7- §cDEAD §f${value.respawnTime.timeUntil()}"
                 eliminated -> "$key §7- §cELIMINATED"
+                dead -> "$key §7- §cDEAD §f${value.respawnTime.timeUntil()}"
+                isFarPast && value.health != -1 -> "$key §7- $health§c❤"
                 else -> "$key §7- §6???"
             }
 

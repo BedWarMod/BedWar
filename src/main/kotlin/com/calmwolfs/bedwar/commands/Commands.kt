@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.commands
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.commands.testcommands.CopyEntitiesCommand
 import com.calmwolfs.bedwar.commands.testcommands.CopyScoreboardCommand
 import com.calmwolfs.bedwar.commands.testcommands.CopyTablistCommand
 import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
@@ -37,6 +38,7 @@ object Commands {
         registerCommand("bwcopyerror") { CopyErrorCommand.command(it) }
         registerCommand("bwcopyscoreboard") { CopyScoreboardCommand.command(it) }
         registerCommand("bwcopytablist") { CopyTablistCommand.command(it) }
+        registerCommand("bwcopyentities") { CopyEntitiesCommand.command(it) }
 
         registerCommand("bwpartylist") { PartyUtils.listMembers() }
         registerCommand("bwexp") { BedwarsStarUtils.testExperience(it) }

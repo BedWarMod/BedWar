@@ -78,7 +78,7 @@ class BedWarMod {
         loadModule(CopyChat())
         loadModule(ShopInventoryOverlay())
         loadModule(TeamStatus)
-        loadModule(PartyGameStats())
+        loadModule(PartyGameStats)
         loadModule(PauseButton())
         loadModule(PlayerChatClick())
         loadModule(ResourceOverlay())
