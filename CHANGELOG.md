@@ -1,7 +1,8 @@
 # BedWar Mod - Change Log
 
 ## Version 0.1.3
-- Made mod detect teammates as eliminated
+- Trap display - shows what traps your team currently has
+- Actually detect teammates as eliminated
 - Added some more colours based on health to the team status overlay
 - Allowed the user to customise the delay before the parties stats are sent to chat
 - Made the mod not run when not in a BedWars area

@@ -17,6 +17,7 @@ import com.calmwolfs.bedwar.features.inventory.ShopInventoryOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
 import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
+import com.calmwolfs.bedwar.features.session.TrapDisplay
 import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.*
 import kotlinx.coroutines.CoroutineName
@@ -78,6 +79,7 @@ class BedWarMod {
         loadModule(CopyChat())
         loadModule(ShopInventoryOverlay())
         loadModule(TeamStatus)
+        loadModule(TrapDisplay())
         loadModule(PartyGameStats)
         loadModule(PauseButton())
         loadModule(PlayerChatClick())

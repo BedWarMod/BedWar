@@ -54,4 +54,19 @@ public class SessionConfig {
         @Expose
         public Position position = new Position(10, 10, false, true);
     }
+
+    @Expose
+    @ConfigOption(name = "Trap Queue", desc = "")
+    @Accordion
+    public TrapQueue trapQueue = new TrapQueue();
+
+    public static class TrapQueue {
+        @ConfigOption(name = "Enabled", desc = "Displays the current bought traps in the game in a gui")
+        @Expose
+        @ConfigEditorBoolean
+        public boolean enabled = false;
+
+        @Expose
+        public Position position = new Position(110, 20, false, true);
+    }
 }
