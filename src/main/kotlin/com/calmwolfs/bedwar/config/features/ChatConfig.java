@@ -42,7 +42,7 @@ public class ChatConfig {
         @ConfigEditorBoolean
         public boolean partyJoin = false;
 
-        @ConfigOption(name = "Click Message", desc = "Clicking on a message from someone while in the hub will display their stats")
+        @ConfigOption(name = "Click Message", desc = "Clicking on a message from someone while in a bedwars area will show their stats")
         @Expose
         @ConfigEditorBoolean
         public boolean clickName = true;

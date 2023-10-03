@@ -9,6 +9,8 @@
 - Fetch your winstreak from the npc in the hub for the session display
 - Made party match stats work for nicked teammates (but will show them twice)
 - Fixed clicking teammates messages in chat not running `/bws`
+- Reworded config options to make a bit more sense
+- Made features that need an api key not work if none is set in the mod
 
 ## Version 0.1.2
 - Teammate status display - Shows how much health each of your teammates has along with whether they have been eliminated or disconnected

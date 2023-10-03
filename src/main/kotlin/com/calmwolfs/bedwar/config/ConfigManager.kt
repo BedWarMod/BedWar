@@ -4,9 +4,6 @@ import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
-import com.google.gson.TypeAdapter
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonWriter
 import io.github.moulberry.moulconfig.observer.PropertyTypeAdapterFactory
 import io.github.moulberry.moulconfig.processor.BuiltinMoulConfigGuis
 import io.github.moulberry.moulconfig.processor.ConfigProcessorDriver
@@ -15,7 +12,6 @@ import java.io.*
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
-import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
 object ConfigManager {
@@ -23,15 +19,6 @@ object ConfigManager {
         .excludeFieldsWithoutExposeAnnotation()
         .serializeSpecialFloatingPointValues()
         .registerTypeAdapterFactory(PropertyTypeAdapterFactory())
-        .registerTypeAdapter(UUID::class.java, object : TypeAdapter<UUID>() {
-            override fun write(out: JsonWriter, value: UUID) {
-                out.value(value.toString())
-            }
-
-            override fun read(reader: JsonReader): UUID {
-                return UUID.fromString(reader.nextString())
-            }
-        }.nullSafe())
         .enableComplexMapKeySerialization()
         .create()
 

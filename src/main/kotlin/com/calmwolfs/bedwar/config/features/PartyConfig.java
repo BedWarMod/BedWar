@@ -29,7 +29,7 @@ public class PartyConfig {
 
         @Expose
         @ConfigOption(name = "Action Type", desc = "What the mod will do with your stats at the end of the game. " +
-                "§eRequires above setting to be enabled. §cAuto sending messages is use at your own risk")
+                "§eRequires above setting to be enabled.")
         @ConfigEditorDropdown(values = {"Nothing", "Copy to clipboard", "Send to party", "Copy and Send"})
         public int actionType = 0;
 

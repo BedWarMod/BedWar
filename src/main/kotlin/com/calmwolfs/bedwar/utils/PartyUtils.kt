@@ -21,7 +21,7 @@ object PartyUtils {
         val unformatted = message.unformat()
 
         // no word party
-        "§eKicked (?<name>\\w+) because they were offline\\.".toPattern().matchMatcher(message) {
+        "§eKicked (?<name>.*) because they were offline\\.".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
             partyMembers.remove(name)
             return
@@ -30,12 +30,12 @@ object PartyUtils {
         if (!unformatted.lowercase().contains("party")) return
 
         // new member joined
-        "§eYou have joined (?<name>\\w+)'s §eparty!".toPattern().matchMatcher(message) {
+        "§eYou have joined (?<name>.*)'s §eparty!".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
             if (!partyMembers.contains(name)) partyMembers.add(name)
             return
         }
-        "(?<name>\\w+) §ejoined the party\\.".toPattern().matchMatcher(message) {
+        "(?<name>.*) §ejoined the party\\.".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
             if (!partyMembers.contains(name)) {
                 partyMembers.add(name)
@@ -43,7 +43,7 @@ object PartyUtils {
             }
             return
         }
-        "§eYou'll be partying with: (?<names>\\w+)".toPattern().matchMatcher(message) {
+        "§eYou'll be partying with: (?<names>.*)".toPattern().matchMatcher(message) {
             for (name in group("names").split(", ")) {
                 val playerName = name.toPlayerName()
                 if (!partyMembers.contains(playerName)) partyMembers.add(playerName)
@@ -52,22 +52,22 @@ object PartyUtils {
         }
 
         // one member got removed
-        "(?<name>\\w+) §ehas left the party\\.".toPattern().matchMatcher(message) {
+        "(?<name>.*) §ehas left the party\\.".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
             partyMembers.remove(name)
             return
         }
-        "(?<name>\\w+) §ehas been removed from the party\\.".toPattern().matchMatcher(message) {
+        "(?<name>.*) §ehas been removed from the party\\.".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
             partyMembers.remove(name)
             return
         }
-        "(?<name>\\w+) §ewas removed from your party because they disconnected\\.".toPattern().matchMatcher(message) {
+        "(?<name>.*) §ewas removed from your party because they disconnected\\.".toPattern().matchMatcher(message) {
             val name = group("name").toPlayerName()
             partyMembers.remove(name)
             return
         }
-        "The party was transferred to .* because (?<name>\\w+) left".toPattern().matchMatcher(unformatted) {
+        "The party was transferred to .* because (?<name>.*) left".toPattern().matchMatcher(unformatted) {
             val name = group("name").toPlayerName()
             partyMembers.remove(name)
             return

@@ -15,6 +15,7 @@ class PlayerChatClick {
         if (event.sender == HypixelUtils.currentName) return
         if (!BedwarsUtils.inBedwarsArea) return
         if (BedWarMod.feature.chat.playerStats.clickName) {
+            if (BedWarMod.feature.dev.apiKey == "") return
             if (event.component.siblings.isEmpty()) return
             val lastComponent = event.component.siblings.last()
             if (lastComponent.chatStyle.chatClickEvent != null) {

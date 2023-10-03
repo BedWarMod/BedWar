@@ -23,7 +23,7 @@ public class SessionConfig {
         @ConfigEditorBoolean
         public boolean enabled = true;
 
-        @ConfigOption(name = "Show In BedWars Lobby", desc = "Display the session tracker while in a BedWars lobby")
+        @ConfigOption(name = "Show In BedWars Lobby", desc = "Also display the session tracker while in a BedWars lobby")
         @Expose
         @ConfigEditorBoolean
         public boolean showInLobby = true;

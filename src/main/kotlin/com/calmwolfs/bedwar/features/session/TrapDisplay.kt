@@ -34,7 +34,6 @@ class TrapDisplay {
     fun onBed(event: BedBreakEvent) {
         if (event.team == BedwarsUtils.currentTeamName) {
             hasBed = false
-            formatDisplay()
         }
     }
 
@@ -85,12 +84,6 @@ class TrapDisplay {
         val stringBuilder = StringBuilder()
         stringBuilder.append("§e§lTraps§7:")
 
-        if (!hasBed) {
-            stringBuilder.append(" §c§lYou Have No Bed!")
-            trapLine = stringBuilder.toString()
-            return
-        }
-
         if (traps.isEmpty()) {
             stringBuilder.append(" §c§lYou Have No Traps!")
             trapLine = stringBuilder.toString()
@@ -115,6 +108,7 @@ class TrapDisplay {
     fun onRenderOverlay(event: GuiRenderEvent.GuiOverlayRenderEvent) {
         if (!config.enabled) return
         if (!BedwarsUtils.playingBedwars) return
+        if (!hasBed) return
 
         config.position.renderString(trapLine, posLabel = "Trap Display")
     }

@@ -7,7 +7,7 @@ import io.github.moulberry.moulconfig.annotations.*;
 import io.github.moulberry.moulconfig.observer.Property;
 
 public class AboutConfig {
-    @ConfigOption(name = "Current Version", desc = "This is the BedWar Mod version you are running currently")
+    @ConfigOption(name = "Current Version", desc = "This is your current mod version")
     @ConfigVersionDisplay
     public transient Void currentVersion = null;
 
@@ -16,12 +16,12 @@ public class AboutConfig {
     @ConfigEditorBoolean
     public boolean autoUpdates = true;
 
-    @ConfigOption(name = "Update Stream", desc = "How frequently do you want updates for BedWar Mod")
+    @ConfigOption(name = "Update Stream", desc = "What sort of updates do you want to be notified about")
     @Expose
     @ConfigEditorDropdown
     public Property<UpdateStream> updateStream = Property.of(UpdateStream.RELEASES);
 
-    @ConfigOption(name = "Used Software", desc = "Information about used software and licenses")
+    @ConfigOption(name = "Used Software", desc = "Information about used software and their licenses")
     @Accordion
     public Licenses licenses = new Licenses();
 

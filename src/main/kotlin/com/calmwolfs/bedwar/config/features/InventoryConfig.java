@@ -19,7 +19,7 @@ public class InventoryConfig {
         @ConfigEditorBoolean
         public boolean enabled = true;
 
-        @ConfigOption(name = "Show Total", desc = "Adds another number that combines the count of each item you have" + "in your inventory and enderchest")
+        @ConfigOption(name = "Show Total", desc = "Also displays the total of each resource")
         @Expose
         @ConfigEditorBoolean
         public boolean showTotal = true;
@@ -34,7 +34,7 @@ public class InventoryConfig {
     public ShopInventoryOverlay shopInventoryOverlay = new ShopInventoryOverlay();
 
     public static class ShopInventoryOverlay {
-        @ConfigOption(name = "Enabled", desc = "Enable highlighting slots based on conditions, settings below")
+        @ConfigOption(name = "Enabled", desc = "Enable highlighting slots based on conditions")
         @Expose
         @ConfigEditorBoolean
         public boolean enabled = false;
@@ -42,7 +42,7 @@ public class InventoryConfig {
         @Expose
         @ConfigOption(name = "Hide Already Purchased", desc = "Greys out items that you cannot purchase because you already bought them")
         @ConfigEditorBoolean
-        public boolean hidePurchased = false;
+        public boolean hidePurchased = true;
 
         @Expose
         @ConfigOption(name = "Block Clicks", desc = "Block the clicks on already purchased items to speed up time in the shop")

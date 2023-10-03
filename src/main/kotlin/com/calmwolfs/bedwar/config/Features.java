@@ -18,19 +18,19 @@ public class Features extends Config {
     }
 
     @Expose
-    @Category(name = "About", desc = "Information about this BedWar Mod and its updates")
+    @Category(name = "About", desc = "Information about this mod and its updates")
     public AboutConfig about = new AboutConfig();
 
     @Expose
-    @Category(name = "GUI", desc = "Change the locations of GUI elements. (§e/bw gui§7)")
+    @Category(name = "GUI", desc = "Change the locations and the appearance of GUI elements")
     public GuiConfig gui = new GuiConfig();
 
     @Expose
-    @Category(name = "Inventory", desc = "Features related to your inventory and the shop")
+    @Category(name = "Inventory", desc = "Features related to your inventory and the item shop")
     public InventoryConfig inventory = new InventoryConfig();
 
     @Expose
-    @Category(name = "Session", desc = "Tracker for current session and current game")
+    @Category(name = "Session", desc = "Trackers for your current session and current game")
     public SessionConfig session = new SessionConfig();
 
     @Expose
@@ -38,7 +38,7 @@ public class Features extends Config {
     public PartyConfig party = new PartyConfig();
 
     @Expose
-    @Category(name = "Team", desc = "Features relating to you having a team")
+    @Category(name = "Team", desc = "Features relating to you and your team")
     public TeamConfig team = new TeamConfig();
 
     @Expose

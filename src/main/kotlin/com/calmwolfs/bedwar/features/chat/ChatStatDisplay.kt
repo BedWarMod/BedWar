@@ -20,12 +20,14 @@ object ChatStatDisplay {
     @SubscribeEvent
     fun onPartyJoin(event: PlayerJoinPartyEvent) {
         if (!config.partyJoin) return
+        if (BedWarMod.feature.dev.apiKey == "") return
         displayStats(event.player, config.statType.get())
     }
 
     fun command(args: Array<String>) {
         if (BedWarMod.feature.dev.apiKey == "") {
             ModUtils.error("You need an api key to use this until a new system is made")
+            return
         }
         if (args.isEmpty()) {
             displayStats(HypixelUtils.currentName, config.statType.get())
