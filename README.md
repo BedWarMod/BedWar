@@ -33,6 +33,7 @@ All features are toggleable and should not introduce any lag or break other mods
 #### Session Display
 * Shows Stats From Current Session - Keep track of stats from the current session e.g. Final Kills, KDA, average game time
 * Fully Customisable - The order of the list can be fully changed and anything in the list can be removed if you don't want it
+* Trap Queue - Shows what traps your team currently has in queue
 
 #### Party
 * Party Match Stats - At the conclusion of the game display how many kills, finals and beds each party member got

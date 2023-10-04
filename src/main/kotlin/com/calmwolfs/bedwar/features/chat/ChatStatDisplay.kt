@@ -6,7 +6,6 @@ import com.calmwolfs.bedwar.data.types.BedwarsPlayerData
 import com.calmwolfs.bedwar.events.PlayerJoinPartyEvent
 import com.calmwolfs.bedwar.utils.*
 import com.calmwolfs.bedwar.utils.NumberUtils.addSeparators
-import com.calmwolfs.bedwar.utils.NumberUtils.getRatio
 import com.calmwolfs.bedwar.utils.NumberUtils.round
 import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
 import kotlinx.coroutines.launch
@@ -80,11 +79,13 @@ object ChatStatDisplay {
 
         val stars = BedwarsStarUtils.getStarForExp(stats.experience)
         val starsFormatted = BedwarsStarUtils.formatStar(stars.toInt())
-        val kdr = getRatio(modeStats.kills, modeStats.deaths)
-        val fkdr = getRatio(modeStats.finalKills, modeStats.finalDeaths)
-        val bblr = getRatio(modeStats.bedsBroken, modeStats.bedsLost)
-        val wlr = getRatio(modeStats.wins, modeStats.losses)
+        val kdr = NumberUtils.getRatio(modeStats.kills, modeStats.deaths)
+        val fkdr = NumberUtils.getRatio(modeStats.finalKills, modeStats.finalDeaths)
+        val bblr = NumberUtils.getRatio(modeStats.bedsBroken, modeStats.bedsLost)
+        val wlr = NumberUtils.getRatio(modeStats.wins, modeStats.losses)
         val winstreak = if (modeStats.winstreak == -1) "§eAPI off" else modeStats.winstreak.addSeparators()
+
+        val totalGames = (modeStats.wins + modeStats.losses).toDouble()
 
         val outputLines = mutableListOf<ChatComponentText>()
 
@@ -94,37 +95,40 @@ object ChatStatDisplay {
             "§3$player §7has §6${stats.experience.addSeparators()} §7total bedwars experience!"
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
-            "§6[BW] §7Kills: §6${modeStats.kills.addSeparators()} §7| KDR: §6$kdr",
+            "§6[BW] §7Kills: §6${modeStats.kills.addSeparators()} §7| KDR: §6${kdr.round(3)}",
             listOf(
                 "§7Kills: §6${modeStats.kills.addSeparators()}",
                 "§7Deaths: §6${modeStats.deaths.addSeparators()}",
                 "§7Kills per star: §6${(modeStats.kills / stars).round(2)}",
                 "§7Deaths per star: §6${(modeStats.deaths / stars).round(2)}",
+                "§7Kills per game: §6${(modeStats.kills / totalGames).round(2)}",
                 "§7KDR: §6$kdr"
             )
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
-            "§6[BW] §7Finals: §6${modeStats.finalKills.addSeparators()} §7| FKDR: §6$fkdr",
+            "§6[BW] §7Finals: §6${modeStats.finalKills.addSeparators()} §7| FKDR: §6${fkdr.round(3)}",
             listOf(
                 "§7Final Kills: §6${modeStats.finalKills.addSeparators()}",
                 "§7Final Deaths: §6${modeStats.finalDeaths.addSeparators()}",
                 "§7Final Kills per star: §6${(modeStats.finalKills / stars).round(2)}",
                 "§7Final Deaths per star: §6${(modeStats.finalDeaths / stars).round(2)}",
+                "§7Final Kills per game: §6${(modeStats.finalKills / totalGames).round(2)}",
                 "§7FKDR: §6$fkdr"
             )
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
-            "§6[BW] §7Beds: §6${modeStats.bedsBroken.addSeparators()} §7| BBLR: §6$bblr",
+            "§6[BW] §7Beds: §6${modeStats.bedsBroken.addSeparators()} §7| BBLR: §6${bblr.round(3)}",
             listOf(
                 "§7Beds Broken: §6${modeStats.bedsBroken.addSeparators()}",
                 "§7Beds Lost: §6${modeStats.bedsLost.addSeparators()}",
                 "§7Beds Broken per star: §6${(modeStats.bedsBroken / stars).round(2)}",
                 "§7Beds Lost per star: §6${(modeStats.bedsLost / stars).round(2)}",
+                "§7Beds Broken per game: §6${(modeStats.bedsBroken / totalGames).round(2)}",
                 "§7BBLR: §6$bblr"
             )
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
-            "§6[BW] §7Wins: §6${modeStats.wins.addSeparators()} §7| WLR: §6$wlr",
+            "§6[BW] §7Wins: §6${modeStats.wins.addSeparators()} §7| WLR: §6${wlr.round(3)}",
             listOf(
                 "§7Wins: §6${modeStats.wins.addSeparators()}",
                 "§7Losses: §6${modeStats.losses.addSeparators()}",

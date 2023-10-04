@@ -23,11 +23,10 @@ object NumberUtils {
         return if (a.length > b.length) this else result
     }
 
-    fun getRatio(good: Int, bad: Int): String {
+    fun getRatio(good: Int, bad: Int): Double {
         val first = good.toDouble()
         val second = if (bad == 0) 1.0 else bad.toDouble()
-        val result = first / second
 
-        return result.round(2).addSeparators()
+        return first / second
     }
 }

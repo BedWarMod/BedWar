@@ -7,12 +7,9 @@ import com.calmwolfs.bedwar.events.bedwars.*
 import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.events.game.WorldChangeEvent
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
-import com.calmwolfs.bedwar.utils.BedwarsUtils
-import com.calmwolfs.bedwar.utils.EntityUtils
-import com.calmwolfs.bedwar.utils.HypixelUtils
+import com.calmwolfs.bedwar.utils.*
 import com.calmwolfs.bedwar.utils.ListUtils.addAsSingletonList
-import com.calmwolfs.bedwar.utils.NumberUtils.getRatio
-import com.calmwolfs.bedwar.utils.StringUtils
+import com.calmwolfs.bedwar.utils.NumberUtils.round
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.computer.TimeUtils
 import com.calmwolfs.bedwar.utils.gui.GuiElementUtils.renderStringsAndItems
@@ -88,10 +85,10 @@ object SessionDisplay {
 
     private fun drawSessionDisplay() = buildList<List<Any>> {
         val sessionGames = sessionStats.wins + sessionStats.losses
-        val kdr = getRatio(sessionStats.kills, sessionStats.deaths)
-        val fkdr = getRatio(sessionStats.finalKills, sessionStats.finalDeaths)
-        val bblr = getRatio(sessionStats.bedsBroken, sessionStats.bedsLost)
-        val wlr = getRatio(sessionStats.wins, sessionStats.losses)
+        val kdr = NumberUtils.getRatio(sessionStats.kills, sessionStats.deaths)
+        val fkdr = NumberUtils.getRatio(sessionStats.finalKills, sessionStats.finalDeaths)
+        val bblr = NumberUtils.getRatio(sessionStats.bedsBroken, sessionStats.bedsLost)
+        val wlr = NumberUtils.getRatio(sessionStats.wins, sessionStats.losses)
 
         addAsSingletonList("§e§lGame")
         addAsSingletonList("Kills: §a$currentKills")
@@ -99,10 +96,10 @@ object SessionDisplay {
         addAsSingletonList("Beds: §a$currentBeds")
         addAsSingletonList(" ")
         addAsSingletonList("§e§lSession")
-        addAsSingletonList("Kills: §a${sessionStats.kills} §7| §fKDR: §a$kdr")
-        addAsSingletonList("Finals: §a${sessionStats.finalKills} §7| §fFKDR: §a$fkdr")
-        addAsSingletonList("Beds: §a${sessionStats.bedsBroken} §7| §fBBLR: §a$bblr")
-        addAsSingletonList("Wins: §a${sessionStats.wins} §7| §fWLR: §a$wlr")
+        addAsSingletonList("Kills: §a${sessionStats.kills} §7| §fKDR: §a${kdr.round(2)}")
+        addAsSingletonList("Finals: §a${sessionStats.finalKills} §7| §fFKDR: §a${fkdr.round(2)}")
+        addAsSingletonList("Beds: §a${sessionStats.bedsBroken} §7| §fBBLR: §a${bblr.round(2)}")
+        addAsSingletonList("Wins: §a${sessionStats.wins} §7| §fWLR: §a${wlr.round(2)}")
         addAsSingletonList(" ")
         addAsSingletonList("Winstreak: §a${sessionStats.winstreak}")
         addAsSingletonList("Win Rate: §a${StringUtils.getWinrate(sessionStats.wins, sessionStats.losses, 2)}")
