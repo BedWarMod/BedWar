@@ -92,7 +92,7 @@ object ChatStatDisplay {
         outputLines.add(ChatComponentText(""))
         outputLines.add(ChatUtils.makeHoverChat(
             "§6[BedWar] §7${type.displayName} stats for §3$player $starsFormatted",
-            "§3$player §7has §6${stats.experience.addSeparators()} §7total bedwars experience!"
+            "§6${stats.experience.addSeparators()} §7total bedwars experience!"
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
             "§6[BW] §7Kills: §6${modeStats.kills.addSeparators()} §7| KDR: §6${kdr.round(3)}",
@@ -102,7 +102,7 @@ object ChatStatDisplay {
                 "§7Kills per star: §6${(modeStats.kills / stars).round(2)}",
                 "§7Deaths per star: §6${(modeStats.deaths / stars).round(2)}",
                 "§7Kills per game: §6${(modeStats.kills / totalGames).round(2)}",
-                "§7KDR: §6$kdr"
+                "§7KDR: §6${kdr.round(3)}"
             )
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
@@ -113,7 +113,7 @@ object ChatStatDisplay {
                 "§7Final Kills per star: §6${(modeStats.finalKills / stars).round(2)}",
                 "§7Final Deaths per star: §6${(modeStats.finalDeaths / stars).round(2)}",
                 "§7Final Kills per game: §6${(modeStats.finalKills / totalGames).round(2)}",
-                "§7FKDR: §6$fkdr"
+                "§7FKDR: §6${fkdr.round(3)}"
             )
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
@@ -124,7 +124,7 @@ object ChatStatDisplay {
                 "§7Beds Broken per star: §6${(modeStats.bedsBroken / stars).round(2)}",
                 "§7Beds Lost per star: §6${(modeStats.bedsLost / stars).round(2)}",
                 "§7Beds Broken per game: §6${(modeStats.bedsBroken / totalGames).round(2)}",
-                "§7BBLR: §6$bblr"
+                "§7BBLR: §6${bblr.round(3)}"
             )
         ))
         outputLines.add(ChatUtils.makeMultiLineHoverChat(
@@ -134,7 +134,7 @@ object ChatStatDisplay {
                 "§7Losses: §6${modeStats.losses.addSeparators()}",
                 "§7Wins per star: §6${(modeStats.wins / stars).round(2)}",
                 "§7Losses per star: §6${(modeStats.losses / stars).round(2)}",
-                "§7WLR: §6$wlr"
+                "§7WLR: §6${wlr.round(3)}"
             )
         ))
         outputLines.add(ChatComponentText("§6[BW] §7Win Rate: §6${StringUtils.getWinrate(modeStats.wins, modeStats.losses, 3)}"))

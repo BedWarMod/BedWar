@@ -5,6 +5,7 @@
 [![Contributors](https://img.shields.io/github/contributors/BedWarMod/BedWar?color=informational&logo=GitHub)](https://github.com/BedWarMod/BedWar/graphs/contributors)
 [![Downloads](https://img.shields.io/github/downloads/BedWarMod/BedWar/total?label=downloads&color=informational&logo=GitHub)](https://github.com/BedWarMod/BedWar/releases/latest)
 [![Modrinth](https://img.shields.io/modrinth/dt/Al95W2SE?color=informational&logo=modrinth)](https://modrinth.com/mod/bedwar-mod)
+[![Lines](https://tokei.rs/b1/github/BedWarMod/BedWar)](https://github.com/BedWarMod/BedWar/graphs/code-frequency)
 
 ## About
 
