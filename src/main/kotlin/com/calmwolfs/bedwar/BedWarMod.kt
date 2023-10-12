@@ -1,10 +1,20 @@
 package com.calmwolfs.bedwar
 
 import com.calmwolfs.bedwar.commands.Commands
-import com.calmwolfs.bedwar.config.*
+import com.calmwolfs.bedwar.config.ConfigManager
+import com.calmwolfs.bedwar.config.Features
+import com.calmwolfs.bedwar.config.PlayerData
+import com.calmwolfs.bedwar.config.RepoManager
+import com.calmwolfs.bedwar.config.UpdateManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.data.RenderGuiData
-import com.calmwolfs.bedwar.data.game.*
+import com.calmwolfs.bedwar.data.game.ChatManager
+import com.calmwolfs.bedwar.data.game.MinecraftData
+import com.calmwolfs.bedwar.data.game.OtherInventoryData
+import com.calmwolfs.bedwar.data.game.OwnInventoryData
+import com.calmwolfs.bedwar.data.game.ScoreboardData
+import com.calmwolfs.bedwar.data.game.TablistData
+import com.calmwolfs.bedwar.data.game.TooltipData
 import com.calmwolfs.bedwar.events.BedwarsEventManager
 import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.features.chat.ChatMentions
@@ -19,7 +29,14 @@ import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.features.session.TrapDisplay
 import com.calmwolfs.bedwar.features.team.TeamStatus
-import com.calmwolfs.bedwar.utils.*
+import com.calmwolfs.bedwar.utils.ApiUtils
+import com.calmwolfs.bedwar.utils.BedwarsStarUtils
+import com.calmwolfs.bedwar.utils.BedwarsUtils
+import com.calmwolfs.bedwar.utils.ChatCompleteUtils
+import com.calmwolfs.bedwar.utils.HypixelUtils
+import com.calmwolfs.bedwar.utils.ItemRenderUtils
+import com.calmwolfs.bedwar.utils.PartyUtils
+import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -62,6 +79,7 @@ class BedWarMod {
         loadModule(ChatCompleteUtils)
         loadModule(HypixelUtils)
         loadModule(ItemRenderUtils)
+        loadModule(KeyboardUtils)
         loadModule(PartyUtils)
 
         //data

@@ -1,7 +1,7 @@
 package com.calmwolfs.bedwar.config.gui
 
 import com.calmwolfs.bedwar.BedWarMod
-import com.calmwolfs.bedwar.events.game.ModTickEvent
+import com.calmwolfs.bedwar.events.game.ModKeyPressEvent
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.inventory.GuiChest
@@ -10,8 +10,7 @@ import net.minecraft.client.gui.inventory.GuiInventory
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import org.lwjgl.input.Keyboard
-import java.util.*
+import java.util.UUID
 
 object GuiEditorManager {
     private var currentPositions = mutableMapOf<String, Position>()
@@ -19,17 +18,13 @@ object GuiEditorManager {
     private var currentBorderSize = mutableMapOf<String, Pair<Int, Int>>()
 
     @SubscribeEvent
-    fun onTick(event: ModTickEvent) {
+    fun onKeyClick(event: ModKeyPressEvent) {
         Minecraft.getMinecraft().currentScreen?.let {
             if (it !is GuiInventory && it !is GuiChest && it !is GuiEditSign) return
         }
 
-        if (!Keyboard.getEventKeyState()) return
-        val key = if (Keyboard.getEventKey() == 0) Keyboard.getEventCharacter().code + 256 else Keyboard.getEventKey()
-        if (BedWarMod.feature.gui.keyBindOpen != key) return
-
         if (isInGui()) return
-        openGuiPositionEditor()
+        if (event.keyCode == BedWarMod.feature.gui.keyBindOpen) openGuiPositionEditor()
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
