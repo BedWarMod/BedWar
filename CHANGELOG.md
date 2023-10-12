@@ -1,5 +1,10 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.4
+- Fixed bug where party stats would not send your stats at the end of a game
+- Made some things round less frequently plus some more formatting changes
+- Show kills/finals/beds per game
+
 ## Version 0.1.3
 - Trap display - shows what traps your team currently has
 - Actually detect teammates as eliminated

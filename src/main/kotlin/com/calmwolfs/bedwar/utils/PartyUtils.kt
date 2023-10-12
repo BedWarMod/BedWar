@@ -44,6 +44,7 @@ object PartyUtils {
             return
         }
         "§eYou'll be partying with: (?<names>.*)".toPattern().matchMatcher(message) {
+            partyMembers.clear()
             for (name in group("names").split(", ")) {
                 val playerName = name.toPlayerName()
                 if (!partyMembers.contains(playerName)) partyMembers.add(playerName)

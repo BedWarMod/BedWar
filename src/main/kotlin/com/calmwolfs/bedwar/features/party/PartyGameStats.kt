@@ -2,8 +2,16 @@ package com.calmwolfs.bedwar.features.party
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.types.BedwarsGameStat
-import com.calmwolfs.bedwar.events.bedwars.*
-import com.calmwolfs.bedwar.utils.*
+import com.calmwolfs.bedwar.events.bedwars.BedBreakEvent
+import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
+import com.calmwolfs.bedwar.events.bedwars.FinalKillEvent
+import com.calmwolfs.bedwar.events.bedwars.KillEvent
+import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
+import com.calmwolfs.bedwar.utils.BedwarsUtils
+import com.calmwolfs.bedwar.utils.ChatUtils
+import com.calmwolfs.bedwar.utils.HypixelUtils
+import com.calmwolfs.bedwar.utils.PartyUtils
+import com.calmwolfs.bedwar.utils.StringUtils
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -64,8 +72,7 @@ object PartyGameStats {
                 val finals = StringUtils.optionalPlural(stats.finals, "§7Final Kill", "§7Final Kills")
                 val beds = StringUtils.optionalPlural(stats.beds, "§7Bed", "§7Beds")
 
-                line = "§6[BW] §3$player §7got §6$kills§7, §6$finals §7and §6$beds"
-                ChatUtils.chat(line)
+                ChatUtils.chat("§6[BW] §3$player §7got §6$kills§7, §6$finals §7and §6$beds")
                 if (!winner && !config.sendOnLoss) continue
                 if (isPlayer && config.actionType != 0) {
                     line = "${stats.kills} ${stats.finals} ${stats.beds}"
