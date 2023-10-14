@@ -7,7 +7,7 @@ import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import com.google.common.cache.CacheBuilder
 import net.minecraft.client.Minecraft
-import java.util.*
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 object CopyErrorCommand {

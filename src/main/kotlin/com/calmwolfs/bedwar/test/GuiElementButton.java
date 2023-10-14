@@ -1,6 +1,6 @@
 package com.calmwolfs.bedwar.test;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class GuiElementButton extends GuiElementText {
     public GuiElementButton(String text, int colour) {

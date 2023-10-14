@@ -1,7 +1,14 @@
 package com.calmwolfs.bedwar.config;
 
 import com.calmwolfs.bedwar.BedWarMod;
-import com.calmwolfs.bedwar.config.features.*;
+import com.calmwolfs.bedwar.config.features.AboutConfig;
+import com.calmwolfs.bedwar.config.features.ChatConfig;
+import com.calmwolfs.bedwar.config.features.DevConfig;
+import com.calmwolfs.bedwar.config.features.GuiConfig;
+import com.calmwolfs.bedwar.config.features.InventoryConfig;
+import com.calmwolfs.bedwar.config.features.PartyConfig;
+import com.calmwolfs.bedwar.config.features.SessionConfig;
+import com.calmwolfs.bedwar.config.features.TeamConfig;
 import com.google.gson.annotations.Expose;
 import io.github.moulberry.moulconfig.Config;
 import io.github.moulberry.moulconfig.annotations.Category;

@@ -10,7 +10,11 @@ import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.MinecraftExecutor
 import com.calmwolfs.bedwar.utils.ModUtils.onToggle
 import io.github.moulberry.moulconfig.processor.MoulConfigProcessor
-import moe.nea.libautoupdate.*
+import moe.nea.libautoupdate.CurrentVersion
+import moe.nea.libautoupdate.PotentialUpdate
+import moe.nea.libautoupdate.UpdateContext
+import moe.nea.libautoupdate.UpdateSource
+import moe.nea.libautoupdate.UpdateTarget
 import net.minecraft.client.Minecraft
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent

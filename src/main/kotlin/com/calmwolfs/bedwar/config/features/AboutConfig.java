@@ -3,7 +3,11 @@ package com.calmwolfs.bedwar.config.features;
 import com.calmwolfs.bedwar.config.update.ConfigVersionDisplay;
 import com.calmwolfs.bedwar.utils.computer.WebUtils;
 import com.google.gson.annotations.Expose;
-import io.github.moulberry.moulconfig.annotations.*;
+import io.github.moulberry.moulconfig.annotations.Accordion;
+import io.github.moulberry.moulconfig.annotations.ConfigEditorBoolean;
+import io.github.moulberry.moulconfig.annotations.ConfigEditorButton;
+import io.github.moulberry.moulconfig.annotations.ConfigEditorDropdown;
+import io.github.moulberry.moulconfig.annotations.ConfigOption;
 import io.github.moulberry.moulconfig.observer.Property;
 
 public class AboutConfig {

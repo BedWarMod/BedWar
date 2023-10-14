@@ -1,7 +1,8 @@
 package com.calmwolfs.bedwar.utils
 
 import io.github.moulberry.moulconfig.observer.Property
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.time.Duration
 
 object ModUtils {
