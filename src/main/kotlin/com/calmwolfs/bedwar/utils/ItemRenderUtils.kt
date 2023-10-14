@@ -1,24 +1,26 @@
 package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.events.gui.RenderSlotOverlays
+import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import kotlin.time.Duration.Companion.milliseconds
 
 object ItemRenderUtils {
     private val backgroundColour = mutableMapOf<ItemStack, Int>()
-    private val backgroundTime = mutableMapOf<ItemStack, Long>()
+    private val backgroundTime = mutableMapOf<ItemStack, SimpleTimeMark>()
 
     var ItemStack.background: Int
         get() {
-            if (System.currentTimeMillis() > backgroundTime.getOrDefault(this, 0) + 60) return -1
+            if (backgroundTime.getOrDefault(this, SimpleTimeMark.farPast()).passedSince() > 60.milliseconds) return -1
             return backgroundColour.getOrDefault(this, -1)
         }
         set(value) {
             backgroundColour[this] = value
-            backgroundTime[this] = System.currentTimeMillis()
+            backgroundTime[this] = SimpleTimeMark.now()
         }
 
     @SubscribeEvent

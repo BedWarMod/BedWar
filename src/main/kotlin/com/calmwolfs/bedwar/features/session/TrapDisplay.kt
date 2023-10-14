@@ -7,8 +7,7 @@ import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
-import com.calmwolfs.bedwar.utils.StringUtils.removeResets
-import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
+import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.gui.GuiElementUtils.renderString
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -41,7 +40,7 @@ class TrapDisplay {
     fun onChat(event: GameChatEvent) {
         if (!BedwarsUtils.playingBedwars) return
 
-        val message = event.message.trimWhiteSpaceAndResets().removeResets().unformat()
+        val message = event.message.trimWhiteSpace().unformat()
 
         // buying
         "(?<name>\\w+) purchased Miner Fatigue Trap".toPattern().matchMatcher(message) {

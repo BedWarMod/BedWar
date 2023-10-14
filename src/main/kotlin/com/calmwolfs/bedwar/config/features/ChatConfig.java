@@ -47,4 +47,9 @@ public class ChatConfig {
         @ConfigEditorBoolean
         public boolean clickName = true;
     }
+
+    @ConfigOption(name = "Swap Lobby Command", desc = "Makes \"/l1\" run \"/swaplobby 1\" while in a BedWars lobby")
+    @Expose
+    @ConfigEditorBoolean
+    public boolean swapLobbyCommand = true;
 }

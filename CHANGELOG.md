@@ -3,7 +3,9 @@
 ## Version 0.1.4
 - Fixed bug where party stats would not send your stats at the end of a game
 - Made some things round less frequently plus some more formatting changes
-- Show kills/finals/beds per game
+- Show kills/finals/beds per game in `/bws`
+- Replace `/l1` with `/swaplobby 1`
+- Fix potential repo issues
 
 ## Version 0.1.3
 - Trap display - shows what traps your team currently has

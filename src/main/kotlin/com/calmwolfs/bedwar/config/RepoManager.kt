@@ -1,6 +1,5 @@
 package com.calmwolfs.bedwar.config
 
-import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.events.RepositoryReloadEvent
 import com.calmwolfs.bedwar.utils.ChatUtils
@@ -25,11 +24,7 @@ class RepoManager(private val configLocation: File) {
 
     fun loadRepoInformation() {
         atomicShouldManuallyReload.set(true)
-        if (BedWarMod.feature.dev.repoAutoUpdate) {
-            fetchRepository(false).thenRun(this::reloadRepository)
-        } else {
-            reloadRepository()
-        }
+        fetchRepository(false).thenRun(this::reloadRepository)
     }
 
     private val atomicShouldManuallyReload = AtomicBoolean(false)

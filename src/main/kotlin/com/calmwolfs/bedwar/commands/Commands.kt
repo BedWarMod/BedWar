@@ -7,6 +7,7 @@ import com.calmwolfs.bedwar.commands.testcommands.CopyTablistCommand
 import com.calmwolfs.bedwar.config.gui.ConfigGuiManager
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.features.chat.ChatStatDisplay
+import com.calmwolfs.bedwar.features.chat.CommandReplacements
 import com.calmwolfs.bedwar.features.party.PartyCommands
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.BedwarsStarUtils
@@ -50,6 +51,8 @@ object Commands {
         registerCommand("pk") { PartyCommands.kick(it) }
         registerCommand("pt") { PartyCommands.transfer(it) }
         registerCommand("pp") { PartyCommands.promote(it) }
+
+        registerCommand("l1") { CommandReplacements.swapLobbyCommand() }
 
         registerCommand("bwupdaterepo") { BedWarMod.repo.updateRepo() }
         registerCommand("bwreloadrepo") { BedWarMod.repo.reloadRepo() }

@@ -4,9 +4,8 @@ import com.calmwolfs.bedwar.events.PlayerJoinPartyEvent
 import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.optionalPlural
-import com.calmwolfs.bedwar.utils.StringUtils.removeResets
 import com.calmwolfs.bedwar.utils.StringUtils.toPlayerName
-import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
+import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -17,7 +16,7 @@ object PartyUtils {
 
     @SubscribeEvent
     fun onChat(event: GameChatEvent) {
-        val message = event.message.trimWhiteSpaceAndResets().removeResets()
+        val message = event.message.trimWhiteSpace()
         val unformatted = message.unformat()
 
         // no word party

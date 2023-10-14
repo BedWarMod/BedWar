@@ -2,13 +2,20 @@ package com.calmwolfs.bedwar.config
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
+import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import io.github.moulberry.moulconfig.observer.PropertyTypeAdapterFactory
 import io.github.moulberry.moulconfig.processor.BuiltinMoulConfigGuis
 import io.github.moulberry.moulconfig.processor.ConfigProcessorDriver
 import io.github.moulberry.moulconfig.processor.MoulConfigProcessor
-import java.io.*
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileOutputStream
+import java.io.FileReader
+import java.io.IOException
+import java.io.OutputStreamWriter
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
@@ -55,7 +62,7 @@ object ConfigManager {
                 println("Loaded config from file")
             } catch (error: Exception) {
                 error.printStackTrace()
-                val backupFile = configFile!!.resolveSibling("config-${System.currentTimeMillis()}-backup.json")
+                val backupFile = configFile!!.resolveSibling("config-${SimpleTimeMark.now().toMillis()}-backup.json")
                 println("Exception while reading $configFile. Will load blank config and save backup to $backupFile")
                 println("Exception was $error")
                 try {

@@ -2,7 +2,6 @@ package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.mixins.transformers.AccessorChatComponentText
-import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
 import net.minecraft.client.Minecraft
@@ -19,8 +18,8 @@ object ChatUtils {
 
     private var lastMessageSent = SimpleTimeMark.farPast()
 
-    fun String.getPlayerName(): String {
-        if (!playerChatPattern.matcher(this).matches()) return "-"
+    fun String.getPlayerName(): String? {
+        if (!playerChatPattern.matcher(this).matches()) return null
 
         var username = this.unformat().split(":")[0]
 
@@ -30,10 +29,10 @@ object ChatUtils {
         username = username.removePrefix("From ")
         username = username.removePrefix("To ")
 
-        chatUsernamePattern.matchMatcher(username) {
-            return group("username")
-        }
-        return "-"
+        val matcher = chatUsernamePattern.matcher(username)
+
+        if (!matcher.matches()) return null
+        return matcher.group("username")
     }
 
     private fun sendMessageToServer(message: String) {

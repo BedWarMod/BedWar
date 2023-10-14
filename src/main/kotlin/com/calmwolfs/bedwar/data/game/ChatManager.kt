@@ -4,8 +4,7 @@ import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.events.game.PlayerChatEvent
 import com.calmwolfs.bedwar.utils.ChatUtils.getPlayerName
 import com.calmwolfs.bedwar.utils.StringUtils.removeResets
-import com.calmwolfs.bedwar.utils.StringUtils.stripResets
-import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
+import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
 import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
@@ -15,13 +14,13 @@ object ChatManager {
         if (event.type.toInt() == 2) return
 
         val original = event.message
-        val message = original.formattedText.stripResets()
+        val message = original.formattedText.removeResets()
 
         if (message.startsWith("§f{\"server\":\"")) return
 
-        val sender = message.trimWhiteSpaceAndResets().removeResets().getPlayerName()
+        val sender = message.trimWhiteSpace().getPlayerName()
 
-        val blockedReason = if (sender == "-") {
+        val blockedReason = if (sender == null) {
             val chatEvent = GameChatEvent(message, original)
             chatEvent.postAndCatch()
             chatEvent.blockedReason

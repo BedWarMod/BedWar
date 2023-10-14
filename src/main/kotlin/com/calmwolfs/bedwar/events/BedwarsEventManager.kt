@@ -2,7 +2,12 @@ package com.calmwolfs.bedwar.events
 
 import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.data.jsonobjects.ChatRegexJson
-import com.calmwolfs.bedwar.events.bedwars.*
+import com.calmwolfs.bedwar.events.bedwars.BedBreakEvent
+import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
+import com.calmwolfs.bedwar.events.bedwars.FinalKillEvent
+import com.calmwolfs.bedwar.events.bedwars.KillEvent
+import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
+import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
 import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.BedwarsUtils
@@ -10,8 +15,7 @@ import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.SoundUtils
 import com.calmwolfs.bedwar.utils.StringUtils.findMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
-import com.calmwolfs.bedwar.utils.StringUtils.removeResets
-import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpaceAndResets
+import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
@@ -27,7 +31,7 @@ object BedwarsEventManager {
     @SubscribeEvent
     fun onChat(event: GameChatEvent) {
         if (!BedwarsUtils.inBedwarsArea) return
-        val message = event.message.trimWhiteSpaceAndResets().removeResets()
+        val message = event.message.trimWhiteSpace()
 
         gameStartPattern.matchMatcher(message) {
             StartGameEvent().postAndCatch()

@@ -4,10 +4,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 object StringUtils {
-    private val whiteSpaceResetPattern = "^(?:\\s|§r)*|(?:\\s|§r)*$".toPattern()
+    private val whiteSpacePattern = "^\\s*|\\s*$".toPattern()
     private val resetPattern = "(?i)§R".toPattern()
 
-    fun String.trimWhiteSpaceAndResets(): String = whiteSpaceResetPattern.matcher(this).replaceAll("")
+    fun String.trimWhiteSpace(): String = whiteSpacePattern.matcher(this).replaceAll("")
     fun String.removeResets(): String = resetPattern.matcher(this).replaceAll("")
 
     fun String.unformat(): String {
