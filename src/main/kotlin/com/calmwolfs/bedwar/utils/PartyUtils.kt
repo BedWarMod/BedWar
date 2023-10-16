@@ -110,12 +110,12 @@ object PartyUtils {
         val size = partyMembers.size
         if (size == 0) {
             ChatUtils.chat("§e[BedWar] No tracked party members!")
-        } else {
-            val memberLine = optionalPlural(size, "§atracked party member", "§atracked party members")
-            ChatUtils.chat("§a[BedWar] §7$memberLine§f:")
-            for (member in partyMembers) {
-                ChatUtils.chat("   §a- §7$member")
-            }
+            return
+        }
+        val memberLine = optionalPlural(size, "§atracked party member", "§atracked party members")
+        ChatUtils.chat("§a[BedWar] §7$memberLine§f:")
+        for (member in partyMembers) {
+            ChatUtils.chat("   §a- §7$member")
         }
     }
 }

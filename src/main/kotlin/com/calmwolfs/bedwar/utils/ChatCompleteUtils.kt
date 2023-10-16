@@ -47,15 +47,21 @@ object ChatCompleteUtils {
             return PartyUtils.partyMembers
         }
 
-        if (command == "p") {
+        if (command == "p" || command == "party") {
             val resultList = getLobbyPlayers()
-            return resultList + PartyCommands.otherPartyCommands
+            return resultList + getPartyCommands()
         }
 
         if (command == "play") {
             return BedwarsGameMode.getMapNames()
         }
         return null
+    }
+
+    private fun getPartyCommands(): List<String> {
+        return if (PartyUtils.partyMembers.isNotEmpty()) {
+            PartyCommands.otherPartyCommands
+        } else emptyList()
     }
 
     private fun buildResponse(arguments: List<String>, fullResponse: List<String>): List<String> {

@@ -6,6 +6,8 @@
 - Show kills/finals/beds per game in `/bws`
 - Replace `/l1` with `/swaplobby 1`
 - Fix potential repo issues
+- Some more small performance issues fixed
+- Some slight improvements to party chat complete
 
 ## Version 0.1.3
 - Trap display - shows what traps your team currently has

@@ -6,6 +6,7 @@ import com.calmwolfs.bedwar.utils.PartyUtils
 
 object PartyCommands {
     private val config get() = BedWarMod.feature.party
+
     fun kickOffline() {
         if (!config.shortCommands) return
         if (PartyUtils.partyMembers.isEmpty()) return
@@ -26,9 +27,9 @@ object PartyCommands {
     }
 
     fun transfer(args: Array<String>) {
+        if (args.isEmpty()) ChatUtils.sendCommandToServer("pt")
         if (!config.shortCommands) return
         if (PartyUtils.partyMembers.isEmpty()) return
-        if (args.isEmpty()) ChatUtils.sendCommandToServer("pt")
         ChatUtils.sendCommandToServer("party transfer ${args[0]}")
     }
 
@@ -47,6 +48,6 @@ object PartyCommands {
         "Mute",
         "Private",
         "Warp",
-        "Settings Allinvite"
+        "Settings"
     )
 }
