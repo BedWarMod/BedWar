@@ -10,6 +10,7 @@
 - Fix potential repo issues
 - Some more small performance issues fixed
 - Some slight improvements to party chat complete
+- Made the mod work in swap game mode
 
 ## Version 0.1.3
 - Trap display - shows what traps your team currently has

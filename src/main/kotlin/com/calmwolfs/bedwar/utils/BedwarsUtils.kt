@@ -4,11 +4,13 @@ import com.calmwolfs.bedwar.events.bedwars.EndGameEvent
 import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
 import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
 import com.calmwolfs.bedwar.events.game.FooterUpdateEvent
+import com.calmwolfs.bedwar.events.game.GameChatEvent
 import com.calmwolfs.bedwar.events.game.ScoreboardUpdateEvent
 import com.calmwolfs.bedwar.events.game.WorldChangeEvent
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
+import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -20,10 +22,10 @@ object BedwarsUtils {
     private var bedwarsGame = false
     private var gameOngoing = false
 
-    private var tabStatPattern = "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
-    private var scoreboardTeamPattern = "\\w.(?<team>\\w+):\\s.+\\sYOU".toPattern()
+    private val tabStatPattern = "Kills: (?<kills>\\d+) Final Kills: (?<finals>\\d+) Beds Broken: (?<beds>\\d+)".toPattern()
+    private val scoreboardTeamPattern = "\\w.(?<team>\\w+):\\s.+\\sYOU".toPattern()
+    private val swapTeamPattern = "Your team swapped and you are now: (?<team>.*)".toPattern()
 
-    // todo deal with swap gamemode tbh could just check scoreboard each tick for some stuff and fix rejoins as well
     var currentTeamName = ""
 
     val inBedwarsArea get() = bedwarsArea && Minecraft.getMinecraft().thePlayer != null
@@ -31,6 +33,14 @@ object BedwarsUtils {
     val inBedwarsGame get() = inBedwarsArea && bedwarsGame
     val inBedwarsLobby get() = inBedwarsArea && !bedwarsGame && !bedwarsQueue
     val playingBedwars get() = inBedwarsGame && gameOngoing
+
+    @SubscribeEvent
+    fun onChat(event: GameChatEvent) {
+        if (!inBedwarsGame) return
+        swapTeamPattern.matchMatcher(event.message.unformat().trimWhiteSpace()) {
+            currentTeamName = group("team")
+        }
+    }
 
     @SubscribeEvent
     fun onWorldChange(event: WorldChangeEvent) {
