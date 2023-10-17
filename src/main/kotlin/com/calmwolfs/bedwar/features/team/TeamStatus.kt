@@ -100,7 +100,7 @@ object TeamStatus {
         if (!BedwarsUtils.inBedwarsGame) return
         if (currentTeamMembers.size == 1 && !config.showSolo) return
 
-        config.position.renderStringsAndItems(display, posLabel = "Session Tracker")
+        config.position.renderStringsAndItems(display, posLabel = "Team Status")
     }
 
     private fun drawList() = buildList<List<Any>> {

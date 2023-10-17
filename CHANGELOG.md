@@ -11,6 +11,7 @@
 - Some more small performance issues fixed
 - Some slight improvements to party chat complete
 - Made the mod work in swap game mode
+- Fixed not being able to edit session tracker if team status was showing
 
 ## Version 0.1.3
 - Trap display - shows what traps your team currently has

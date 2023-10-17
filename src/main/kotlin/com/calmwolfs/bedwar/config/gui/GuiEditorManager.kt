@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.config.gui
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.events.game.ModKeyPressEvent
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
 import net.minecraft.client.Minecraft
@@ -43,6 +44,9 @@ object GuiEditorManager {
         if (!currentPositions.containsKey(name)) {
             currentPositions[name] = position
             currentBorderSize[posLabel] = Pair(x, y)
+        } else {
+            val error = Throwable()
+            CopyErrorCommand.logError(error, "Duplicate Gui Name Displayed: $name")
         }
     }
 
