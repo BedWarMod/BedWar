@@ -9,12 +9,12 @@ import io.github.moulberry.moulconfig.annotations.ConfigOption;
 
 public class NotificationsConfig {
     @Expose
-    @ConfigOption(name = "Notification Corner", desc = "What corner do you want the notification to display in.")
+    @ConfigOption(name = "Notification Corner", desc = "What corner do you want the notification to display in?")
     @ConfigEditorDropdown(values = {"Top Left", "Top Right"})
     public int corner = 0;
 
     @Expose
-    @ConfigOption(name = "Animation Direction", desc = "What direction do you want it to appear from.")
+    @ConfigOption(name = "Animation Direction", desc = "What direction do you want it to appear from?")
     @ConfigEditorDropdown(values = {"Horizontal", "Vertical"})
     public int direction = 0;
 

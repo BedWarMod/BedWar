@@ -95,11 +95,11 @@ object NotificationUtils {
         if (status != NotificationStatus.DISPLAYING) {
             if (config.direction == 0) {
                 // horizontal transition
-                val distance = (currentNotification.getWidth() * (1 - animationProgress)).toInt()
+                val distance = (notification.getWidth() * (1 - animationProgress)).toInt()
                 offsetX = if (config.corner == 0) - distance else distance
             } else {
                 // vertical transition
-                offsetY = - ((currentNotification.getHeight()) * (1 - animationProgress)).toInt()
+                offsetY = - ((notification.getHeight()) * (1 - animationProgress)).toInt()
             }
         }
 

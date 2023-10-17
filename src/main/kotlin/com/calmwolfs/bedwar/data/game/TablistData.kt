@@ -52,10 +52,10 @@ object TablistData {
         }
 
         val tablistData = Minecraft.getMinecraft().ingameGUI.tabList as AccessorGuiPlayerTabOverlay
-        header = tablistData.bedwar_getHeader().formattedText
-        val footerData = tablistData.bedwar_getFooter().formattedText
+        header = tablistData.bedwar_getHeader()?.formattedText ?: ""
+        val footerData = tablistData.bedwar_getFooter()?.formattedText ?: ""
 
-        if (footerData != footer) {
+        if (footerData != footer && footerData != "") {
             FooterUpdateEvent(footerData).postAndCatch()
             footer = footerData
         }

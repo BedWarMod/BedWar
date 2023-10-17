@@ -1,5 +1,10 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.5.Pre.1
+- Potentially fixed null pointer error due to tablist not having a header or footer
+- Fixed notification having wrong dimensions when leaving if a new one came
+- Small wording fixes
+
 ## Version 0.1.4
 - Added notifications - Displays for various things, and they can be customised in multiple ways
 - Party Join notification and notifications when someone on your team gets a kill or breaks a bed
