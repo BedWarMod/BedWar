@@ -15,7 +15,7 @@ abstract class ModEvent : Event() {
         }.onFailure {
             CopyErrorCommand.logError(
                 it,
-                "Caught an ${it::class.simpleName ?: "error"} at ${eventName}: '${it.message}'"
+                "Caught a ${it::class.simpleName ?: "error"} at ${eventName}: '${it.message}'"
             )
         }.getOrDefault(isCanceled)
     }
