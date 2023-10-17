@@ -6,6 +6,7 @@ import com.calmwolfs.bedwar.config.features.ChatConfig;
 import com.calmwolfs.bedwar.config.features.DevConfig;
 import com.calmwolfs.bedwar.config.features.GuiConfig;
 import com.calmwolfs.bedwar.config.features.InventoryConfig;
+import com.calmwolfs.bedwar.config.features.NotificationsConfig;
 import com.calmwolfs.bedwar.config.features.PartyConfig;
 import com.calmwolfs.bedwar.config.features.SessionConfig;
 import com.calmwolfs.bedwar.config.features.TeamConfig;
@@ -51,6 +52,10 @@ public class Features extends Config {
     @Expose
     @Category(name = "Chat", desc = "Any features relating to the chat")
     public ChatConfig chat = new ChatConfig();
+
+    @Expose
+    @Category(name = "Notifications", desc = "Notifications that are displayed based on various conditions")
+    public NotificationsConfig notifications = new NotificationsConfig();
 
     @Expose
     @Category(name = "Dev", desc = "Mostly developer features")

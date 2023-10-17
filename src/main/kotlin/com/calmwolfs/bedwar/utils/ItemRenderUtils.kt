@@ -27,13 +27,13 @@ object ItemRenderUtils {
     fun renderOverlayLol(event: RenderSlotOverlays) {
         val stack = event.stack ?: return
 
-        val backgroundColor = stack.background
-        if (backgroundColor != -1) {
+        val backgroundColour = stack.background
+        if (backgroundColour != -1) {
             GlStateManager.pushMatrix()
             GlStateManager.translate(0f, 0f, 110 + Minecraft.getMinecraft().renderItem.zLevel)
             val x = event.x
             val y = event.y
-            Gui.drawRect(x, y, x + 16, y + 16, backgroundColor)
+            Gui.drawRect(x, y, x + 16, y + 16, backgroundColour)
             GlStateManager.popMatrix()
         }
     }

@@ -22,7 +22,8 @@ object TeamStatus {
     private val config get() = BedWarMod.feature.team.teamStatus
     private val tabTeamPattern = "^(?<team>\\w) (?:.\\s)?(?<username>\\w+)".toPattern()
 
-    private val currentTeamMembers = mutableMapOf<String, PlayerStatus>()
+    //todo merge into a utils class or a team class or game info class
+    val currentTeamMembers = mutableMapOf<String, PlayerStatus>()
     private var display = emptyList<List<Any>>()
     private var needsUpdate = false
     private val deadTeammates = mutableListOf<String>()

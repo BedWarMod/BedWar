@@ -12,6 +12,7 @@ import com.calmwolfs.bedwar.features.party.PartyCommands
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.utils.BedwarsStarUtils
 import com.calmwolfs.bedwar.utils.PartyUtils
+import com.calmwolfs.bedwar.utils.gui.NotificationUtils
 import net.minecraft.command.ICommandSender
 import net.minecraft.util.BlockPos
 import net.minecraftforge.client.ClientCommandHandler
@@ -41,6 +42,7 @@ object Commands {
         registerCommand("bwcopyscoreboard") { CopyScoreboardCommand.command(it) }
         registerCommand("bwcopytablist") { CopyTablistCommand.command(it) }
         registerCommand("bwcopyentities") { CopyEntitiesCommand.command(it) }
+        registerCommand("bwtestnotification") { NotificationUtils.command(it) }
 
         registerCommand("bwpartylist") { PartyUtils.listMembers() }
         registerCommand("bwexp") { BedwarsStarUtils.testExperience(it) }

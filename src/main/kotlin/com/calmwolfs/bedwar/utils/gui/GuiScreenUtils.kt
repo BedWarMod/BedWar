@@ -1,13 +1,9 @@
 package com.calmwolfs.bedwar.utils.gui
 
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.ScaledResolution
 import org.lwjgl.opengl.GL11
 
 object GuiScreenUtils {
-    fun scaledHeight() = ScaledResolution(Minecraft.getMinecraft()).scaledHeight
-    fun scaledWidth() = ScaledResolution(Minecraft.getMinecraft()).scaledWidth
-
     fun drawStringCentered(str: String?, x: Int, y: Int) {
         val fr = Minecraft.getMinecraft().fontRendererObj
         val strLen = fr.getStringWidth(str)

@@ -85,7 +85,7 @@ object RepoUtils {
 
         val jsonFile = File(repo, "constants/$constant.json")
         if (!jsonFile.isFile) {
-            BedWarMod.repo.unsuccessfulConstants.add("Constant")
+            BedWarMod.repo.unsuccessfulConstants.add("All Constants")
             CopyErrorCommand.logError(
                 Error("File '$jsonFile' not found!"),
                 "File in repo missing! ($jsonFile). Try §e/bwupdaterepo"

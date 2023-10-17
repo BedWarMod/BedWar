@@ -9,10 +9,10 @@ import com.calmwolfs.bedwar.events.bedwars.KillEvent
 import com.calmwolfs.bedwar.events.bedwars.StartGameEvent
 import com.calmwolfs.bedwar.events.bedwars.TeamEliminatedEvent
 import com.calmwolfs.bedwar.events.game.GameChatEvent
+import com.calmwolfs.bedwar.features.notifications.ErrorNotifications
 import com.calmwolfs.bedwar.features.team.TeamStatus
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ModUtils
-import com.calmwolfs.bedwar.utils.SoundUtils
 import com.calmwolfs.bedwar.utils.StringUtils.findMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.matchMatcher
 import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
@@ -83,7 +83,7 @@ object BedwarsEventManager {
                 val killed = matcher.group("killed")
                 FinalKillEvent(killer, killed).postAndCatch()
             } else {
-                SoundUtils.playBeepSound()
+                ErrorNotifications.repoMatchError("Final Kill")
                 ModUtils.warning("Final Kill message did not match!\n" +
                         "Please report this final kill message on the github so your stats can be more accurate :)")
             }
@@ -98,7 +98,7 @@ object BedwarsEventManager {
                 if (team == "Your") team = BedwarsUtils.currentTeamName
                 BedBreakEvent(team, player).postAndCatch()
             } else {
-                SoundUtils.playBeepSound()
+                ErrorNotifications.repoMatchError("Bed Break")
                 ModUtils.warning("Bed Break message did not match!\n" +
                         "Please report this bed break message on the github so your stats can be more accurate :)")
             }

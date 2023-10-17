@@ -25,6 +25,8 @@ import com.calmwolfs.bedwar.features.config.PauseButton
 import com.calmwolfs.bedwar.features.inventory.ResourceOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopInventoryOverlay
 import com.calmwolfs.bedwar.features.inventory.ShopMiddleClick
+import com.calmwolfs.bedwar.features.notifications.GameNotifications
+import com.calmwolfs.bedwar.features.notifications.PartyNotifications
 import com.calmwolfs.bedwar.features.party.PartyGameStats
 import com.calmwolfs.bedwar.features.session.SessionDisplay
 import com.calmwolfs.bedwar.features.session.TrapDisplay
@@ -37,6 +39,7 @@ import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.ItemRenderUtils
 import com.calmwolfs.bedwar.utils.PartyUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
+import com.calmwolfs.bedwar.utils.gui.NotificationUtils
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -77,9 +80,11 @@ class BedWarMod {
         loadModule(BedwarsStarUtils)
         loadModule(BedwarsUtils)
         loadModule(ChatCompleteUtils)
+        loadModule(GameNotifications)
         loadModule(HypixelUtils)
         loadModule(ItemRenderUtils)
         loadModule(KeyboardUtils)
+        loadModule(NotificationUtils)
         loadModule(PartyUtils)
 
         //data
@@ -99,6 +104,7 @@ class BedWarMod {
         loadModule(TeamStatus)
         loadModule(TrapDisplay())
         loadModule(PartyGameStats)
+        loadModule(PartyNotifications)
         loadModule(PauseButton())
         loadModule(PlayerChatClick())
         loadModule(ResourceOverlay())

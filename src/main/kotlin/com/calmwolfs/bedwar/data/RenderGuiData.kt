@@ -2,6 +2,7 @@ package com.calmwolfs.bedwar.data
 
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager
 import com.calmwolfs.bedwar.events.gui.GuiRenderEvent
+import com.calmwolfs.bedwar.events.gui.NotificationRenderEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.inventory.GuiChest
 import net.minecraft.client.gui.inventory.GuiInventory
@@ -17,6 +18,7 @@ class RenderGuiData {
         if (GuiEditorManager.isInGui()) return
 
         GuiRenderEvent.GuiOverlayRenderEvent().postAndCatch()
+        NotificationRenderEvent().postAndCatch()
     }
 
     @SubscribeEvent

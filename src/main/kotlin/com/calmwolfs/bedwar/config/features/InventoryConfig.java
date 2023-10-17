@@ -25,7 +25,7 @@ public class InventoryConfig {
         public boolean showTotal = true;
 
         @Expose
-        public Position position = new Position(-100, 10, false, true);
+        public Position position = new Position(-100, 50, false, true);
     }
 
     @Expose

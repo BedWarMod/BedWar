@@ -3,6 +3,7 @@ package com.calmwolfs.bedwar.config.gui
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getAbsX
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getAbsY
 import com.calmwolfs.bedwar.config.gui.GuiEditorManager.getDummySize
+import com.calmwolfs.bedwar.utils.MinecraftUtils
 import com.calmwolfs.bedwar.utils.NumberUtils.round
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import com.calmwolfs.bedwar.utils.gui.GuiScreenUtils
@@ -33,7 +34,7 @@ class GuiPositionEditor(private val positions: List<Position>, private val borde
     }
 
     private fun renderLabels(hoveredPos: Int) {
-        GuiScreenUtils.drawStringCentered("§cBedWar Mod Position Editor", GuiScreenUtils.scaledWidth() / 2, 8)
+        GuiScreenUtils.drawStringCentered("§cBedWar Mod Position Editor", MinecraftUtils.scaledWidth() / 2, 8)
 
         var displayPos = -1
         if (clickedPos != -1) {
@@ -48,12 +49,12 @@ class GuiPositionEditor(private val positions: List<Position>, private val borde
         if (displayPos == -1) {
             GuiScreenUtils.drawStringCentered(
                 "§eTo edit hidden GUI elements set a key in /bw edit",
-                GuiScreenUtils.scaledWidth() / 2,
+                MinecraftUtils.scaledWidth() / 2,
                 20
             )
             GuiScreenUtils.drawStringCentered(
                 "§ethen click that key while the GUI element is visible",
-                GuiScreenUtils.scaledWidth() / 2,
+                MinecraftUtils.scaledWidth() / 2,
                 32
             )
             return
@@ -61,15 +62,15 @@ class GuiPositionEditor(private val positions: List<Position>, private val borde
 
         val pos = positions[displayPos]
         val location = "§7x: §e${pos.rawX}§7, y: §e${pos.rawY}§7, scale: §e${pos.scale.round(2)}"
-        GuiScreenUtils.drawStringCentered("§b" + pos.internalName, GuiScreenUtils.scaledWidth() / 2, 18)
-        GuiScreenUtils.drawStringCentered(location, GuiScreenUtils.scaledWidth() / 2, 28)
+        GuiScreenUtils.drawStringCentered("§b" + pos.internalName, MinecraftUtils.scaledWidth() / 2, 18)
+        GuiScreenUtils.drawStringCentered(location, MinecraftUtils.scaledWidth() / 2, 28)
     }
 
     private fun renderRectangles(): Int {
         var hoveredPos = -1
         GlStateManager.pushMatrix()
-        width = GuiScreenUtils.scaledWidth()
-        height = GuiScreenUtils.scaledHeight()
+        width = MinecraftUtils.scaledWidth()
+        height = MinecraftUtils.scaledHeight()
         val mouseX = Mouse.getX() * width / Minecraft.getMinecraft().displayWidth
         val mouseY = height - Mouse.getY() * height / Minecraft.getMinecraft().displayHeight - 1
         for ((index, position) in positions.withIndex()) {

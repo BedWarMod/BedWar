@@ -1,6 +1,8 @@
 # BedWar Mod - Change Log
 
 ## Version 0.1.4
+- Added notifications - Displays for various things, and they can be customised in multiple ways
+- Party Join notification and notifications when someone on your team gets a kill or breaks a bed
 - Fixed bug where party stats would not send your stats at the end of a game
 - Made some things round less frequently plus some more formatting changes
 - Show kills/finals/beds per game in `/bws`

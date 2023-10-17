@@ -30,6 +30,7 @@ object PartyUtils {
 
         // new member joined
         "§eYou have joined (?<name>.*)'s §eparty!".toPattern().matchMatcher(message) {
+            partyMembers.clear()
             val name = group("name").toPlayerName()
             if (!partyMembers.contains(name)) partyMembers.add(name)
             return
@@ -43,7 +44,6 @@ object PartyUtils {
             return
         }
         "§eYou'll be partying with: (?<names>.*)".toPattern().matchMatcher(message) {
-            partyMembers.clear()
             for (name in group("names").split(", ")) {
                 val playerName = name.toPlayerName()
                 if (!partyMembers.contains(playerName)) partyMembers.add(playerName)

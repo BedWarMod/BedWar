@@ -123,4 +123,8 @@ object GuiElementUtils {
 
         GlStateManager.popMatrix()
     }
+
+    fun ItemStack.renderOnScreen(x: Int, y: Int, scaleMultiplier: Double = 1.0) {
+        this.renderOnScreen(x.toFloat(), y.toFloat(), scaleMultiplier)
+    }
 }

@@ -2,6 +2,7 @@ package com.calmwolfs.bedwar.config
 
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.events.RepositoryReloadEvent
+import com.calmwolfs.bedwar.features.notifications.ErrorNotifications
 import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.ModUtils
 import com.calmwolfs.bedwar.utils.RepoUtils
@@ -63,11 +64,13 @@ class RepoManager(private val configLocation: File) {
                 if (latestRepoCommit == null || latestRepoCommit!!.isEmpty()) return@supplyAsync false
                 if (File(configLocation, "repo").exists()) {
                     if (currentCommitJSON != null && currentCommitJSON["sha"].asString == latestRepoCommit) {
-                        if (command) {
-                            ChatUtils.chat("§e[BedWar] §7The repo is already up to date!")
-                            atomicShouldManuallyReload.set(false)
+                        if (unsuccessfulConstants.isEmpty()) {
+                            if (command) {
+                                ChatUtils.chat("§e[BedWar] §7The repo is already up to date!")
+                                atomicShouldManuallyReload.set(false)
+                            }
+                            return@supplyAsync false
                         }
-                        return@supplyAsync false
                     }
                 }
                 RepoUtils.recursiveDelete(repoLocation)
@@ -148,6 +151,7 @@ class RepoManager(private val configLocation: File) {
                 for (constant in unsuccessfulConstants) {
                     ChatUtils.chat("   §a- §7$constant")
                 }
+                ErrorNotifications.repoError()
             }
             return
         }

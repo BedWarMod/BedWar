@@ -5,11 +5,8 @@ import net.minecraft.client.gui.ScaledResolution
 
 object MinecraftUtils {
     private fun scaledResolution() = ScaledResolution(Minecraft.getMinecraft())
-    fun scaleFactor(): Double {
-        return scaledResolution().scaleFactor.toDouble()
-    }
 
-    fun scaledHeight(): Int {
-        return scaledResolution().scaledHeight
-    }
+    fun scaleFactor() = scaledResolution().scaleFactor.toDouble()
+    fun scaledHeight() = scaledResolution().scaledHeight
+    fun scaledWidth() = scaledResolution().scaledWidth
 }
