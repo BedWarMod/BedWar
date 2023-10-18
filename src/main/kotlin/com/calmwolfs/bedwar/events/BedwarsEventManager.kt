@@ -115,7 +115,7 @@ object BedwarsEventManager {
     @SubscribeEvent
     fun onRepoReload(event: RepositoryReloadEvent) {
         try {
-            val data = event.getConstant<ChatRegexJson>("ChatRegex") ?: return
+            val data = event.getConstant<ChatRegexJson>("ChatRegex") ?: throw Exception()
             gameStartPattern = data.gameStartPattern.toPattern()
             gameEndPattern = data.gameEndPattern.toPattern()
             bedBreakPattern = data.bedBreakPattern.toPattern()
@@ -124,8 +124,7 @@ object BedwarsEventManager {
             selfKillPattern = data.selfKillPattern.toPattern()
             teamEliminatedPattern = data.teamEliminatedPattern.toPattern()
             BedWarMod.repo.successfulConstants.add("ChatRegex")
-        } catch (e: Exception) {
-            ModUtils.error("Error in repository reload event (ChatRegex)")
+        } catch (_: Exception) {
             BedWarMod.repo.unsuccessfulConstants.add("ChatRegex")
         }
     }

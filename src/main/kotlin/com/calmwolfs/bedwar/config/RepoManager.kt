@@ -128,14 +128,13 @@ class RepoManager(private val configLocation: File) {
             try {
                 successfulConstants.clear()
                 unsuccessfulConstants.clear()
+
                 RepositoryReloadEvent(repoLocation, gson).postAndCatch()
                 comp.complete(null)
                 if (unsuccessfulConstants.isNotEmpty()) {
                     ChatUtils.chat("§e[BedWar] error reloading repository")
-                } else {
-                    if (answerMessage.isNotEmpty()) {
-                        ChatUtils.chat("§e[BedWar] §a$answerMessage")
-                    }
+                } else if (answerMessage.isNotEmpty()) {
+                    ChatUtils.chat("§e[BedWar] §a$answerMessage")
                 }
             } catch (e: java.lang.Exception) {
                 CopyErrorCommand.logError(e, "Error reading repo data!")
@@ -159,7 +158,7 @@ class RepoManager(private val configLocation: File) {
             ChatUtils.chat("§a[BedWar] Repo working fine!")
             return
         }
-        ChatUtils.chat("§a[BedWar] Successful Constants:")
+        if (successfulConstants.isNotEmpty()) ChatUtils.chat("§a[BedWar] Successful Constants:")
         for (constant in successfulConstants) {
             ChatUtils.chat("   §a- §7$constant")
         }

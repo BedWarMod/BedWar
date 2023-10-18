@@ -54,7 +54,7 @@ object CopyErrorCommand {
             "```\nBedWar Mod ${BedWarMod.version}: $rawMessage\n(full stack trace)\n \n$fullStackTrace\n```"
 
         ChatUtils.clickableChat(
-            "§c[BedWar] ${BedWarMod.version}]: $message§c. Click here to copy the error into the clipboard.",
+            "§c[BedWar ${BedWarMod.version}]: $message§c. Click here to copy the error into the clipboard.",
             "bwcopyerror $randomId"
         )
     }

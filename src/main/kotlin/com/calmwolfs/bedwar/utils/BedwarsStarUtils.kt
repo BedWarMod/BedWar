@@ -22,7 +22,7 @@ object BedwarsStarUtils {
     @SubscribeEvent
     fun onRepoReload(event: RepositoryReloadEvent) {
         try {
-            val data = event.getConstant<ExperienceJson>("Experience") ?: return
+            val data = event.getConstant<ExperienceJson>("Experience") ?: throw Exception()
             easyLevelCount = data.easyLevelCount
             easyLevelExp = data.easyLevelExp
             easyLevelExpTotal = data.easyLevelExpTotal
@@ -30,16 +30,14 @@ object BedwarsStarUtils {
             expPerPrestige = data.expPerPrestige
             levelsPerPrestige = data.levelsPerPrestige
             BedWarMod.repo.successfulConstants.add("Experience")
-        } catch (e: Exception) {
-            ModUtils.error("Error in repository reload event (Experience)")
+        } catch (_: Exception) {
             BedWarMod.repo.unsuccessfulConstants.add("Experience")
         }
         try {
-            val data = event.getConstant<PrestigesJson>("Prestiges") ?: return
+            val data = event.getConstant<PrestigesJson>("Prestiges") ?: throw Exception()
             prestiges = data.prestiges
             BedWarMod.repo.successfulConstants.add("Prestiges")
-        } catch (e: Exception) {
-            ModUtils.error("Error in repository reload event (Prestiges)")
+        } catch (_: Exception) {
             BedWarMod.repo.unsuccessfulConstants.add("Prestiges")
         }
     }

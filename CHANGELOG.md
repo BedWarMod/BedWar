@@ -1,5 +1,9 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.5
+- Allow customisable notification duration
+- Improved repo error logging
+
 ## Version 0.1.5.Pre.1
 - Potentially fixed null pointer error due to tablist not having a header or footer
 - Fixed notification having wrong dimensions when leaving if a new one came

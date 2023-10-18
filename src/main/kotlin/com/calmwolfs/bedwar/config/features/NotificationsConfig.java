@@ -54,6 +54,7 @@ public class NotificationsConfig {
         @ConfigEditorBoolean
         public boolean sound = true;
 
+        @Expose
         @ConfigOption(name = "Display Time", desc = "The amount of time in seconds that this notification shows for")
         @ConfigEditorSlider(minValue = 1.5f, maxValue = 10, minStep = .5f)
         public float displayLength = 5;
@@ -70,6 +71,7 @@ public class NotificationsConfig {
         @ConfigEditorBoolean
         public boolean sound = false;
 
+        @Expose
         @ConfigOption(name = "Display Time", desc = "The amount of time in seconds that this notification shows for")
         @ConfigEditorSlider(minValue = 1.5f, maxValue = 10, minStep = .5f)
         public float displayLength = 5;
@@ -86,6 +88,7 @@ public class NotificationsConfig {
         @ConfigEditorBoolean
         public boolean sound = false;
 
+        @Expose
         @ConfigOption(name = "Display Time", desc = "The amount of time in seconds that this notification shows for")
         @ConfigEditorSlider(minValue = 1.5f, maxValue = 10, minStep = .5f)
         public float displayLength = 5;

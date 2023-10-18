@@ -13,7 +13,7 @@ import kotlin.time.Duration.Companion.milliseconds
 object ClipboardUtils {
     private var lastClipboardAccessTime = SimpleTimeMark.farPast()
 
-    private fun canAccessClibpard(): Boolean {
+    private fun canAccessClipboard(): Boolean {
         val result = lastClipboardAccessTime.passedSince() > 10.milliseconds
         if (result) {
             lastClipboardAccessTime = SimpleTimeMark.now()
@@ -23,7 +23,7 @@ object ClipboardUtils {
 
     private suspend fun getClipboard(): Clipboard? {
         val deferred = CompletableDeferred<Clipboard?>()
-        if (canAccessClibpard()) {
+        if (canAccessClipboard()) {
             deferred.complete(Toolkit.getDefaultToolkit().systemClipboard)
         } else {
             ModUtils.runDelayed(5.milliseconds) {
