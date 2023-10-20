@@ -6,6 +6,7 @@ import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.ClipboardUtils
 import com.calmwolfs.bedwar.utils.computer.KeyboardUtils
 import com.google.common.cache.CacheBuilder
+import net.minecraft.client.Minecraft
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
@@ -36,7 +37,9 @@ object CopyErrorCommand {
     }
 
     fun logError(throwable: Throwable, message: String) {
-        throwable.printStackTrace()
+        val error = Error(message, throwable)
+        error.printStackTrace()
+        Minecraft.getMinecraft().thePlayer ?: return
 
         val pair = if (throwable.stackTrace.isNotEmpty()) {
             throwable.stackTrace[0].let { it.fileName to it.lineNumber }

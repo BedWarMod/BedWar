@@ -136,7 +136,8 @@ class RepoManager(private val configLocation: File) {
                 } else if (answerMessage.isNotEmpty()) {
                     ChatUtils.chat("§e[BedWar] §a$answerMessage")
                 }
-            } catch (e: java.lang.Exception) {
+            } catch (e: Exception) {
+                unsuccessfulConstants.add("All Constants")
                 CopyErrorCommand.logError(e, "Error reading repo data!")
             }
         }
@@ -146,7 +147,7 @@ class RepoManager(private val configLocation: File) {
     fun displayRepoStatus(joinEvent: Boolean) {
         if (joinEvent) {
             if (unsuccessfulConstants.isNotEmpty()) {
-                ChatUtils.chat("§c[BedWar] §7Repo Issue! Features may not work please report this on the GitHub:")
+                ChatUtils.chat("§c[BedWar] §7Repo Issue! Some features may not work. Please report this error on the GitHub:")
                 for (constant in unsuccessfulConstants) {
                     ChatUtils.chat("   §a- §7$constant")
                 }
@@ -158,13 +159,13 @@ class RepoManager(private val configLocation: File) {
             ChatUtils.chat("§a[BedWar] Repo working fine!")
             return
         }
-        if (successfulConstants.isNotEmpty()) ChatUtils.chat("§a[BedWar] Successful Constants:")
+        if (successfulConstants.isNotEmpty()) ChatUtils.chat("§a[BedWar] Successful Constants §7(${successfulConstants.size}):")
         for (constant in successfulConstants) {
             ChatUtils.chat("   §a- §7$constant")
         }
-        ChatUtils.chat("§c[BedWar] Unsuccessful Constants:")
+        ChatUtils.chat("§c[BedWar] Unsuccessful Constants §7(${unsuccessfulConstants.size}):")
         for (constant in unsuccessfulConstants) {
-            ChatUtils.chat("   §a- §7$constant")
+            ChatUtils.chat("   §e- §7$constant")
         }
     }
 
