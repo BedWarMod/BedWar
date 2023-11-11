@@ -28,17 +28,11 @@ class SimpleCommand : CommandBase {
         fun tabComplete(sender: ICommandSender?, args: Array<String>?, pos: BlockPos?): List<String>
     }
 
-    override fun canCommandSenderUseCommand(sender: ICommandSender): Boolean {
-        return true
-    }
+    override fun canCommandSenderUseCommand(sender: ICommandSender) = true
 
-    override fun getCommandName(): String {
-        return commandName
-    }
+    override fun getCommandName() = commandName
 
-    override fun getCommandUsage(sender: ICommandSender): String {
-        return "/$commandName"
-    }
+    override fun getCommandUsage(sender: ICommandSender) = "/$commandName"
 
     override fun processCommand(sender: ICommandSender, args: Array<String>) {
         try {

@@ -130,7 +130,6 @@ tasks.processResources {
     rename("(.+_at.cfg)", "META-INF/$1")
 }
 
-
 val remapJar by tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
     archiveClassifier.set("")
     from(tasks.shadowJar)

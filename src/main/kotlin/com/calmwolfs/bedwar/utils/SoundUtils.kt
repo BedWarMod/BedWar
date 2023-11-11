@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation
 object SoundUtils {
     private val beepSound by lazy { createSound("random.orb", 1f) }
 
-    fun ISound.playSound() {
+    private fun ISound.playSound() {
         Minecraft.getMinecraft().addScheduledTask {
             val gameSettings = Minecraft.getMinecraft().gameSettings
             val oldLevel = gameSettings.getSoundLevel(SoundCategory.PLAYERS)

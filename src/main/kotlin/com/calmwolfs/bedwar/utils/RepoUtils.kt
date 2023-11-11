@@ -13,7 +13,6 @@ import java.nio.file.Files
 import java.util.zip.ZipInputStream
 
 object RepoUtils {
-
     fun recursiveDelete(file: File) {
         if (file.isDirectory && !Files.isSymbolicLink(file.toPath())) {
             for (child in file.listFiles()) {

@@ -4,7 +4,6 @@ import com.calmwolfs.bedwar.BedWarMod
 import com.calmwolfs.bedwar.commands.CopyErrorCommand
 import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import io.github.moulberry.moulconfig.observer.PropertyTypeAdapterFactory
 import io.github.moulberry.moulconfig.processor.BuiltinMoulConfigGuis
 import io.github.moulberry.moulconfig.processor.ConfigProcessorDriver
@@ -12,9 +11,10 @@ import io.github.moulberry.moulconfig.processor.MoulConfigProcessor
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.io.FileReader
 import java.io.IOException
+import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
@@ -47,17 +47,10 @@ object ConfigManager {
 
         if (configFile!!.exists()) {
             try {
-                val builder = StringBuilder()
-
                 println("load-config-now")
-                BufferedReader(FileReader(configFile!!)).use { reader ->
-                    var line: String?
-                    while (reader.readLine().also { line = it } != null) {
-                        builder.append(line).append('\n')
-                    }
-                }
-                val configJson = gson.fromJson(builder.toString(), JsonObject::class.java)
-                features = gson.fromJson(configJson, Features::class.java)
+                val inputStreamReader = InputStreamReader(FileInputStream(configFile!!), StandardCharsets.UTF_8)
+                val bufferedReader = BufferedReader(inputStreamReader)
+                features = gson.fromJson(bufferedReader.readText(), Features::class.java)
 
                 println("Loaded config from file")
             } catch (error: Exception) {
