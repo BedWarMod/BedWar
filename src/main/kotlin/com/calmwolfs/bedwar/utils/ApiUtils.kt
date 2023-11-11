@@ -28,9 +28,9 @@ object ApiUtils {
     val uuidToName = mutableMapOf<String, String>()
     val uuidToExp = mutableMapOf<String, Int>()
 
-    private const val maxRequestsPerMin = 55
-    private const val maxRequestBank = 250
-    var requestBank = 250
+    private const val maxRequestsPerMin = 30
+    private const val maxRequestBank = 125
+    var requestBank = 125
 
     init {
         fixedRateTimer(name = "bedwar-api-rate-limit", period = 60_000L) {
@@ -103,8 +103,6 @@ object ApiUtils {
     }
 
     suspend fun getBedwarsStats(uuid: String): JsonObject {
-        val url = "https://api.hypixel.net/player?key=${config.apiKey}&uuid=$uuid"
-
         if (uuid in currentFetchedUuids) {
             return JsonObject()
         }
@@ -114,6 +112,7 @@ object ApiUtils {
         var stats = JsonObject()
         var displayName = "-"
         var experience = 0
+        val url = "https://bedwar-mod.cwolfson58.workers.dev/?uuid=$uuid"
 
         try {
             val result = withContext(Dispatchers.IO) { getJSONResponse(url) }.asJsonObject

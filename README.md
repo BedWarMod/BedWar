@@ -15,7 +15,7 @@ To open the mods menu either use `/bw` or `/bedwars`. All the mods commands begi
 This mod is still in development, but if you want to test it, it is available. There will be some bugs, but they should 
 not impact gameplay too much. If you find any bugs or have any suggestions feel free to report them through the GitHub issues.
 
-Currently, this mod does not use Hypixel's new API system but that will be changed soon. It only makes API requests when 
+This mod complies with Hypixel's new api system, meaning you don't need to worry about getting an api key
 you run `/bws <player>`. This will be updated to a new system in the coming weeks.
 
 Also feel free to contribute to the mod!

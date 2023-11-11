@@ -3,6 +3,10 @@
 ## Version 0.1.5
 - Allow customisable notification duration
 - Improved repo error logging
+- Used my own api backend so you no longer need a key
+- Some other small improvements
+- Fixed game notifications not being able to be disabled
+- And everything from 0.1.5.Pre-1
 
 ## Version 0.1.5.Pre.1
 - Potentially fixed null pointer error due to tablist not having a header or footer
