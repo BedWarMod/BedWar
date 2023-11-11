@@ -15,6 +15,7 @@ object GameNotifications {
     //todo make it say "You" instead of your username
     @SubscribeEvent
     fun onKill(event: KillEvent) {
+        if (!config.enabled) return
         if (event.killer in TeamStatus.currentTeamMembers || event.killer == HypixelUtils.currentName) {
             val message = formatNotification(listOf("§3${event.killer} §agot a kill!"))
             NotificationUtils.displayNotification(message, null, config.sound, config.displayLength.toDouble())
@@ -23,6 +24,7 @@ object GameNotifications {
 
     @SubscribeEvent
     fun onFinal(event: FinalKillEvent) {
+        if (!config.enabled) return
         if (event.killer in TeamStatus.currentTeamMembers || event.killer == HypixelUtils.currentName) {
             val message = formatNotification(listOf("§3${event.killer} §agot a final kill!"))
             NotificationUtils.displayNotification(message, null, config.sound, config.displayLength.toDouble())
@@ -31,6 +33,7 @@ object GameNotifications {
 
     @SubscribeEvent
     fun onBed(event: BedBreakEvent) {
+        if (!config.enabled) return
         if (event.player in TeamStatus.currentTeamMembers || event.player == HypixelUtils.currentName) {
             val message = formatNotification(listOf("§3${event.player} §abroke a bed!"))
             NotificationUtils.displayNotification(message, null, config.sound, config.displayLength.toDouble())
