@@ -39,6 +39,11 @@ public class NotificationsConfig {
     public NotificationsNoSound gameNotifications = new NotificationsNoSound();
 
     @Expose
+    @ConfigOption(name = "Team Death Notifications", desc = "")
+    @Accordion
+    public NotificationsNoSound deathNotifications = new NotificationsNoSound();
+
+    @Expose
     @ConfigOption(name = "Mod Errors", desc = "")
     @Accordion
     public NotificationsSound modErrors = new NotificationsSound();

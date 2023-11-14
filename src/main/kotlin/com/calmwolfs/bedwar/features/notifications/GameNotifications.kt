@@ -10,33 +10,40 @@ import com.calmwolfs.bedwar.utils.gui.NotificationUtils
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object GameNotifications {
-    private val config get() = BedWarMod.feature.notifications.gameNotifications
+    private val gameConfig get() = BedWarMod.feature.notifications.gameNotifications
+    private val deathConfig get() = BedWarMod.feature.notifications.gameNotifications
 
     //todo make it say "You" instead of your username
     @SubscribeEvent
     fun onKill(event: KillEvent) {
-        if (!config.enabled) return
-        if (event.killer in TeamStatus.currentTeamMembers || event.killer == HypixelUtils.currentName) {
+        if (gameConfig.enabled && event.killer in TeamStatus.currentTeamMembers || event.killer == HypixelUtils.currentName) {
             val message = formatNotification(listOf("§3${event.killer} §agot a kill!"))
-            NotificationUtils.displayNotification(message, null, config.sound, config.displayLength.toDouble())
+            NotificationUtils.displayNotification(message, null, gameConfig.sound, gameConfig.displayLength.toDouble())
+        }
+        if (deathConfig.enabled && event.killed in TeamStatus.currentTeamMembers || event.killed == HypixelUtils.currentName) {
+            val message = formatNotification(listOf("§3${event.killed} §ewas killed!"))
+            NotificationUtils.displayNotification(message, null, deathConfig.sound, deathConfig.displayLength.toDouble())
         }
     }
 
     @SubscribeEvent
     fun onFinal(event: FinalKillEvent) {
-        if (!config.enabled) return
-        if (event.killer in TeamStatus.currentTeamMembers || event.killer == HypixelUtils.currentName) {
+        if (gameConfig.enabled && event.killer in TeamStatus.currentTeamMembers || event.killer == HypixelUtils.currentName) {
             val message = formatNotification(listOf("§3${event.killer} §agot a final kill!"))
-            NotificationUtils.displayNotification(message, null, config.sound, config.displayLength.toDouble())
+            NotificationUtils.displayNotification(message, null, gameConfig.sound, gameConfig.displayLength.toDouble())
+        }
+        if (deathConfig.enabled && event.killed in TeamStatus.currentTeamMembers || event.killed == HypixelUtils.currentName) {
+            val message = formatNotification(listOf("§3${event.killed} §ewas final killed!"))
+            NotificationUtils.displayNotification(message, null, deathConfig.sound, deathConfig.displayLength.toDouble())
         }
     }
 
     @SubscribeEvent
     fun onBed(event: BedBreakEvent) {
-        if (!config.enabled) return
+        if (!gameConfig.enabled) return
         if (event.player in TeamStatus.currentTeamMembers || event.player == HypixelUtils.currentName) {
             val message = formatNotification(listOf("§3${event.player} §abroke a bed!"))
-            NotificationUtils.displayNotification(message, null, config.sound, config.displayLength.toDouble())
+            NotificationUtils.displayNotification(message, null, gameConfig.sound, gameConfig.displayLength.toDouble())
         }
     }
 
