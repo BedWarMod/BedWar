@@ -1,5 +1,8 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.6.Pre.1
+- Allowed you to use old api system as a backup in case the current one is down or cannot be accessed
+
 ## Version 0.1.5
 - Allow customisable notification duration
 - Improved repo error logging

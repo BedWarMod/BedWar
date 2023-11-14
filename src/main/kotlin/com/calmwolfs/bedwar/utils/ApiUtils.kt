@@ -73,7 +73,6 @@ object ApiUtils {
             }
         } catch (e: Exception) {
             CopyErrorCommand.logError(e, "Api error")
-            JsonObject()
         } finally {
             client.close()
         }
@@ -113,9 +112,12 @@ object ApiUtils {
         var displayName = "-"
         var experience = 0
         val url = "https://bedwar-mod.cwolfson58.workers.dev/?uuid=$uuid"
+        val oldUrl = "https://api.hypixel.net/player?key=${config.apiKey}&uuid=$uuid"
+
+        val actualUrl = if (shouldUseOldUrl()) oldUrl else url
 
         try {
-            val result = withContext(Dispatchers.IO) { getJSONResponse(url) }.asJsonObject
+            val result = withContext(Dispatchers.IO) { getJSONResponse(actualUrl) }.asJsonObject
             if (result.has("player")) {
                 val playerJson = result.get("player").asJsonObject
                 displayName = playerJson.getStringOr("displayname")
@@ -135,5 +137,14 @@ object ApiUtils {
         uuidToExp[uuid] = experience
         currentFetchedUuids.remove(uuid)
         return stats
+    }
+
+    private fun shouldUseOldUrl(): Boolean {
+        if (!config.oldApi) return false
+        if (config.apiKey.isEmpty()) {
+            ModUtils.warning("You have old api system selected but no key inputted, defaulting to new system")
+            return false
+        }
+        return true
     }
 }
