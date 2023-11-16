@@ -45,6 +45,8 @@ All features are toggleable and should not introduce any lag or break other mods
 
 #### Team
 * Team Member Status - Shows the health of each of your teammates, how long until they respawn if they are dead, if they are eliminated or if they disconnected
+* Notifications when you or your teammates get a kill, final or bed
+* Notifications when you or your teammates die
 
 #### Chat
 * Copy Chat Line - Upon control-clicking a message in chat, the mod will copy that chat line to your clipboard

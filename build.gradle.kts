@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.calmwolfs.bedwar"
-version = "0.1.6.Pre.1"
+version = "0.1.6.Pre.2"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
