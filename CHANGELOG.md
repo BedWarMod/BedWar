@@ -1,5 +1,8 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.6.Pre.2
+- Fixed some bugs with team kill and death notifications causing it to not work as intended
+
 ## Version 0.1.6.Pre.1
 - Allowed you to use old api system as a backup in case the current one is down or cannot be accessed
 - Add team death notifications that show when your teammates are killed or final killed
