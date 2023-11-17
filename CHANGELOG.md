@@ -1,5 +1,8 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.6.Pre.3
+- Fixed another small typo causing death notifications to not use the correct settings
+
 ## Version 0.1.6.Pre.2
 - Fixed some bugs with team kill and death notifications causing it to not work as intended
 
