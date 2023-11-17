@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object GameNotifications {
     private val gameConfig get() = BedWarMod.feature.notifications.gameNotifications
-    private val deathConfig get() = BedWarMod.feature.notifications.gameNotifications
+    private val deathConfig get() = BedWarMod.feature.notifications.deathNotifications
 
     //todo make it say "You" instead of your username
     @SubscribeEvent
