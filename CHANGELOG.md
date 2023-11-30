@@ -1,5 +1,9 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.7
+- Stopped some npc messages being detected as player messages
+- And everything from 0.1.6.Pre 1,2 and 3
+
 ## Version 0.1.6.Pre.3
 - Fixed another small typo causing death notifications to not use the correct settings
 

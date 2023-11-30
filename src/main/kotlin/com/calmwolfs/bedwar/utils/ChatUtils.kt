@@ -23,6 +23,10 @@ object ChatUtils {
 
         var username = this.unformat().split(":")[0]
 
+        if (username.contains("[NPC]")) {
+            return null
+        }
+
         if (username.contains(">")) {
             username = username.substring(username.indexOf('>') + 1).trim()
         }
