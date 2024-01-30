@@ -45,7 +45,7 @@ public class PartyConfig {
     }
 
     @ConfigOption(name = "Party Commands", desc = "Shortens party commands and allows tab-completing for them. " +
-            "\n§eCommands: /pt /pp /pko /pk")
+            "\n§eCommands: /pt /pp /pko /pk /pd")
     @Expose
     @ConfigEditorBoolean
     public boolean shortCommands = true;

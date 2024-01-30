@@ -50,6 +50,7 @@ object Commands {
 
         registerCommand("pko") { PartyCommands.kickOffline() }
         registerCommand("pw") { PartyCommands.warp() }
+        registerCommand("pd") { PartyCommands.disband() }
         registerCommand("pk") { PartyCommands.kick(it) }
         registerCommand("pt") { PartyCommands.transfer(it) }
         registerCommand("pp") { PartyCommands.promote(it) }
