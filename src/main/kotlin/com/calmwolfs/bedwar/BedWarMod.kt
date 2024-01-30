@@ -35,6 +35,7 @@ import com.calmwolfs.bedwar.utils.ApiUtils
 import com.calmwolfs.bedwar.utils.BedwarsStarUtils
 import com.calmwolfs.bedwar.utils.BedwarsUtils
 import com.calmwolfs.bedwar.utils.ChatCompleteUtils
+import com.calmwolfs.bedwar.utils.ChatUtils
 import com.calmwolfs.bedwar.utils.HypixelUtils
 import com.calmwolfs.bedwar.utils.ItemRenderUtils
 import com.calmwolfs.bedwar.utils.PartyUtils
@@ -80,6 +81,7 @@ class BedWarMod {
         loadModule(BedwarsStarUtils)
         loadModule(BedwarsUtils)
         loadModule(ChatCompleteUtils)
+        loadModule(ChatUtils)
         loadModule(HypixelUtils)
         loadModule(ItemRenderUtils)
         loadModule(KeyboardUtils)

@@ -25,6 +25,9 @@ object PartyCommands {
     fun kick(args: Array<String>) {
         if (!isEnabled()) return
         if (args.isEmpty()) return
+        if (args.size > 1 && config.partyKickReason) {
+            ChatUtils.sendCommandToServer("pc Kicking ${args[0]}: ${args.drop(1).joinToString(" ").trim()}")
+        }
         ChatUtils.sendCommandToServer("party kick ${args[0]}")
     }
 

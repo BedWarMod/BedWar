@@ -49,4 +49,9 @@ public class PartyConfig {
     @Expose
     @ConfigEditorBoolean
     public boolean shortCommands = true;
+
+    @ConfigOption(name = "Party Kick Reason", desc = "Kick people while sending a reason when using §e/pk CalMWolfs low FKDR §7.")
+    @Expose
+    @ConfigEditorBoolean
+    public boolean partyKickReason = true;
 }

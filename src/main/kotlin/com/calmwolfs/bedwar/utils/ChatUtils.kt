@@ -1,6 +1,7 @@
 package com.calmwolfs.bedwar.utils
 
 import com.calmwolfs.bedwar.BedWarMod
+import com.calmwolfs.bedwar.events.game.ModTickEvent
 import com.calmwolfs.bedwar.mixins.transformers.AccessorChatComponentText
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
 import com.calmwolfs.bedwar.utils.computer.SimpleTimeMark
@@ -9,14 +10,30 @@ import net.minecraft.event.ClickEvent
 import net.minecraft.event.HoverEvent
 import net.minecraft.util.ChatComponentText
 import net.minecraft.util.IChatComponent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import java.util.LinkedList
+import java.util.Queue
 import java.util.function.Predicate
-import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Duration.Companion.milliseconds
 
 object ChatUtils {
     private val playerChatPattern = ".*§[f7]: .*".toPattern()
     private val chatUsernamePattern = "^(?:\\[\\d+] )?(?:\\S )?(?:\\[\\w.+] )?(?<username>\\w+)(?: \\[.+?])?\$".toPattern()
 
     private var lastMessageSent = SimpleTimeMark.farPast()
+    private val sendQueue: Queue<String> = LinkedList()
+
+    @SubscribeEvent
+    fun onTick(event: ModTickEvent) {
+        val player = Minecraft.getMinecraft().thePlayer ?: run {
+            sendQueue.clear()
+            return
+        }
+        if (lastMessageSent.passedSince() > 300.milliseconds) {
+            player.sendChatMessage(sendQueue.poll() ?: return)
+            lastMessageSent = SimpleTimeMark.now()
+        }
+    }
 
     fun String.getPlayerName(): String? {
         if (!playerChatPattern.matcher(this).matches()) return null
@@ -40,11 +57,7 @@ object ChatUtils {
     }
 
     private fun sendMessageToServer(message: String) {
-        if (lastMessageSent.passedSince() > 2.seconds) {
-            lastMessageSent = SimpleTimeMark.now()
-            val thePlayer = Minecraft.getMinecraft().thePlayer
-            thePlayer.sendChatMessage(message)
-        }
+        sendQueue.add(message)
     }
 
     fun chat(message: String) {
