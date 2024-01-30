@@ -41,7 +41,8 @@ All features are toggleable and should not introduce any lag or break other mods
 * Copy or Send Stats - Option for at the conclusion of the game to either copy your stats into the clipboard or send it 
 * to the party in the format `kills finals beds` e.g. `5 4 1`
 * Party Commands - Shortens commands such as `/pt` as `/p transfer`. Also allows tab completion for anyone in your party 
-* for party commands and can tab complete for inviting someone to your party
+* You can tab complete inviting players to your party
+* Party kick with reason so you can do `/pk CalMWolfs low fkdr` or `/pk Wolfie586 didn't defend bed`
 
 #### Team
 * Team Member Status - Shows the health of each of your teammates, how long until they respawn if they are dead, if they are eliminated or if they disconnected

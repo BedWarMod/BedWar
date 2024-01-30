@@ -1,8 +1,10 @@
 # BedWar Mod - Change Log
 
-## Version 0.1.7
+## Version 0.1.6
 - Stopped some npc messages being detected as player messages
-- And everything from 0.1.6.Pre 1,2 and 3
+- Added `/pd` to short party commands
+- Added party kick with reason so you can do `/pk calmwolfs low fkdr`
+- And everything from 0.1.6.Pre 1, 2 and 3
 
 ## Version 0.1.6.Pre.3
 - Fixed another small typo causing death notifications to not use the correct settings
