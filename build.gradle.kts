@@ -1,3 +1,4 @@
+import org.apache.commons.lang3.SystemUtils
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -77,6 +78,17 @@ loom {
             property("asmhelper.verbose", "true")
             arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
             arg("--mods", devenvMod.resolve().joinToString(",") { it.relativeTo(file("run")).path })
+        }
+    }
+    runConfigs {
+        "client" {
+            if (SystemUtils.IS_OS_MAC_OSX) {
+                vmArgs.remove("-XstartOnFirstThread")
+            }
+            vmArgs.add("-Xmx4G")
+        }
+        "server" {
+            isIdeConfigGenerated = false
         }
     }
     forge {
