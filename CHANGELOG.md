@@ -1,9 +1,15 @@
 # BedWar Mod - Change Log
 
+## Version 0.1.7.Pre.1
+- Adjusted some default overlay positions
+- Changed some config order to make more sense
+- Removed printing each chat message for debug purposes
+- Made game notifications not trigger on yourself
+
 ## Version 0.1.6
 - Stopped some npc messages being detected as player messages
 - Added `/pd` to short party commands
-- Added party kick with reason so you can do `/pk calmwolfs low fkdr`
+- Added party kick with reason so you can do `/pk CalMWolfs low fkdr`
 - And everything from 0.1.6.Pre 1, 2 and 3
 
 ## Version 0.1.6.Pre.3
