@@ -39,16 +39,16 @@ object BedwarsEventManager {
         }
 
         if (!BedwarsUtils.inBedwarsGame) return
-        val unformatted = message.unformat()
+        val unFormatted = message.unformat()
 
-        println("trimmed: $message")
-
-        "(?<player>\\w+) disconnected.".toPattern().matchMatcher(unformatted) {
+        "(?<player>\\w+) disconnected.".toPattern().matchMatcher(unFormatted) {
             TeamStatus.playerDisconnect(group("player"))
+            return
         }
 
-        "(?<player>\\w+) reconnected.".toPattern().matchMatcher(unformatted) {
+        "(?<player>\\w+) reconnected.".toPattern().matchMatcher(unFormatted) {
             TeamStatus.playerReconnect(group("player"))
+            return
         }
 
         killPattern.findMatcher(message) {
@@ -67,7 +67,7 @@ object BedwarsEventManager {
             return
         }
 
-        var matcher = gameEndPattern.matcher(unformatted)
+        var matcher = gameEndPattern.matcher(unFormatted)
         if (matcher.find()) {
             val matchedTeam = matcher.group("team")
             if (matchedTeam in teamColours) {
@@ -77,7 +77,7 @@ object BedwarsEventManager {
         }
 
         if (message.endsWith("§7. §b§lFINAL KILL!")) {
-            matcher = finalKillPattern.matcher(unformatted)
+            matcher = finalKillPattern.matcher(unFormatted)
             if (matcher.find()) {
                 val killer = matcher.group("killer")
                 val killed = matcher.group("killed")
@@ -91,7 +91,7 @@ object BedwarsEventManager {
         }
 
         if (message.unformat().startsWith("BED DESTRUCTION")) {
-            matcher = bedBreakPattern.matcher(unformatted)
+            matcher = bedBreakPattern.matcher(unFormatted)
             if (matcher.find()) {
                 var team = matcher.group("team")
                 val player = matcher.group("player")
@@ -105,7 +105,7 @@ object BedwarsEventManager {
             return
         }
 
-        teamEliminatedPattern.matchMatcher(unformatted) {
+        teamEliminatedPattern.matchMatcher(unFormatted) {
             val team = group("team")
             TeamEliminatedEvent(team).postAndCatch()
             return

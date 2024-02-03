@@ -67,6 +67,6 @@ public class SessionConfig {
         public boolean enabled = false;
 
         @Expose
-        public Position position = new Position(110, 20, false, true);
+        public Position position = new Position(120, 20, false, true);
     }
 }

@@ -7,7 +7,6 @@ import com.calmwolfs.bedwar.utils.StringUtils.optionalPlural
 import com.calmwolfs.bedwar.utils.StringUtils.toPlayerName
 import com.calmwolfs.bedwar.utils.StringUtils.trimWhiteSpace
 import com.calmwolfs.bedwar.utils.StringUtils.unformat
-import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object PartyUtils {
@@ -99,7 +98,7 @@ object PartyUtils {
         "Party (?:Leader|Moderators|Members): (?<names>.*)".toPattern().matchMatcher(unformatted) {
             for (name in group("names").split(" ● ")) {
                 val playerName = name.replace(" ●", "").toPlayerName()
-                if (playerName == Minecraft.getMinecraft().thePlayer.name) continue
+                if (playerName == HypixelUtils.currentName) continue
                 if (!partyMembers.contains(playerName)) partyMembers.add(playerName)
             }
             return

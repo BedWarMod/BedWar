@@ -21,6 +21,12 @@ public class PartyConfig {
         public boolean enabled = true;
 
         @Expose
+        @ConfigOption(name = "Action Type", desc = "What the mod will do with your stats at the end of the game. " +
+                "§eRequires above setting to be enabled.")
+        @ConfigEditorDropdown(values = {"Nothing", "Copy to clipboard", "Send to party", "Copy and Send"})
+        public int actionType = 0;
+
+        @Expose
         @ConfigOption(name = "Stats Delay", desc = "The amount of time in milliseconds after the game ends before the " +
                 "stats are sent in chat")
         @ConfigEditorSlider(minValue = 500, maxValue = 2500, minStep = 100)
@@ -30,12 +36,6 @@ public class PartyConfig {
         @Expose
         @ConfigEditorBoolean
         public boolean sendOnLoss = false;
-
-        @Expose
-        @ConfigOption(name = "Action Type", desc = "What the mod will do with your stats at the end of the game. " +
-                "§eRequires above setting to be enabled.")
-        @ConfigEditorDropdown(values = {"Nothing", "Copy to clipboard", "Send to party", "Copy and Send"})
-        public int actionType = 0;
 
         @Expose
         @ConfigOption(name = "Send Delay", desc = "The amount of time in milliseconds after your parties stats are sent " +
